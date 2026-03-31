@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아기톡톡 NLP 파이프라인 테스트 & 분석 v2</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #FFF8F0; color: #3D2C23; min-height: 100vh; }
+  .header { background: linear-gradient(135deg, #FFB5A7, #FFDDD2); padding: 16px 24px; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(255,181,167,0.3); }
+  .header h1 { font-size: 18px; font-weight: 700; color: #5D3A2E; }
+  .header p { font-size: 11px; color: #8D6E63; margin-top: 2px; }
+  .tabs { display: flex; background: #fff; border-bottom: 2px solid #F0E6E0; position: sticky; top: 58px; z-index: 99; }
+  .tab { flex: 1; padding: 12px; text-align: center; font-size: 13px; font-weight: 600; color: #8D7B70; cursor: pointer; border-bottom: 3px solid transparent; transition: all .2s; }
+  .tab:hover { background: #FFF4EE; }
+  .tab.active { color: #FF9A8C; border-bottom-color: #FF9A8C; }
+  .tab .badge { display: inline-block; background: #FF9A8C; color: #fff; font-size: 10px; border-radius: 8px; padding: 1px 6px; margin-left: 4px; }
+  .container { max-width: 700px; margin: 0 auto; padding: 16px; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .card { background: #fff; border-radius: 16px; padding: 16px; box-shadow: 0 1px 8px rgba(0,0,0,0.04); margin-bottom: 12px; }
+  .card-title { font-size: 14px; font-weight: 700; color: #5D3A2E; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .input-row { display: flex; gap: 8px; }
+  .input-row input { flex: 1; border: 2px solid #FFE0D6; border-radius: 24px; padding: 10px 16px; font-size: 14px; outline: none; transition: border-color .2s; font-family: inherit; }
+  .input-row input:focus { border-color: #FFB5A7; }
+  .btn { border: none; border-radius: 20px; padding: 10px 20px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; transition: all .15s; }
+  .btn:hover { transform: scale(1.03); }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary { background: linear-gradient(135deg, #FFB5A7, #FF9A8C); color: #fff; }
+  .btn-secondary { background: #F0E6E0; color: #5D3A2E; }
+  .btn-success { background: #98D8B0; color: #fff; }
+  .btn-danger { background: #E57373; color: #fff; }
+  .btn-sm { padding: 6px 12px; font-size: 11px; border-radius: 12px; }
+  .stage-select { display: flex; gap: 6px; margin-top: 10px; }
+  .stage-btn { flex: 1; border: 2px solid #FFE0D6; background: #fff; border-radius: 10px; padding: 6px; text-align: center; cursor: pointer; font-size: 11px; font-weight: 600; transition: all .2s; font-family: inherit; }
+  .stage-btn.active { background: #FFB5A7; color: #fff; border-color: #FFB5A7; }
+  .quick-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+  .quick-chip { background: #FFF0E8; border: 1px solid #FFD6C4; border-radius: 14px; padding: 5px 10px; font-size: 11px; cursor: pointer; transition: all .15s; font-family: inherit; }
+  .quick-chip:hover { background: #FFE0D6; transform: translateY(-1px); }
+  .step-card { background: #fff; border-radius: 14px; padding: 14px; margin-bottom: 8px; box-shadow: 0 1px 6px rgba(0,0,0,0.03); border-left: 4px solid #ddd; transition: all .3s; }
+  .step-card.success { border-left-color: #98D8B0; }
+  .step-card.fail { border-left-color: #E57373; }
+  .step-card.pending { border-left-color: #ddd; opacity: 0.4; }
+  .step-header { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+  .step-num { width: 22px; height: 22px; border-radius: 50%; background: #F0E6E0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #8D7B70; flex-shrink: 0; }
+  .step-card.success .step-num { background: #DFF5E8; color: #4CAF50; }
+  .step-card.fail .step-num { background: #FFEBEE; color: #E57373; }
+  .step-name { font-size: 13px; font-weight: 700; }
+  .step-status { margin-left: auto; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 6px; }
+  .step-card.success .step-status { background: #DFF5E8; color: #4CAF50; }
+  .step-card.fail .step-status { background: #FFEBEE; color: #E57373; }
+  .step-body { font-size: 11px; color: #6D5D53; line-height: 1.6; }
+  .step-detail { background: #FAF6F2; border-radius: 8px; padding: 8px 10px; margin-top: 4px; }
+  .step-detail .label { font-weight: 600; color: #8D7B70; display: inline-block; min-width: 70px; }
+  .step-detail .value { color: #3D2C23; font-weight: 500; }
+  .step-detail .highlight { background: #FFDDD2; padding: 1px 5px; border-radius: 4px; font-weight: 600; }
+  .step-detail .score-bar { display: inline-block; height: 7px; border-radius: 4px; background: #FFB5A7; margin-left: 4px; vertical-align: middle; min-width: 2px; }
+  .final-result { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); border-radius: 16px; padding: 16px; margin-top: 10px; text-align: center; }
+  .final-result.error { background: linear-gradient(135deg, #FFEBEE, #FFCDD2); }
+  .final-emoji { font-size: 36px; margin-bottom: 6px; }
+  .final-category { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .final-summary { font-size: 12px; color: #5D4E44; margin-bottom: 6px; }
+  .confidence-bar { height: 7px; border-radius: 4px; background: #E0E0E0; margin-top: 6px; overflow: hidden; }
+  .confidence-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #FFB5A7, #4CAF50); transition: width .5s; }
+  .judge-row { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
+  .judge-btn { width: 48px; height: 48px; border-radius: 50%; border: 3px solid #ddd; background: #fff; font-size: 20px; cursor: pointer; transition: all .2s; display: flex; align-items: center; justify-content: center; }
+  .judge-btn:hover { transform: scale(1.1); }
+  .judge-btn.pass { border-color: #98D8B0; }
+  .judge-btn.pass.selected { background: #98D8B0; color: #fff; border-color: #4CAF50; }
+  .judge-btn.fail { border-color: #FFCDD2; }
+  .judge-btn.fail.selected { background: #E57373; color: #fff; border-color: #C62828; }
+  .judge-btn.fix { border-color: #FFE082; }
+  .judge-btn.fix.selected { background: #FFB300; color: #fff; border-color: #FF8F00; }
+  .judge-input { display: none; margin-top: 8px; }
+  .judge-input.visible { display: block; }
+  .judge-input select, .judge-input input, .judge-input textarea { width: 100%; border: 2px solid #FFE0D6; border-radius: 10px; padding: 8px 12px; font-size: 12px; font-family: inherit; outline: none; margin-top: 4px; }
+  .judge-input textarea { height: 50px; resize: vertical; }
+  .medicine-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; justify-content: center; }
+  .medicine-chip { background: #DFF5E8; border: 1px solid rgba(152,216,176,0.4); border-radius: 14px; padding: 6px 14px; font-size: 12px; font-weight: 600; color: #4CAF50; cursor: pointer; transition: all .15s; font-family: inherit; }
+  .medicine-chip:hover { background: #C8E6C9; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+  .stat-box { background: #fff; border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+  .stat-num { font-size: 28px; font-weight: 700; }
+  .stat-label { font-size: 10px; color: #8D7B70; font-weight: 600; margin-top: 2px; }
+  .stat-box.green .stat-num { color: #4CAF50; }
+  .stat-box.red .stat-num { color: #E57373; }
+  .stat-box.yellow .stat-num { color: #FFB300; }
+  .stat-box.blue .stat-num { color: #64B5F6; }
+  .bar-chart { display: flex; align-items: flex-end; gap: 4px; height: 120px; padding: 0 4px; }
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .bar-fill { width: 100%; border-radius: 6px 6px 0 0; transition: height .4s; min-height: 2px; }
+  .bar-label { font-size: 9px; color: #8D7B70; margin-top: 4px; text-align: center; font-weight: 600; }
+  .bar-value { font-size: 9px; font-weight: 700; color: #5D3A2E; margin-bottom: 2px; }
+  .result-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .result-table th { background: #F0E6E0; padding: 8px 6px; text-align: left; font-weight: 700; color: #5D3A2E; position: sticky; top: 0; }
+  .result-table td { padding: 7px 6px; border-bottom: 1px solid #F5EDE8; vertical-align: middle; }
+  .result-table tr:hover { background: #FFF8F0; }
+  .result-table .judge-cell { text-align: center; font-size: 16px; }
+  .fail-item { background: #FFEBEE; border-radius: 12px; padding: 12px; margin-bottom: 8px; border-left: 4px solid #E57373; }
+  .fail-item .fail-input { font-weight: 700; font-size: 13px; }
+  .fail-item .fail-detail { font-size: 11px; color: #6D5D53; margin-top: 4px; }
+  .suggestion { background: #E3F2FD; border-radius: 10px; padding: 10px 12px; margin-top: 6px; font-size: 11px; color: #1565C0; }
+  .suggestion strong { color: #0D47A1; }
+  .batch-textarea { width: 100%; border: 2px solid #FFE0D6; border-radius: 12px; padding: 12px; font-size: 12px; font-family: inherit; outline: none; min-height: 120px; resize: vertical; line-height: 1.6; }
+  .batch-textarea:focus { border-color: #FFB5A7; }
+  .batch-progress { height: 6px; border-radius: 3px; background: #F0E6E0; margin: 8px 0; overflow: hidden; }
+  .batch-progress-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #FFB5A7, #98D8B0); transition: width .3s; }
+  .export-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .cat-filter-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+  .cat-filter-chip { background: #FFF0E8; border: 1.5px solid #FFD6C4; border-radius: 14px; padding: 5px 12px; font-size: 11px; cursor: pointer; transition: all .15s; font-family: inherit; font-weight: 600; }
+  .cat-filter-chip:hover { background: #FFE0D6; }
+  .cat-filter-chip.active { background: #FFB5A7; color: #fff; border-color: #FFB5A7; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-thumb { background: #E0D6D0; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>아기톡톡 NLP 파이프라인 테스트 & 분석 v2</h1>
+  <p>입력 → 파이프라인 → 평가(O/X) → 통계 분석 → 개선점 도출 · <strong>200+ 테스트 문장</strong></p>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('test')">테스트</div>
+  <div class="tab" onclick="switchTab('stats')" id="tabStats">통계 <span class="badge" id="badgeTotal">0</span></div>
+  <div class="tab" onclick="switchTab('fails')" id="tabFails">실패 분석 <span class="badge" id="badgeFails" style="background:#E57373">0</span></div>
+  <div class="tab" onclick="switchTab('batch')">배치 테스트</div>
+  <div class="tab" onclick="switchTab('history')">기록</div>
+</div>
+
+<div class="container">
+
+  <!-- TAB 1: 테스트 -->
+  <div id="tab-test" class="tab-content active">
+    <div class="card">
+      <div class="input-row">
+        <input type="text" id="userInput" placeholder="예: 분유 120ml 먹었어" autofocus>
+        <button class="btn btn-primary" onclick="runPipeline()">분석</button>
+      </div>
+      <div class="stage-select">
+        <div class="stage-btn active" data-stage="0" onclick="setStage(0)">분유기</div>
+        <div class="stage-btn" data-stage="1" onclick="setStage(1)">이유식기</div>
+        <div class="stage-btn" data-stage="2" onclick="setStage(2)">유아식기</div>
+      </div>
+      <div class="quick-chips">
+        <div class="quick-chip" onclick="quickInput('분유 120ml 먹었어')">🍼 분유 120ml</div>
+        <div class="quick-chip" onclick="quickInput('분유 80 먹음')">🍼 분유 80</div>
+        <div class="quick-chip" onclick="quickInput('모유 수유했어')">🤱 모유 수유</div>
+        <div class="quick-chip" onclick="quickInput('직수 20분 했어')">🤱 직수 20분</div>
+        <div class="quick-chip" onclick="quickInput('이유식 소고기죽')">🥣 이유식</div>
+        <div class="quick-chip" onclick="quickInput('딸기 먹었어')">🍎 간식</div>
+        <div class="quick-chip" onclick="quickInput('뻥튀기 줬어')">🍘 뻥튀기</div>
+        <div class="quick-chip" onclick="quickInput('아기 잠들었어')">😴 잠듦</div>
+        <div class="quick-chip" onclick="quickInput('낮잠 2시간 잤어')">😴 낮잠</div>
+        <div class="quick-chip" onclick="quickInput('2시부터 자서 4시에 깼어')">😴 시간범위</div>
+        <div class="quick-chip" onclick="quickInput('깼어')">⏰ 깸</div>
+        <div class="quick-chip" onclick="quickInput('기저귀 갈았어')">🧷 기저귀</div>
+        <div class="quick-chip" onclick="quickInput('응가했어')">💩 응가</div>
+        <div class="quick-chip" onclick="quickInput('묽은 변 봤어')">💩 묽은변</div>
+        <div class="quick-chip" onclick="quickInput('약 먹었어')">💊 약</div>
+        <div class="quick-chip" onclick="quickInput('해열제 먹였어')">🌡️ 해열제</div>
+        <div class="quick-chip" onclick="quickInput('체온 37.5도')">🌡️ 체온</div>
+        <div class="quick-chip" onclick="quickInput('콧물 나와')">🤧 증상</div>
+        <div class="quick-chip" onclick="quickInput('뒤집기 했어')">⭐ 성장</div>
+        <div class="quick-chip" onclick="quickInput('걸음마 시작했어')">⭐ 걸음마</div>
+        <div class="quick-chip" onclick="quickInput('목욕했어')">🛁 목욕</div>
+        <div class="quick-chip" onclick="quickInput('외출')">🚗 외출</div>
+        <div class="quick-chip" onclick="quickInput('오늘 날씨 좋다')">📝 잡담</div>
+        <div class="quick-chip" onclick="quickInput('분유 먹고 잠들었어')">🔀 복합</div>
+      </div>
+    </div>
+    <div id="pipelineResult"></div>
+  </div>
+
+  <!-- TAB 2: 통계 -->
+  <div id="tab-stats" class="tab-content">
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-box blue"><div class="stat-num" id="sTotal">0</div><div class="stat-label">전체 테스트</div></div>
+      <div class="stat-box green"><div class="stat-num" id="sPass">0</div><div class="stat-label">정확 (O)</div></div>
+      <div class="stat-box red"><div class="stat-num" id="sFail">0</div><div class="stat-label">오류 (X)</div></div>
+      <div class="stat-box yellow"><div class="stat-num" id="sFix">0</div><div class="stat-label">수정필요 (△)</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">정확도</div>
+      <div style="text-align:center;margin:8px 0">
+        <span id="accuracyPct" style="font-size:40px;font-weight:800;color:#4CAF50">--%</span>
+        <div style="font-size:11px;color:#8D7B70;margin-top:2px">평가 완료 기준</div>
+      </div>
+      <div class="confidence-bar" style="height:10px"><div id="accuracyBar" class="confidence-fill" style="width:0%"></div></div>
+    </div>
+    <div class="card"><div class="card-title">카테고리별 정확도</div><div class="bar-chart" id="catChart"></div></div>
+    <div class="card"><div class="card-title">Confidence 분포</div><div class="bar-chart" id="confChart"></div></div>
+    <div class="card"><div class="card-title">자주 틀리는 패턴 TOP 5</div><div id="topFailPatterns" style="font-size:12px;color:#6D5D53"><span style="color:#aaa">평가 데이터 부족</span></div></div>
+  </div>
+
+  <!-- TAB 3: 실패 분석 -->
+  <div id="tab-fails" class="tab-content">
+    <div class="card"><div class="card-title">실패(X) 및 수정필요(△) 항목 분석</div><div id="failsList"><span style="color:#aaa;font-size:12px">아직 평가된 실패 항목이 없습니다.</span></div></div>
+    <div class="card" id="improvementCard" style="display:none"><div class="card-title">개선 제안 요약</div><div id="improvementSummary"></div></div>
+  </div>
+
+  <!-- TAB 4: 배치 테스트 -->
+  <div id="tab-batch" class="tab-content">
+    <div class="card">
+      <div class="card-title">배치 테스트 (200+ 문장)</div>
+      <p style="font-size:11px;color:#8D7B70;margin-bottom:8px">한 줄에 하나씩 "입력|기대카테고리" 형식. # 주석 지원.</p>
+      <textarea class="batch-textarea" id="batchInput" placeholder="분유 120ml 먹었어|feeding&#10;아기 잠들었어|sleep&#10;기저귀 갈았어|diaper"></textarea>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="runBatch()">일괄 실행</button>
+        <button class="btn btn-success" onclick="loadSampleBatch()">전체 200+ 불러오기</button>
+      </div>
+      <div class="card-title" style="margin-top:12px;font-size:12px">카테고리별 불러오기</div>
+      <div class="cat-filter-chips">
+        <div class="cat-filter-chip" onclick="loadCategoryBatch('feeding')">🍼 수유</div>
+        <div class="cat-filter-chip" onclick="loadCategoryBatch('babyfood')">🥣 이유식</div>
+        <div class="cat-filter-chip" onclick="loadCategoryBatch('snack')">🍎 간식</div>
+        <div class="cat-filter-chip" onclick="loadCategoryBatch('sleep')">😴 수면</div>
+        <div class="cat-filter-chip" onclick="loadCategoryBatch('diaper')">🧷 기저귀</div>
+        <div class="cat-filter-chip" onclick="loadCategoryBatch('health')">🌡️ 건강</div>
+        <div class="cat-filter-chip" onclick="loadCategoryBatch('milestone')">⭐ 성장</div>
+        <div class="cat-filter-chip" onclick="loadCategoryBatch('other')">📝 기타</div>
+      </div>
+      <div class="batch-progress" id="batchProgress" style="display:none"><div class="batch-progress-fill" id="batchProgressFill"></div></div>
+      <div id="batchResult" style="margin-top:10px"></div>
+    </div>
+  </div>
+
+  <!-- TAB 5: 기록 -->
+  <div id="tab-history" class="tab-content">
+    <div class="card">
+      <div class="card-title">전체 테스트 기록</div>
+      <div class="export-btns" style="margin-bottom:10px">
+        <button class="btn btn-sm btn-secondary" onclick="exportCSV()">CSV 내보내기</button>
+        <button class="btn btn-sm btn-secondary" onclick="exportJSON()">JSON 내보내기</button>
+        <button class="btn btn-sm btn-danger" onclick="clearAllData()">전체 초기화</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="result-table" id="historyTable">
+          <thead><tr><th>#</th><th>입력</th><th>카테고리</th><th>결과</th><th>Conf</th><th>평가</th><th>기대값</th></tr></thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+//   글로벌 상태
+// ═══════════════════════════════════════════════
+let currentStage = 0;
+let allResults = [];
+
+const CATEGORIES = {
+  feeding: { name: '수유', emoji: '🍼', color: '#FFB5A7' },
+  babyfood: { name: '이유식', emoji: '🥣', color: '#FFCBA4' },
+  snack: { name: '간식', emoji: '🍎', color: '#FFD8A8' },
+  sleep: { name: '수면', emoji: '😴', color: '#C9B1FF' },
+  diaper: { name: '기저귀', emoji: '🧷', color: '#FFE5A0' },
+  health: { name: '건강', emoji: '🌡️', color: '#98D8B0' },
+  milestone: { name: '성장', emoji: '⭐', color: '#FFD700' },
+  other: { name: '기타', emoji: '📝', color: '#A8D8EA' },
+};
+
+// ═══════════════════════════════════════════════
+//   키워드 & 패턴 사전 (Dart 코드와 동일)
+// ═══════════════════════════════════════════════
+const FEEDING_KW = {'분유':3,'모유':3,'수유':3,'젖병':2.5,'유축':2.5,'젖':2,'먹었':1,'먹임':1,'먹였':1,'먹음':1,'우유':2,'직수':3,'완모':3,'완분':3,'혼합':2,'혼수':2};
+const BABYFOOD_KW = {'이유식':3,'죽':2.5,'미음':2.5,'퓨레':2.5,'으깬':2,'소고기':2,'닭고기':2,'생선':2,'계란':2,'감자':2,'고구마':2,'브로콜리':2,'당근':2,'시금치':2,'옥수수':2,'호박':2,'양배추':2,'오트밀':2.5,'쌀':1.5};
+const SNACK_KW = {'간식':3,'사과':2,'딸기':2,'바나나':2,'귤':2,'포도':2,'수박':2,'블루베리':2,'요거트':2,'요구르트':2,'과자':2,'뻥튀기':2.5,'떡뻥':2.5,'쌀과자':2.5,'빵':1.5,'과일':2,'주스':2,'키위':2,'토마토':2,'멜론':2};
+const SLEEP_KW = {'잠들':3,'잠잤':3,'잠자':3,'낮잠':3,'밤잠':3,'쪽잠':3,'선잠':3,'꿀잠':3,'토닥':2,'취침':3,'수면':3,'기상':3,'재웠':2.5,'재움':2.5,'재워':2.5,'재우':2,'깼어':2.5,'깸':2.5,'눈떠':2.5,'눈떴':2.5,'깼':2.5,'일어났':2.5,'잤어':2.5,'잤다':2.5,'잠듦':2.5,'잠듬':2.5,'자요':2.5,'잠깨':2.5,'잠깼':2.5,'자서':2.5,'자고':2,'잤는데':2.5};
+const DIAPER_KW = {'기저귀':3,'응가':3,'대변':3,'소변':3,'오줌':2.5,'배변':2.5,'쌌어':2.5,'갈았':2,'갈아':2,'똥':2.5,'쉬했':2.5,'갈아줬':2,'교체':2,'묽은':2,'물변':2.5};
+const HEALTH_KW = {'체온':3,'온도':2.5,'예방접종':3,'병원':1.5,'감기':2.5,'열':2,'콧물':2,'기침':2,'발진':2.5,'두드러기':2.5,'구토':2.5,'토했':2.5,'설사':2,'알레르기':2.5,'약':2,'투약':3,'복용':2.5,'해열제':3,'타이레놀':3,'항생제':3,'시럽':2.5,'연고':2.5,'유산균':2.5,'영양제':2.5,'프로바이오틱스':2.5,'감기약':3,'기침약':3,'소화제':3,'비타민':2.5};
+const MILESTONE_KW = {'뒤집기':3,'뒤집었':3,'기었':3,'기어':2.5,'걸었':3,'걸음마':3,'첫':2,'처음':2,'옹알이':3,'이앓이':2.5,'이빨':2,'앉았':3,'섰어':3,'웃었':2,'손뼉':2.5};
+const OTHER_KW = {'목욕':3,'샤워':2,'씻겼':2.5,'씻김':2.5,'외출':3,'산책':2.5};
+
+const FEEDING_PAT = [[/\d+\s*(ml|cc)/i,3],[/젖\s*(먹|물)/,2.5],[/(반병|한병)/,2.5],[/양\s*(?:은|이|을|가|:)?\s*\d+/,2.5],[/\d+\s*밀리리터/,3],[/(?:분유|모유|수유|젖병|유축)\s*\d{2,3}/,2.5]];
+const SLEEP_PAT = [[/깨\s*(어|었|서|고|남|요)/,2.5],[/잠\s*(들|잤|잘|이)/,3],[/(밤|낮|쪽|선|꿀)\s*잠/,3],[/자다\s*(깨|가)/,2.5],[/자기\s*시작/,3],[/잠잤/,3],[/일어\s*났/,2.5],[/자서\s*.+\s*일어/,3],[/자서\s*.+\s*깼/,3],[/자고\s*.+\s*일어/,3]];
+const DIAPER_PAT = [[/똥\s*(쌌|싸|나|봤|이)/,3],[/쉬\s*(했|마려)/,2.5],[/응가\s*(했|봤|함|나|를)/,2],[/기저귀\s*(갈|교|바)/,2],[/쌌\s*(어|다|요)/,2.5],[/(묽은|노란|녹색|검은|물)\s*변/,3]];
+const HEALTH_PAT = [[/\d{2}\.?\d?\s*(도|°|℃)/,3],[/약\s*(먹|줬|투|복|을)/,3],[/약\s*(시럽|한\s*포|반\s*스푼)/,3]];
+const OTHER_PAT = [[/목욕\s*(했|시|함)/,3],[/씻\s*(겼|김|었)/,2.5],[/외출\s*(했|함|갔|나갔)/,3],[/산책\s*(했|함|갔|나갔)/,2.5]];
+
+// ═══════════════════════════════════════════════
+//   NLP 엔진
+// ═══════════════════════════════════════════════
+function scoreCategory(text, keywords, patterns) {
+  let score = 0; const matched = [];
+  for (const [kw, w] of Object.entries(keywords)) { if (text.includes(kw)) { score += w; matched.push(`"${kw}" +${w}`); } }
+  if (patterns) { for (const [pat, w] of patterns) { if (pat.test(text)) { score += w; matched.push(`/${pat.source.slice(0,20)}/ +${w}`); } } }
+  return { score: Math.round(score*100)/100, matched };
+}
+function normalizeText(raw) {
+  let text = raw.trim();
+  text = text.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '');
+  text = text.replace(/\s+/g, ' ').trim().toLowerCase();
+  return text;
+}
+function classifyCategory(text) {
+  const results = {
+    feeding: scoreCategory(text, FEEDING_KW, FEEDING_PAT),
+    babyfood: scoreCategory(text, BABYFOOD_KW, []),
+    snack: scoreCategory(text, SNACK_KW, []),
+    sleep: scoreCategory(text, SLEEP_KW, SLEEP_PAT),
+    diaper: scoreCategory(text, DIAPER_KW, DIAPER_PAT),
+    health: scoreCategory(text, HEALTH_KW, HEALTH_PAT),
+    milestone: scoreCategory(text, MILESTONE_KW, []),
+    other: scoreCategory(text, OTHER_KW, OTHER_PAT),
+  };
+  let bestCat = null, bestScore = 0;
+  for (const [cat, r] of Object.entries(results)) { if (r.score >= 2.0 && r.score > bestScore) { bestCat = cat; bestScore = r.score; } }
+  const sorted = Object.values(results).map(r=>r.score).sort((a,b)=>b-a);
+  const secondScore = sorted.length > 1 ? sorted[1] : 0;
+  let confidence = Math.min(0.95, Math.max(0.4, bestScore / 8.0));
+  const gap = bestScore - secondScore;
+  if (gap >= 3) confidence = Math.min(0.95, confidence + 0.1);
+  else if (gap < 1 && secondScore > 0) confidence = Math.max(0.3, confidence - 0.15);
+  confidence = Math.round(confidence*100)/100;
+  return { results, bestCat, bestScore, confidence, gap, secondScore };
+}
+function detectIntent(text, category) {
+  const intent = { category };
+  if (category === 'feeding') {
+    intent.feedingType = text.includes('모유') || /젖\s*(먹|물)/.test(text) || text.includes('직수') ? '모유' : '분유';
+    let m = text.match(/(\d+)\s*(ml|cc|밀리리터)/i);
+    if (!m) m = text.match(/(?:분유|모유|수유|젖병|유축)\s*(\d{2,3})(?!\s*(?:도|°|℃|시|분))/);
+    if (!m) m = text.match(/(\d{2,3})\s*(먹|줬|먹였|줌|먹음|먹임|마심|마셨)/);
+    if (!m) { const kn = text.match(/(?:분유|모유|수유|젖병|유축)\s+(\d{2,3})\s/); if (kn) m = kn; }
+    if (m) intent.amountMl = parseInt(m[1]);
+    if (/반병/.test(text)) intent.amountMl = 100;
+    if (/한병/.test(text)) intent.amountMl = 200;
+    const d = text.match(/(\d+)\s*(분|분간)/); if (d && !text.includes('분 전')) intent.durationMin = parseInt(d[1]);
+    if (intent.feedingType === '모유' && !intent.amountMl && !intent.durationMin) intent.needsDuration = true;
+    if (intent.feedingType === '분유' && !intent.amountMl) intent.needsAmount = true;
+  } else if (category === 'sleep') {
+    if (/깼|깨|일어났|깸|눈떠|눈떴/.test(text)) intent.sleepStatus = '종료';
+    else if (/잤|잠들|낮잠|밤잠|자요|잠듦|잠듬|취침|재웠|재움|재워/.test(text)) intent.sleepStatus = '시작';
+    // "자서...일어났어" → 종료 (override)
+    if (/자서.+(일어|깼|깸)/.test(text) || /자고.+(일어|깼|깸)/.test(text)) intent.sleepStatus = '종료';
+    if (text.includes('낮잠')) intent.sleepType = '낮잠';
+    else if (text.includes('밤잠')) intent.sleepType = '밤잠';
+    else if (text.includes('쪽잠')) intent.sleepType = '쪽잠';
+    else if (text.includes('선잠')) intent.sleepType = '선잠';
+    else if (text.includes('꿀잠')) intent.sleepType = '꿀잠';
+    else {
+      // 시간 기반 자동 판단: sleepStart 시간 또는 현재 시간 기준
+      const timeMatch = text.match(/(\d{1,2})\s*시/);
+      const refHour = timeMatch ? parseInt(timeMatch[1]) : new Date().getHours();
+      // bare hour(1~12)이고 오후가 합리적이면 PM으로 추론
+      const effectiveHour = (refHour >= 1 && refHour <= 12 && !/(오전|아침|새벽)/.test(text) && new Date().getHours() >= 12) ? refHour + 12 : refHour;
+      if (effectiveHour >= 20 || effectiveHour < 6) {
+        intent.sleepType = '밤잠';
+      } else {
+        intent.sleepType = '낮잠';
+      }
+    }
+    // 패턴 1: 양쪽 시각이 있는 범위 ("2시에 자서 4시에 깼어")
+    const rangeMatch = text.match(/(\d{1,2})\s*시.*(?:부터|에)\s*(?:자|잠).*?(\d{1,2})\s*시/);
+    if (rangeMatch) {
+      intent.sleepStart = parseInt(rangeMatch[1]) + '시';
+      intent.sleepEnd = parseInt(rangeMatch[2]) + '시';
+      let dur = parseInt(rangeMatch[2]) - parseInt(rangeMatch[1]);
+      if (dur < 0) dur += 24;
+      intent.durationMin = dur * 60;
+    }
+    // 패턴 2: 시작 시각만 있고 "이제/방금/지금" 일어남 ("1시에 자서 이제 일어났어")
+    if (!intent.durationMin) {
+      const nowWakeMatch = text.match(/(\d{1,2})\s*시\s*(?:부터|에)?\s*(?:자서|잠들어서?|자다가?)\s*(?:이제|방금|지금|금방)?\s*(?:깼|깸|일어|기상|눈떠|눈떴)/);
+      if (nowWakeMatch) {
+        let startH = parseInt(nowWakeMatch[1]);
+        const nowH = new Date().getHours();
+        // 스마트 AM/PM 추론
+        if (startH >= 1 && startH <= 12 && !/(오전|아침|새벽)/.test(text) && nowH >= 12) startH += 12;
+        intent.sleepStart = startH + '시';
+        intent.sleepEnd = '현재';
+        let dur = nowH - startH;
+        if (dur < 0) dur += 24;
+        intent.durationMin = dur * 60 + (new Date().getMinutes());
+      }
+    }
+    if (!intent.durationMin) {
+      const d = text.match(/(\d+)\s*(시간|분)/);
+      if (d) { intent.durationMin = d[2]==='시간' ? parseInt(d[1])*60 : parseInt(d[1]); }
+      if (/반/.test(text) && /시간/.test(text)) intent.durationMin = (intent.durationMin || 0) + 30;
+    }
+  } else if (category === 'diaper') {
+    const hasPee = /소변|오줌/.test(text), hasPoop = /대변|응가|똥|쌌/.test(text);
+    intent.diaperType = (hasPee&&hasPoop) ? '소변+대변' : hasPoop ? '대변' : '소변';
+  } else if (category === 'health') {
+    const t = text.match(/(\d{2}\.?\d?)\s*(도|°|℃)/); if (t) intent.temperature = parseFloat(t[1]);
+    const meds = ['해열제','타이레놀','감기약','기침약','항생제','소화제','유산균','영양제','비타민','시럽','연고'];
+    const found = meds.find(m => text.includes(m));
+    if (found) intent.medicine = found;
+    else if (/약\s*(먹|줬|투|복|을)/.test(text) || text.includes('투약')) { intent.medicine = '(미지정)'; intent.needsMedicineType = true; }
+  } else if (category === 'other') {
+    intent.subType = text.includes('외출') ? '외출' : text.includes('산책') ? '산책' : text.includes('목욕') ? '목욕' : '기타';
+  }
+  return intent;
+}
+function parseTime(text) {
+  const now = new Date();
+  let t = text.replace(/바ㄴ/g, '반');
+  t = t.replace(/(\d{1,2})\s*시\s*반/g, '$1시 30분');
+  t = t.replace(/(오전|오후|아침|저녁|밤)\s*(\d{1,2})\s*시\s*반/g, '$1 $2시 30분');
+  let m = t.match(/(\d+)\s*분\s*전/); if (m) return { time: new Date(now-parseInt(m[1])*60000), desc: `${m[1]}분 전` };
+  m = t.match(/(\d+)\s*시간\s*전/); if (m) return { time: new Date(now-parseInt(m[1])*3600000), desc: `${m[1]}시간 전` };
+  if (t.includes('아까')) return { time: new Date(now-30*60000), desc: '약 30분 전' };
+  m = t.match(/(오전|오후|아침|저녁|밤)\s*(\d{1,2})\s*시\s*(\d{1,2})?\s*분?/);
+  if (m) {
+    let hour = parseInt(m[2]), min = parseInt(m[3]||'0');
+    const period = m[1];
+    if ((period==='오후'||period==='저녁'||period==='밤') && hour < 12) hour += 12;
+    else if ((period==='오전'||period==='아침') && hour === 12) hour = 0;
+    const d = new Date(now); d.setHours(hour, min, 0, 0);
+    return { time: d, desc: `${period} ${m[2]}시 ${min}분` };
+  }
+  m = t.match(/(\d{1,2})\s*시\s*(\d{1,2})?\s*분?/);
+  if (m) { const d = new Date(now); d.setHours(parseInt(m[1]),parseInt(m[2]||'0'),0,0); return { time: d, desc: `${m[1]}시 ${m[2]||'00'}분` }; }
+  return { time: now, desc: '현재 시각' };
+}
+function buildSummary(category, intent) {
+  let s = CATEGORIES[category]?.name || '기타';
+  if (intent.feedingType) s = intent.feedingType;
+  if (intent.amountMl) s += ` ${intent.amountMl}ml`;
+  if (intent.durationMin && category === 'feeding') s += ` ${intent.durationMin}분`;
+  if (intent.needsDuration) s += ' (시간 질문)';
+  if (intent.needsAmount) s += ' (양 질문)';
+  if (intent.sleepStatus) {
+    const tp = intent.sleepType ? `${intent.sleepType} ` : '';
+    s = intent.sleepStatus === '시작' ? `${tp}잠듦` : '깨어남';
+    if (intent.durationMin) {
+      const h = Math.floor(intent.durationMin / 60), m = intent.durationMin % 60;
+      s += ` (${h > 0 ? h+'시간' : ''}${m > 0 ? ' '+m+'분' : ''})`;
+    }
+    if (intent.sleepStart && intent.sleepEnd) s += ` ${intent.sleepStart}~${intent.sleepEnd}`;
+  }
+  if (intent.diaperType) s = intent.diaperType;
+  if (intent.temperature) s = `체온 ${intent.temperature}°C`;
+  if (intent.medicine && !intent.needsMedicineType) s = `${intent.medicine} 복용`;
+  if (intent.subType) s = intent.subType;
+  return s;
+}
+
+// ═══════════════════════════════════════════════
+//   메인 파이프라인
+// ═══════════════════════════════════════════════
+async function runPipeline(inputText, silent) {
+  const raw = inputText || document.getElementById('userInput').value;
+  if (!raw.trim()) return;
+  if (!silent) document.getElementById('userInput').value = '';
+  const container = document.getElementById('pipelineResult');
+  if (!silent) {
+    container.innerHTML = '';
+    ['입력 정규화','문장 분석','카테고리 분류','의도 감지','시간 정규화','필드 검증','기록 생성'].forEach((name,i) => {
+      const id = ['normalize','sentence','classify','intent','time','validate','generate'][i];
+      container.innerHTML += `<div id="step-${id}" class="step-card pending"><div class="step-header"><div class="step-num">${i+1}</div><div class="step-name">${name}</div><div class="step-status">대기</div></div><div class="step-body"></div></div>`;
+    });
+  }
+  const delay = ms => silent ? Promise.resolve() : new Promise(r => setTimeout(r, ms));
+  const norm = normalizeText(raw);
+
+  await delay(200);
+  if (!silent) updateStep('normalize', true, `<div class="step-detail"><div><span class="label">원본:</span> <span class="value">"${raw}"</span></div><div><span class="label">정규화:</span> <span class="value highlight">"${norm}"</span></div></div>`);
+
+  await delay(200);
+  const segs = norm.split(/[.。,，;；\n]/).filter(s=>s.trim());
+  if (!silent) updateStep('sentence', true, `<div class="step-detail"><div><span class="label">문장 수:</span> <span class="value">${segs.length > 1 ? segs.length+'개 (다중)' : '1개'}</span></div><div><span class="label">서술어:</span> <span class="value">${/[었았했음됨잤깼]/.test(norm) ? '있음 ✅' : '없음'}</span></div></div>`);
+
+  await delay(300);
+  const cls = classifyCategory(norm);
+  if (!silent) {
+    const maxS = Math.max(8, cls.bestScore);
+    let html = Object.entries(cls.results).sort((a,b)=>b[1].score-a[1].score).map(([cat,r]) => {
+      const info = CATEGORIES[cat]; const barW = Math.max(2,(r.score/maxS)*100); const isBest = cat===cls.bestCat;
+      return `<div${isBest ? ' style="font-weight:700"' : ''}><span class="label">${info.emoji} ${info.name}:</span> <span class="value">${r.score.toFixed(1)}</span><span class="score-bar" style="width:${barW}px;background:${isBest?info.color:'#E0D6D0'}"></span>${isBest?' ← 선택':''}${r.matched.length?`<br><span style="font-size:9px;color:#aaa;margin-left:74px">${r.matched.join(', ')}</span>`:''}</div>`;
+    }).join('');
+    html += `<hr style="border:none;border-top:1px solid #F0E6E0;margin:6px 0"><div><span class="label">Confidence:</span> <span class="value highlight">${(cls.confidence*100).toFixed(0)}%</span> (1-2위 차: ${cls.gap.toFixed(1)})</div>`;
+    updateStep('classify', !!cls.bestCat, `<div class="step-detail">${html}</div>`);
+  }
+
+  if (!cls.bestCat) {
+    const maxAcross = Math.max(...Object.values(cls.results).map(r => r.score));
+    if (maxAcross < 1.5) {
+      cls.bestCat = 'other'; cls.bestScore = 0; cls.confidence = 0.3;
+      if (!silent) updateStep('classify', true, `<div class="step-detail"><div style="color:#FFA000;font-weight:600">⚠️ 매칭 키워드 없음 → 기타 기록으로 폴백</div></div>`);
+    } else {
+      const id = addResult({ raw, normalized: norm, category: null, summary: '분류 실패', confidence: 0, scores: cls.results, intent: {}, judge: null, expectedCat: null, note: '' });
+      if (!silent) {
+        ['intent','time','validate','generate'].forEach(s => updateStep(s, false, ''));
+        container.innerHTML += `<div class="final-result error"><div class="final-emoji">❓</div><div class="final-category">카테고리 판별 불가</div></div>`;
+        container.innerHTML += buildJudgeUI(id);
+      }
+      return { id, category: null, confidence: 0 };
+    }
+  }
+
+  await delay(250);
+  const intent = detectIntent(norm, cls.bestCat);
+  if (!silent) {
+    let ih = Object.entries(intent).filter(([k])=>k!=='category'&&k!=='needsMedicineType').map(([k,v])=>`<div><span class="label">${k}:</span> <span class="value highlight">${v}</span></div>`).join('');
+    if (intent.needsMedicineType) ih += `<div style="color:#FFA000;font-weight:600;margin-top:4px">💊 약 종류 선택 필요</div><div class="medicine-chips" id="medChips">${['해열제','감기약','기침약','항생제','소화제','유산균','비타민/영양제','기타 약'].map(m=>`<div class="medicine-chip" onclick="selectMedicine('${m}')">${m}</div>`).join('')}</div>`;
+    updateStep('intent', true, `<div class="step-detail">${ih||'추출 정보 없음'}</div>`);
+  }
+  if (intent.needsMedicineType && !silent) {
+    window._pendingMed = { raw, norm, cls, intent };
+    ['time','validate','generate'].forEach(s => updateStep(s, false, ''));
+    return;
+  }
+  return await finishPipeline(raw, norm, cls, intent, silent);
+}
+
+async function selectMedicine(name) {
+  const p = window._pendingMed; if (!p) return; window._pendingMed = null;
+  const chips = document.getElementById('medChips');
+  if (chips) chips.innerHTML = `<span style="color:#4CAF50;font-weight:600">✅ ${name}</span>`;
+  p.intent.medicine = name; delete p.intent.needsMedicineType;
+  await finishPipeline(p.raw, p.norm, p.cls, p.intent, false);
+}
+
+async function finishPipeline(raw, norm, cls, intent, silent) {
+  const delay = ms => silent ? Promise.resolve() : new Promise(r => setTimeout(r, ms));
+  const container = document.getElementById('pipelineResult');
+
+  await delay(200);
+  const time = parseTime(norm);
+  if (!silent) updateStep('time', true, `<div class="step-detail"><div><span class="label">기록 시각:</span> <span class="value highlight">${time.time.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}</span> (${time.desc})</div></div>`);
+
+  await delay(150);
+  let warnings = [];
+  if (intent.amountMl && intent.amountMl > 300) { warnings.push(`수유량 ${intent.amountMl}ml > 300`); intent.amountMl = 300; }
+  if (intent.temperature && (intent.temperature > 42 || intent.temperature < 34)) warnings.push(`체온 ${intent.temperature}°C 이상치`);
+  if (!silent) updateStep('validate', true, `<div class="step-detail">${warnings.length ? warnings.map(w=>`<div style="color:#FFA000">⚠️ ${w}</div>`).join('') : '모든 필드 정상 ✅'}</div>`);
+
+  await delay(200);
+  const summary = buildSummary(cls.bestCat, intent);
+  const catInfo = CATEGORIES[cls.bestCat];
+  if (!silent) updateStep('generate', true, `<div class="step-detail"><div><span class="label">Category:</span> <span class="value">${catInfo.emoji} ${catInfo.name}</span></div><div><span class="label">Summary:</span> <span class="value highlight">${summary}</span></div><div><span class="label">Auto-Save:</span> <span class="value">${cls.confidence > 0.7 ? '✅ 자동 저장' : '❌ 확인 카드'}</span></div></div>`);
+
+  const id = addResult({ raw, normalized: norm, category: cls.bestCat, summary, confidence: cls.confidence, scores: cls.results, intent, judge: null, expectedCat: null, note: '' });
+  if (!silent) {
+    container.innerHTML += `<div class="final-result"><div class="final-emoji">${catInfo.emoji}</div><div class="final-category">${summary}</div><div class="final-summary">${catInfo.name} · Confidence ${(cls.confidence*100).toFixed(0)}%</div><div class="confidence-bar"><div class="confidence-fill" style="width:${cls.confidence*100}%"></div></div></div>`;
+    container.innerHTML += buildJudgeUI(id);
+  }
+  return { id, category: cls.bestCat, confidence: cls.confidence };
+}
+
+// ═══════════════════════════════════════════════
+//   평가 UI
+// ═══════════════════════════════════════════════
+function buildJudgeUI(id) {
+  return `<div class="card" style="text-align:center;margin-top:8px" id="judge-${id}">
+    <div style="font-size:13px;font-weight:700;margin-bottom:8px">이 결과가 맞나요?</div>
+    <div class="judge-row">
+      <div class="judge-btn pass" onclick="judgeResult(${id},'pass',this)" title="정확함">⭕</div>
+      <div class="judge-btn fail" onclick="judgeResult(${id},'fail',this)" title="틀림">❌</div>
+      <div class="judge-btn fix" onclick="judgeResult(${id},'fix',this)" title="수정필요">△</div>
+    </div>
+    <div class="judge-input" id="judgeInput-${id}">
+      <select id="expectedCat-${id}" style="margin-top:6px">
+        <option value="">올바른 카테고리 선택</option>
+        ${Object.entries(CATEGORIES).map(([k,v])=>`<option value="${k}">${v.emoji} ${v.name}</option>`).join('')}
+      </select>
+      <textarea id="judgeNote-${id}" placeholder="어떤 점이 잘못되었나요?"></textarea>
+      <button class="btn btn-sm btn-primary" onclick="saveJudge(${id})" style="margin-top:4px">저장</button>
+    </div>
+  </div>`;
+}
+function judgeResult(id, judge, el) {
+  el.parentElement.querySelectorAll('.judge-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  const r = allResults.find(r => r.id === id); if (r) r.judge = judge;
+  const input = document.getElementById(`judgeInput-${id}`);
+  if (judge === 'fail' || judge === 'fix') input.classList.add('visible');
+  else { input.classList.remove('visible'); saveJudge(id); }
+}
+function saveJudge(id) {
+  const r = allResults.find(r => r.id === id); if (!r) return;
+  const catSel = document.getElementById(`expectedCat-${id}`);
+  const noteTa = document.getElementById(`judgeNote-${id}`);
+  if (catSel) r.expectedCat = catSel.value || null;
+  if (noteTa) r.note = noteTa.value || '';
+  updateAllStats();
+  const card = document.getElementById(`judge-${id}`);
+  if (card) {
+    const msg = r.judge === 'pass' ? '✅ 정확' : r.judge === 'fail' ? '❌ 오류' : '△ 수정필요';
+    card.innerHTML = `<div style="font-size:13px;font-weight:600;color:${r.judge==='pass'?'#4CAF50':r.judge==='fail'?'#E57373':'#FFB300'}">${msg} 평가 저장됨</div>`;
+  }
+}
+
+// ═══════════════════════════════════════════════
+//   결과 저장 & 통계
+// ═══════════════════════════════════════════════
+let _nextId = 1;
+function addResult(data) { const id = _nextId++; allResults.push({ id, timestamp: new Date(), ...data }); updateAllStats(); return id; }
+
+function updateAllStats() {
+  const total = allResults.length;
+  const judged = allResults.filter(r => r.judge);
+  const pass = judged.filter(r => r.judge === 'pass').length;
+  const fail = judged.filter(r => r.judge === 'fail').length;
+  const fix = judged.filter(r => r.judge === 'fix').length;
+  document.getElementById('sTotal').textContent = total;
+  document.getElementById('sPass').textContent = pass;
+  document.getElementById('sFail').textContent = fail;
+  document.getElementById('sFix').textContent = fix;
+  document.getElementById('badgeTotal').textContent = total;
+  document.getElementById('badgeFails').textContent = fail + fix;
+  const accuracy = judged.length ? Math.round((pass / judged.length) * 100) : 0;
+  document.getElementById('accuracyPct').textContent = judged.length ? accuracy + '%' : '--%';
+  document.getElementById('accuracyBar').style.width = accuracy + '%';
+  document.getElementById('accuracyBar').style.background = accuracy >= 80 ? 'linear-gradient(90deg,#98D8B0,#4CAF50)' : accuracy >= 50 ? 'linear-gradient(90deg,#FFE082,#FFB300)' : 'linear-gradient(90deg,#FFCDD2,#E57373)';
+  renderCategoryChart(); renderConfidenceChart(); renderHistory(); renderFailAnalysis();
+}
+
+function renderCategoryChart() {
+  const chart = document.getElementById('catChart');
+  const cats = Object.keys(CATEGORIES);
+  const data = {}; cats.forEach(c => { data[c] = { total: 0, pass: 0 }; });
+  allResults.forEach(r => { if (r.category && data[r.category]) { data[r.category].total++; if (r.judge === 'pass') data[r.category].pass++; } });
+  const maxVal = Math.max(1, ...Object.values(data).map(d => d.total));
+  chart.innerHTML = cats.map(c => {
+    const d = data[c]; const info = CATEGORIES[c];
+    const h = Math.max(2, (d.total / maxVal) * 100);
+    const passH = d.total ? (d.pass / d.total) * h : 0;
+    return `<div class="bar-col"><div class="bar-value">${d.total>0&&d.pass>0?Math.round(d.pass/d.total*100)+'%':d.total>0?'0%':''}</div><div style="width:100%;height:${h}px;position:relative;border-radius:6px 6px 0 0;overflow:hidden"><div style="position:absolute;bottom:0;width:100%;height:${passH}px;background:${info.color}"></div><div style="position:absolute;top:0;width:100%;height:${h-passH}px;background:#F0E6E0"></div></div><div class="bar-label">${info.emoji}<br>${d.total}</div></div>`;
+  }).join('');
+}
+function renderConfidenceChart() {
+  const chart = document.getElementById('confChart');
+  const buckets = [{label:'30-50%',min:0.3,max:0.5,count:0},{label:'50-60%',min:0.5,max:0.6,count:0},{label:'60-70%',min:0.6,max:0.7,count:0},{label:'70-80%',min:0.7,max:0.8,count:0},{label:'80-90%',min:0.8,max:0.9,count:0},{label:'90%+',min:0.9,max:1.01,count:0}];
+  allResults.forEach(r => { const b = buckets.find(b => r.confidence >= b.min && r.confidence < b.max); if (b) b.count++; });
+  const maxVal = Math.max(1, ...buckets.map(b => b.count));
+  const colors = ['#FFCDD2','#FFE082','#FFE082','#C8E6C9','#A5D6A7','#81C784'];
+  chart.innerHTML = buckets.map((b,i) => `<div class="bar-col"><div class="bar-value">${b.count||''}</div><div class="bar-fill" style="height:${Math.max(2,(b.count/maxVal)*100)}px;background:${colors[i]}"></div><div class="bar-label">${b.label}</div></div>`).join('');
+}
+function renderFailAnalysis() {
+  const fails = allResults.filter(r => r.judge === 'fail' || r.judge === 'fix');
+  const list = document.getElementById('failsList');
+  const impCard = document.getElementById('improvementCard');
+  if (!fails.length) { list.innerHTML = '<span style="color:#aaa;font-size:12px">아직 평가된 실패 항목이 없습니다.</span>'; impCard.style.display = 'none'; document.getElementById('topFailPatterns').innerHTML = '<span style="color:#aaa">평가 데이터 부족</span>'; return; }
+  list.innerHTML = fails.map(r => {
+    const catInfo = r.category ? CATEGORIES[r.category] : { emoji: '❓', name: '없음' };
+    const expectedInfo = r.expectedCat ? CATEGORIES[r.expectedCat] : null;
+    return `<div class="fail-item"><div class="fail-input">"${r.raw}"</div><div class="fail-detail"><div>결과: ${catInfo.emoji} ${catInfo.name} (${(r.confidence*100).toFixed(0)}%) ${r.judge==='fix'?'△':'❌'}</div>${expectedInfo?`<div>기대: ${expectedInfo.emoji} ${expectedInfo.name}</div>`:''}${r.note?`<div>메모: ${r.note}</div>`:''}</div></div>`;
+  }).join('');
+  const patternCounts = {};
+  fails.forEach(r => { const key = `${r.category||'null'}→${r.expectedCat||'?'}`; patternCounts[key] = (patternCounts[key]||0) + 1; });
+  document.getElementById('topFailPatterns').innerHTML = Object.entries(patternCounts).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([p,c]) => {
+    const [from,to] = p.split('→');
+    const fi = CATEGORIES[from]||{emoji:'❓',name:from}, ti = CATEGORIES[to]||{emoji:'❓',name:to};
+    return `<div style="padding:4px 0">${fi.emoji} ${fi.name} → ${ti.emoji} ${ti.name} <strong>(${c}회)</strong></div>`;
+  }).join('') || '<span style="color:#aaa">데이터 부족</span>';
+}
+function renderHistory() {
+  document.getElementById('historyBody').innerHTML = allResults.slice().reverse().map((r,i) => {
+    const ci = r.category ? CATEGORIES[r.category] : {emoji:'❓',name:'-'};
+    const ei = r.expectedCat ? CATEGORIES[r.expectedCat] : null;
+    const ji = r.judge==='pass'?'⭕':r.judge==='fail'?'❌':r.judge==='fix'?'△':'—';
+    return `<tr><td>${allResults.length-i}</td><td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.raw}">${r.raw}</td><td>${ci.emoji} ${ci.name}</td><td>${r.summary}</td><td>${(r.confidence*100).toFixed(0)}%</td><td class="judge-cell">${ji}</td><td>${ei?ei.emoji+' '+ei.name:''}</td></tr>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════
+//   배치 테스트
+// ═══════════════════════════════════════════════
+async function runBatch() {
+  const raw = document.getElementById('batchInput').value.trim();
+  if (!raw) return;
+  const lines = raw.split('\n').filter(l => l.trim() && !l.startsWith('#'));
+  const progress = document.getElementById('batchProgress');
+  const fill = document.getElementById('batchProgressFill');
+  const result = document.getElementById('batchResult');
+  progress.style.display = 'block'; result.innerHTML = '';
+  let pass = 0, fail = 0, total = lines.length;
+  const details = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    fill.style.width = ((i+1)/total*100) + '%';
+    const parts = lines[i].split('|');
+    const input = parts[0].trim();
+    const expected = parts[1]?.trim() || null;
+    const res = await runPipeline(input, true);
+    if (!res) continue;
+    const r = allResults.find(r => r.id === res.id);
+    if (r && expected) {
+      r.expectedCat = expected;
+      if (r.category === expected) { r.judge = 'pass'; pass++; } else { r.judge = 'fail'; fail++; }
+    }
+    details.push({ input, expected, actual: res.category, confidence: res.confidence, ok: expected ? res.category === expected : null, summary: r?.summary || '' });
+    await new Promise(r => setTimeout(r, 10));
+  }
+
+  const autoJudged = details.filter(d => d.ok !== null).length;
+  const accuracy = autoJudged ? Math.round(pass / autoJudged * 100) : 0;
+  const catStats = {};
+  details.forEach(d => {
+    if (!d.expected) return;
+    if (!catStats[d.expected]) catStats[d.expected] = { pass: 0, fail: 0 };
+    if (d.ok) catStats[d.expected].pass++; else catStats[d.expected].fail++;
+  });
+  const catHtml = Object.entries(catStats).map(([cat,s]) => {
+    const info = CATEGORIES[cat]||{emoji:'?',name:cat};
+    const acc = Math.round(s.pass/(s.pass+s.fail)*100);
+    return `<span style="display:inline-block;background:${acc>=80?'#E8F5E9':'#FFEBEE'};border-radius:8px;padding:3px 8px;margin:2px;font-size:11px">${info.emoji} ${info.name} ${acc}% (${s.pass}/${s.pass+s.fail})</span>`;
+  }).join('');
+
+  result.innerHTML = `
+    <div class="card" style="text-align:center">
+      <div style="font-size:28px;font-weight:800;color:${accuracy>=80?'#4CAF50':accuracy>=50?'#FFB300':'#E57373'}">${accuracy}%</div>
+      <div style="font-size:12px;color:#8D7B70">${total}건 실행 · ${pass}건 정확 · ${fail}건 오류 · ${total-autoJudged}건 미평가</div>
+      <div style="margin-top:8px">${catHtml}</div>
+    </div>
+    <div class="card"><table class="result-table">
+      <thead><tr><th>입력</th><th>기대</th><th>결과</th><th>요약</th><th>Conf</th><th>판정</th></tr></thead>
+      <tbody>${details.map(d => {
+        const ei = d.expected ? CATEGORIES[d.expected] : null;
+        const ai = d.actual ? CATEGORIES[d.actual] : {emoji:'❓',name:'-'};
+        return `<tr style="background:${d.ok===true?'#F1F8E9':d.ok===false?'#FFEBEE':'#fff'}">
+          <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${d.input}">${d.input}</td>
+          <td>${ei?ei.emoji+' '+ei.name:'-'}</td>
+          <td>${ai.emoji} ${ai.name}</td>
+          <td style="font-size:10px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${d.summary}">${d.summary}</td>
+          <td>${(d.confidence*100).toFixed(0)}%</td>
+          <td style="text-align:center;font-size:16px">${d.ok===true?'⭕':d.ok===false?'❌':'—'}</td>
+        </tr>`;
+      }).join('')}</tbody>
+    </table></div>`;
+  updateAllStats();
+}
+
+// ═══════════════════════════════════════════════
+//   200+ 종합 테스트 문장 세트
+// ═══════════════════════════════════════════════
+const FULL_TEST_SET = `# ━━━━━━━━ 수유 (feeding) 기본 표현 ━━━━━━━━
+분유 120ml 먹었어|feeding
+분유 80 먹음|feeding
+분유 100 줬어|feeding
+분유 먹였어|feeding
+모유 수유했어|feeding
+모유 10분 먹었어|feeding
+모유 왼쪽 15분 오른쪽 10분|feeding
+젖병 80cc 먹음|feeding
+젖 물렸어|feeding
+직수 20분 했어|feeding
+유축 150ml 먹였어|feeding
+완모 중이야|feeding
+완분이에요|feeding
+혼합 수유 중|feeding
+반병 먹었어|feeding
+한병 다 먹었어|feeding
+우유 200 밀리리터 줬어|feeding
+아기 젖 먹였어|feeding
+수유 완료|feeding
+수유량 100ml|feeding
+# 수유 - 시간 표현 조합
+30분 전에 분유 100ml|feeding
+1시간 전에 젖 먹였어|feeding
+아까 모유 수유함|feeding
+오후 2시에 분유 120ml 먹었어|feeding
+10시반에 분유 먹었어|feeding
+새벽 3시에 수유했어|feeding
+아침 8시에 분유 120ml|feeding
+# 수유 - 양/시간 질문 유도 (세부정보 누락)
+분유 먹었어|feeding
+모유 수유|feeding
+젖병 먹임|feeding
+수유했어|feeding
+# 수유 - 구어체/줄임말/띄어쓰기 없음
+모유수유했어|feeding
+분유먹음|feeding
+# 수유 - 부정/감정 포함
+분유 양이 좀 적었어 60ml|feeding
+3시간 간격으로 수유 중|feeding
+아기가 안 먹어|feeding
+안 먹으려고 해|feeding
+많이 먹었어|feeding
+조금 먹었어|feeding
+잘 먹었어|feeding
+
+# ━━━━━━━━ 이유식 (babyfood) ━━━━━━━━
+이유식 먹었어|babyfood
+이유식 소고기죽|babyfood
+이유식 당근 호박 죽|babyfood
+소고기 미음 줬어|babyfood
+닭고기 퓨레 먹었어|babyfood
+감자 으깬 거 줬어|babyfood
+고구마 죽 해줬어|babyfood
+브로콜리 시금치 죽|babyfood
+계란 노른자 줬어|babyfood
+쌀 미음 처음 먹였어|babyfood
+오트밀 죽 만들었어|babyfood
+생선살 죽 먹었어|babyfood
+옥수수 감자 퓨레|babyfood
+양배추 죽 줬어|babyfood
+호박 당근 으깬 거|babyfood
+이유식 잘 안 먹어|babyfood
+이유식 거부했어|babyfood
+이유식 새로운 재료 도전|babyfood
+오늘 첫 이유식 시작했어|babyfood
+이유식 양 조금 늘렸어|babyfood
+# 이유식 - 시간/구어체
+오전 10시에 이유식 먹었어|babyfood
+점심때 이유식 줬어|babyfood
+아까 이유식 줌|babyfood
+이유식줬어|babyfood
+이유식 줌|babyfood
+죽 먹음|babyfood
+
+# ━━━━━━━━ 간식 (snack) ━━━━━━━━
+간식 줬어|snack
+딸기 먹었어|snack
+바나나 반개 줬어|snack
+사과 갈아서 줬어|snack
+귤 한 쪽 먹었어|snack
+블루베리 줬어|snack
+요거트 줬어|snack
+뻥튀기 줬어|snack
+떡뻥 먹었어|snack
+쌀과자 줬어|snack
+과일 줬어|snack
+수박 조금 먹었어|snack
+포도 껍질 벗겨서 줬어|snack
+키위 줬어|snack
+토마토 줬어|snack
+멜론 먹었어|snack
+빵 조금 줬어|snack
+주스 조금 먹였어|snack
+요구르트 마셨어|snack
+간식으로 과자 줬어|snack
+간식 줌|snack
+딸기줬어|snack
+
+# ━━━━━━━━ 수면 (sleep) 기본 ━━━━━━━━
+아기 잠들었어|sleep
+잠잤어|sleep
+깼어|sleep
+낮잠 잤어|sleep
+밤잠 들었어|sleep
+쪽잠 잤어|sleep
+선잠만 잤어|sleep
+꿀잠 잤어|sleep
+토닥토닥 재웠어|sleep
+아기 재움|sleep
+재워놨어|sleep
+눈 떴어|sleep
+일어났어|sleep
+잠깼어|sleep
+취침했어|sleep
+기상했어|sleep
+잠이 들었어|sleep
+자요|sleep
+잠듦|sleep
+# 수면 - 시간/기간
+2시간 잤어|sleep
+낮잠 30분 잤어|sleep
+한시간 반 잤어|sleep
+3시간 넘게 낮잠 잤어|sleep
+# 수면 - 시간 범위
+2시부터 자서 4시에 깼어|sleep
+오후 1시에 잠들어서 3시에 깼어|sleep
+밤 9시부터 잠들었어|sleep
+새벽에 깼어|sleep
+오후 3시 반에 낮잠 잤어|sleep
+밤 10시에 잠들었어|sleep
+# 수면 - 다양한 표현
+자다가 깼어|sleep
+자기 시작했어|sleep
+잠잤다 깼어|sleep
+잠들기 힘들어해|sleep
+밤새 잘 잤어|sleep
+뒤척이다가 잠들었어|sleep
+낮잠 안 잤어|sleep
+안 자려고 해|sleep
+# 수면 - "자서/자고" 활용형 (v5)
+1시에 자서 이제 일어났어|sleep
+자고 일어났어|sleep
+잤는데 깼어|sleep
+2시에 자서 방금 깼어|sleep
+# 수면 - 구어체/오타
+잠듬|sleep
+낮잠잤어|sleep
+잠들엇어|sleep
+
+# ━━━━━━━━ 기저귀 (diaper) 기본 ━━━━━━━━
+기저귀 갈았어|diaper
+응가했어|diaper
+대변 봤어|diaper
+소변 봤어|diaper
+오줌 쌌어|diaper
+쉬했어|diaper
+똥 쌌어|diaper
+기저귀 교체함|diaper
+기저귀 갈아줬어|diaper
+배변했어|diaper
+쌌어|diaper
+# 기저귀 - 변 상태 묘사
+묽은 변 봤어|diaper
+물변이야|diaper
+노란 변 봤어|diaper
+녹색 변이야|diaper
+검은 변 나왔어|diaper
+똥이 좀 묽어|diaper
+# 기저귀 - 복합/기타
+소변 대변 같이 봤어|diaper
+응가 대량이야|diaper
+기저귀 바꿨어|diaper
+하루 종일 안 쌌어|diaper
+# 기저귀 - 구어체/오타
+응가함|diaper
+기저귀 갈음|diaper
+기저귀 갈앗어|diaper
+
+# ━━━━━━━━ 건강 (health) 체온 ━━━━━━━━
+체온 37.5도|health
+열이 38도야|health
+체온 36.8℃|health
+온도 37.2도|health
+체온 좀 높은 것 같아|health
+열이 있는 것 같아|health
+열 나는 것 같아|health
+# 건강 - 약/투약
+해열제 먹였어|health
+타이레놀 줬어|health
+약 먹었어|health
+감기약 먹였어|health
+기침약 줬어|health
+항생제 복용했어|health
+시럽 줬어|health
+연고 발랐어|health
+유산균 먹였어|health
+영양제 줬어|health
+비타민 줬어|health
+프로바이오틱스 먹였어|health
+소화제 먹였어|health
+투약 완료|health
+약 한 포 줬어|health
+약 반 스푼 먹였어|health
+# 건강 - 증상
+감기 걸렸어|health
+콧물 나와|health
+기침 해|health
+발진이 생겼어|health
+두드러기 났어|health
+구토했어|health
+토했어|health
+설사해|health
+알레르기 반응 있어|health
+배 아파해|health
+토할 것 같아|health
+# 건강 - 의료/구어체
+예방접종 맞았어|health
+병원 다녀왔어|health
+약먹음|health
+
+# ━━━━━━━━ 성장/발달 (milestone) ━━━━━━━━
+뒤집기 했어|milestone
+뒤집었어|milestone
+기었어|milestone
+기어다녀|milestone
+걸었어|milestone
+걸음마 시작했어|milestone
+첫 걸음마|milestone
+옹알이 해|milestone
+처음 웃었어|milestone
+손뼉 쳤어|milestone
+앉았어|milestone
+혼자 앉았어|milestone
+섰어|milestone
+혼자 섰어|milestone
+이앓이 하는 것 같아|milestone
+이빨 났어|milestone
+첫 이빨 나왔어|milestone
+처음으로 엄마 했어|milestone
+처음 뒤집었어|milestone
+붙잡고 섰어|milestone
+뒤집음|milestone
+
+# ━━━━━━━━ 기타 (other) ━━━━━━━━
+목욕했어|other
+목욕 시켰어|other
+샤워했어|other
+씻겼어|other
+외출했어|other
+산책 다녀왔어|other
+산책 갔다왔어|other
+외출 나갔어|other
+# 기타 - 일상/잡담
+오늘 날씨 좋다|other
+아기 기분 좋아|other
+사진 찍었어|other
+할머니 만났어|other
+아기 배고파|other
+울어|other
+기분이 안 좋아|other
+목욕함|other
+
+# ━━━━━━━━ 복합 문장 (1번째 의도 기준) ━━━━━━━━
+분유 먹고 잠들었어|feeding
+응가하고 기저귀 갈았어|diaper
+목욕하고 잠들었어|other
+이유식 먹고 간식도 줬어|babyfood
+약 먹이고 재웠어|health
+산책 다녀와서 목욕시켰어|other
+분유 100ml 먹고 바로 토했어|feeding
+낮잠 자고 일어나서 간식 먹었어|sleep
+기저귀 갈고 분유 줬어|diaper
+
+# ━━━━━━━━ 시간 표현 다양화 ━━━━━━━━
+10분 전에 분유 먹었어|feeding
+1시간 전에 잠들었어|sleep
+아까 기저귀 갈았어|diaper
+저녁 7시에 목욕했어|other
+새벽 2시에 깼어|sleep
+
+# ━━━━━━━━ 오타/비표준 입력 ━━━━━━━━
+분유 먹엇어|feeding
+잠들엇어|sleep
+기저귀 갈앗어|diaper`;
+
+function loadSampleBatch() {
+  document.getElementById('batchInput').value = FULL_TEST_SET;
+}
+function loadCategoryBatch(cat) {
+  const lines = FULL_TEST_SET.split('\n').filter(l => l.trim() && !l.startsWith('#'));
+  const filtered = lines.filter(l => { const parts = l.split('|'); return parts[1]?.trim() === cat; });
+  document.getElementById('batchInput').value = filtered.join('\n');
+}
+
+// ═══════════════════════════════════════════════
+//   Export
+// ═══════════════════════════════════════════════
+function exportCSV() {
+  const header = 'ID,입력,정규화,카테고리,결과,Confidence,평가,기대카테고리,메모\n';
+  const rows = allResults.map(r => `${r.id},"${r.raw}","${r.normalized}",${r.category||''},${r.summary},${r.confidence},${r.judge||''},${r.expectedCat||''},"${r.note||''}"`).join('\n');
+  downloadFile('pipeline_test_results.csv', header + rows, 'text/csv');
+}
+function exportJSON() { downloadFile('pipeline_test_results.json', JSON.stringify(allResults, null, 2), 'application/json'); }
+function downloadFile(name, content, type) {
+  const blob = new Blob(['\ufeff' + content], { type: type + ';charset=utf-8' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.click();
+}
+function clearAllData() {
+  if (!confirm('모든 테스트 기록을 삭제할까요?')) return;
+  allResults = []; _nextId = 1; updateAllStats();
+  document.getElementById('pipelineResult').innerHTML = '';
+}
+
+// ═══════════════════════════════════════════════
+//   UI 유틸리티
+// ═══════════════════════════════════════════════
+function updateStep(id, success, html) {
+  const el = document.getElementById('step-' + id); if (!el) return;
+  el.className = `step-card ${success ? 'success' : 'fail'}`;
+  el.querySelector('.step-status').textContent = success ? '완료' : '실패';
+  el.querySelector('.step-body').innerHTML = html;
+}
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.tab-content#tab-${name}`).classList.add('active');
+  event.target.closest('.tab').classList.add('active');
+}
+function setStage(stage) {
+  currentStage = stage;
+  document.querySelectorAll('.stage-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.stage-btn[data-stage="${stage}"]`).classList.add('active');
+}
+function quickInput(text) {
+  switchTab('test');
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('.tabs .tab:first-child').classList.add('active');
+  document.getElementById('userInput').value = text;
+  runPipeline(text);
+}
+document.getElementById('userInput').addEventListener('keydown', e => { if (e.key==='Enter') runPipeline(); });
+</script>
+</body>
+</html>

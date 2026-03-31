@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#ecc159",
+              "on-background": "#e2e0fc",
+              "surface-container-lowest": "#0c0c20",
+              "on-error-container": "#ffdad6",
+              "surface-container-low": "#1a1a2e",
+              "surface-dim": "#111125",
+              "on-primary-container": "#006a54",
+              "tertiary": "#fff3df",
+              "inverse-surface": "#e2e0fc",
+              "on-secondary": "#2e2e46",
+              "on-primary": "#00382b",
+              "on-error": "#690005",
+              "on-secondary-container": "#b7b6d3",
+              "surface-bright": "#37374d",
+              "primary-fixed-dim": "#28dfb4",
+              "secondary-fixed": "#e1e0ff",
+              "on-primary-fixed": "#002118",
+              "primary-fixed": "#55fcd0",
+              "on-secondary-fixed-variant": "#44455d",
+              "on-surface": "#e2e0fc",
+              "secondary": "#c5c4e2",
+              "tertiary-fixed": "#ffdf9a",
+              "secondary-fixed-dim": "#c5c4e2",
+              "primary-container": "#46f1c5",
+              "surface-tint": "#28dfb4",
+              "outline": "#85948d",
+              "surface-container-high": "#28283d",
+              "surface": "#111125",
+              "on-tertiary-fixed": "#251a00",
+              "on-tertiary-fixed-variant": "#5a4300",
+              "secondary-container": "#464760",
+              "background": "#111125",
+              "error": "#ffb4ab",
+              "on-secondary-fixed": "#191930",
+              "inverse-primary": "#006b55",
+              "outline-variant": "#3b4a44",
+              "surface-container": "#1e1e32",
+              "tertiary-container": "#ffd268",
+              "error-container": "#93000a",
+              "inverse-on-surface": "#2f2e44",
+              "on-primary-fixed-variant": "#00513f",
+              "on-tertiary-container": "#775900",
+              "surface-variant": "#333348",
+              "surface-container-highest": "#333348",
+              "on-surface-variant": "#bacac2",
+              "on-tertiary": "#3f2e00",
+              "primary": "#ccffeb"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #111125;
+            color: #e2e0fc;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .asymmetric-card {
+            border-top-left-radius: 3rem;
+            border-bottom-right-radius: 3rem;
+            border-top-right-radius: 2rem;
+            border-bottom-left-radius: 2rem;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-[#111125]/80 backdrop-blur-md dark:bg-[#111125]/80">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img alt="Baby Avatar" class="w-full h-full object-cover" data-alt="Cute baby avatar illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKdJMctW4PqlDgGpvl8x5q4659rM98kG0rcN8nx7GlmcDDUk5BN7pgVk0m_V_LJiZ9JHNveuZqycjIejh41RXHIrJxAOW5AvNcr19xogNHp9FZYlLwAGPrq3EOhwozggCAxYSDyJrvyMz3gPae_sfOsUmg1zpT8mEmA1AEeEpXkh393Oc98k6GVj-iuuQWNZBfscy-23-O_y9HFbAVpoWecmTe0oUJ6WvuH3iqjxD5A2mpislXV73i9WKaT7BaoHcwM5R5dcw2cd6X"/>
+</div>
+<h1 class="font-plus-jakarta text-lg font-bold tracking-tight text-[#E2E0FC]">베비 · 13개월 18일 (D+411)</h1>
+</div>
+<button class="text-[#46F1C5] hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</header>
+<main class="pt-24 px-6 space-y-8">
+<!-- Period Controls & Date Display -->
+<section class="space-y-6">
+<div class="flex justify-between items-end">
+<div class="space-y-1">
+<p class="text-on-surface-variant text-sm font-medium">활동 분석</p>
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface">성장 리포트</h2>
+</div>
+<div class="flex bg-surface-container rounded-full p-1 shadow-inner">
+<button class="px-4 py-1.5 rounded-full text-sm font-bold bg-surface-bright text-on-surface">일</button>
+<button class="px-4 py-1.5 rounded-full text-sm font-bold bg-gradient-to-br from-[#CCFFEB] to-[#46F1C5] text-[#00382B]">주</button>
+<button class="px-4 py-1.5 rounded-full text-sm font-bold text-on-surface-variant">월</button>
+</div>
+</div>
+<div class="flex items-center justify-center py-2 bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-primary-container mr-2 text-xl" data-icon="calendar_month">calendar_month</span>
+<span class="text-on-surface font-semibold">📅 3월 15일 - 21일</span>
+</div>
+</section>
+<!-- Summary Stats Bento Grid -->
+<section class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container asymmetric-card p-6 flex flex-col justify-between h-44 shadow-[0_0_32px_0_rgba(12,12,32,0.08)]">
+<div>
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-2">총 수유량</p>
+<h3 class="text-2xl font-extrabold text-primary-container">4,200ml</h3>
+</div>
+<div class="flex items-center text-primary-fixed-dim text-sm font-bold">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="trending_up">trending_up</span>
+                    지난주 대비 ▲5%
+                </div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col justify-between h-44 border border-outline-variant/10">
+<div>
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-2">평균 수면</p>
+<h3 class="text-2xl font-extrabold text-secondary">10시간 15분</h3>
+</div>
+<div class="bg-secondary-container/30 rounded-full px-3 py-1 self-start">
+<span class="text-secondary text-[10px] font-bold">권장 시간 충족</span>
+</div>
+</div>
+</section>
+<!-- Graph Section: Feeding Trend -->
+<section class="space-y-4">
+<div class="flex justify-between items-center px-2">
+<h3 class="text-lg font-bold text-on-surface">수유량 추이</h3>
+<span class="text-xs text-on-surface-variant">단위: ml</span>
+</div>
+<div class="bg-surface-container rounded-xl p-6 h-64 flex items-end justify-between relative overflow-hidden">
+<!-- Background Grid (Faux) -->
+<div class="absolute inset-0 flex flex-col justify-between p-6 opacity-5 pointer-events-none">
+<div class="w-full h-px bg-on-surface"></div>
+<div class="w-full h-px bg-on-surface"></div>
+<div class="w-full h-px bg-on-surface"></div>
+</div>
+<!-- Mock Line Chart Path (SVG) -->
+<div class="absolute inset-0 flex items-center justify-center p-6">
+<svg class="w-full h-full overflow-visible" viewbox="0 0 100 40">
+<path class="drop-shadow-[0_0_8px_rgba(70,241,197,0.5)]" d="M0,35 Q15,30 25,32 T50,15 T75,20 T100,5" fill="none" stroke="#46F1C5" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="25" cy="32" fill="#46F1C5" r="1.5"></circle>
+<circle cx="50" cy="15" fill="#46F1C5" r="1.5"></circle>
+<circle cx="75" cy="20" fill="#46F1C5" r="1.5"></circle>
+<circle cx="100" cy="5" fill="#FFFFFF" r="2"></circle>
+</svg>
+</div>
+<!-- Labels -->
+<div class="flex w-full justify-between items-end z-10 text-[10px] text-on-surface-variant font-bold">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</div>
+</section>
+<!-- Graph Section: Sleep Duration -->
+<section class="space-y-4">
+<div class="flex justify-between items-center px-2">
+<h3 class="text-lg font-bold text-on-surface">수면 시간</h3>
+<span class="text-xs text-on-surface-variant">단위: 시간</span>
+</div>
+<div class="bg-surface-container rounded-xl p-6 h-64 flex items-end justify-around gap-2">
+<!-- Bar Chart -->
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-secondary-container rounded-t-full h-32 opacity-40"></div>
+<span class="text-[10px] text-on-surface-variant">월</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-secondary-container rounded-t-full h-40 opacity-40"></div>
+<span class="text-[10px] text-on-surface-variant">화</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-secondary-container rounded-t-full h-28 opacity-40"></div>
+<span class="text-[10px] text-on-surface-variant">수</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-gradient-to-t from-secondary-container to-secondary rounded-t-full h-48 shadow-[0_0_15px_rgba(197,196,226,0.3)]"></div>
+<span class="text-[10px] text-secondary font-bold">목</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-secondary-container rounded-t-full h-36 opacity-40"></div>
+<span class="text-[10px] text-on-surface-variant">금</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-secondary-container rounded-t-full h-44 opacity-40"></div>
+<span class="text-[10px] text-on-surface-variant">토</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-secondary-container rounded-t-full h-38 opacity-40"></div>
+<span class="text-[10px] text-on-surface-variant">일</span>
+</div>
+</div>
+</section>
+<!-- Insight Card (Bonus to match theme) -->
+<section class="bg-surface-container-highest/40 backdrop-blur-lg p-6 rounded-xl space-y-3">
+<div class="flex items-center gap-2 text-tertiary">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-sm font-bold">AI 인사이트</span>
+</div>
+<p class="text-on-surface leading-relaxed text-sm">
+                베비의 수면 패턴이 저녁 8시경에 고정되고 있어요. 이 시간대에 일관된 수면 의식을 진행하면 통잠을 자는 시간이 더 늘어날 것으로 보입니다.
+            </p>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-8 left-0 right-0 flex justify-around items-center px-4 h-20 bg-[#1E1E32]/60 backdrop-blur-[20px] dark:bg-[#1E1E32]/60 rounded-t-[24px] mb-[40px] mx-auto max-w-[90%] z-50 shadow-[0_0_32px_0_rgba(12,12,32,0.08)]">
+<div class="flex flex-col items-center justify-center text-[#BACAC2] p-2 hover:text-[#46F1C5] transition-all">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide">채팅</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#BACAC2] p-2 hover:text-[#46F1C5] transition-all">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide">패턴</span>
+</div>
+<!-- Active Tab: 통계 -->
+<div class="flex flex-col items-center justify-center bg-gradient-to-br from-[#CCFFEB] to-[#46F1C5] text-[#00382B] rounded-full p-3 scale-110 -translate-y-2 shadow-[0_0_15px_rgba(70,241,197,0.3)]">
+<span class="material-symbols-outlined" data-icon="insert_chart">insert_chart</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide">통계</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#BACAC2] p-2 hover:text-[#46F1C5] transition-all">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide">공개일기</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#BACAC2] p-2 hover:text-[#46F1C5] transition-all">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide">프로필</span>
+</div>
+</nav>
+</body></html>

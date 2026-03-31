@@ -1,0 +1,1951 @@
+00:00 +0: loading /Users/pes/Desktop/Github/ChatBabyTime/test/nlp_full_test.dart
+00:00 +0: 🍼 수유 테스트 (38개) "분유 120ml 먹었어" → feeding
+00:00 +1: 🍼 수유 테스트 (38개) "분유 80 먹음" → feeding
+00:00 +1 -1: 🍼 수유 테스트 (38개) "분유 80 먹음" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "분유 80 먹음" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +1 -1: 🍼 수유 테스트 (38개) "모유 수유했어" → feeding
+00:00 +1 -2: 🍼 수유 테스트 (38개) "모유 수유했어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "모유 수유했어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +1 -2: 🍼 수유 테스트 (38개) "모유 15분 먹었어" → feeding
+00:00 +1 -3: 🍼 수유 테스트 (38개) "모유 15분 먹었어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "모유 15분 먹었어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +1 -3: 🍼 수유 테스트 (38개) "젖병으로 100cc 줬어" → feeding
+00:00 +2 -3: 🍼 수유 테스트 (38개) "직수 20분 했어" → feeding
+00:00 +2 -4: 🍼 수유 테스트 (38개) "직수 20분 했어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "직수 20분 했어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +2 -4: 🍼 수유 테스트 (38개) "완분 160ml" → feeding
+00:00 +3 -4: 🍼 수유 테스트 (38개) "유축 120ml 먹였어" → feeding
+00:00 +4 -4: 🍼 수유 테스트 (38개) "반병 먹었어" → feeding
+00:00 +4 -5: 🍼 수유 테스트 (38개) "반병 먹었어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "반병 먹었어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +4 -5: 🍼 수유 테스트 (38개) "한병 다 먹었음" → feeding
+00:00 +4 -6: 🍼 수유 테스트 (38개) "한병 다 먹었음" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "한병 다 먹었음" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +4 -6: 🍼 수유 테스트 (38개) "분유 100밀리리터" → feeding
+00:00 +4 -7: 🍼 수유 테스트 (38개) "분유 100밀리리터" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "분유 100밀리리터" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +4 -7: 🍼 수유 테스트 (38개) "아기 젖 물렸어" → feeding
+00:00 +4 -8: 🍼 수유 테스트 (38개) "아기 젖 물렸어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "아기 젖 물렸어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +4 -8: 🍼 수유 테스트 (38개) "새벽에 분유 80ml 줬어" → feeding
+00:00 +5 -8: 🍼 수유 테스트 (38개) "수유 완료" → feeding
+00:00 +5 -9: 🍼 수유 테스트 (38개) "수유 완료" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "수유 완료" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +5 -9: 🍼 수유 테스트 (38개) "혼합수유 했어" → feeding
+00:00 +5 -10: 🍼 수유 테스트 (38개) "혼합수유 했어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "혼합수유 했어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +5 -10: 🍼 수유 테스트 (38개) "분유 먹다 잠들었어" → feeding
+00:00 +5 -11: 🍼 수유 테스트 (38개) "분유 먹다 잠들었어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "분유 먹다 잠들었어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +5 -11: 🍼 수유 테스트 (38개) "30분 전에 분유 100ml 먹었어" → feeding
+00:00 +6 -11: 🍼 수유 테스트 (38개) "아까 모유 수유했어" → feeding
+00:00 +6 -12: 🍼 수유 테스트 (38개) "아까 모유 수유했어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "아까 모유 수유했어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +6 -12: 🍼 수유 테스트 (38개) "분유 먹고 잠들었어" → feeding
+00:00 +6 -13: 🍼 수유 테스트 (38개) "분유 먹고 잠들었어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "분유 먹고 잠들었어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +6 -13: 🍼 수유 테스트 (38개) "분유 120ml 먹엇어" → feeding
+00:00 +7 -13: 🍼 수유 테스트 (38개) "밥 120" → feeding
+00:00 +7 -14: 🍼 수유 테스트 (38개) "밥 120" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "밥 120" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +7 -14: 🍼 수유 테스트 (38개) "100ml" → feeding
+00:00 +8 -14: 🍼 수유 테스트 (38개) "분유" → feeding
+00:00 +8 -15: 🍼 수유 테스트 (38개) "분유" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "분유" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +8 -15: 🍼 수유 테스트 (38개) "ㅂㄴ 120" → feeding
+00:00 +8 -16: 🍼 수유 테스트 (38개) "ㅂㄴ 120" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "ㅂㄴ 120" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +8 -16: 🍼 수유 테스트 (38개) "ㅁㅇ 15분" → feeding
+00:00 +8 -17: 🍼 수유 테스트 (38개) "ㅁㅇ 15분" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "ㅁㅇ 15분" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +8 -17: 🍼 수유 테스트 (38개) "아 진짜 분유 120ml 겨우 먹였어" → feeding
+00:00 +9 -17: 🍼 수유 테스트 (38개) "분유 반쯤 먹었어" → feeding
+00:00 +9 -18: 🍼 수유 테스트 (38개) "분유 반쯤 먹었어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "분유 반쯤 먹었어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +9 -18: 🍼 수유 테스트 (38개) "분유 조금만 먹음" → feeding
+00:00 +9 -19: 🍼 수유 테스트 (38개) "분유 조금만 먹음" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "분유 조금만 먹음" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +9 -19: 🍼 수유 테스트 (38개) "모유 수유 거의 다 먹었어" → feeding
+00:00 +9 -20: 🍼 수유 테스트 (38개) "모유 수유 거의 다 먹었어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "모유 수유 거의 다 먹었어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +9 -20: 🍼 수유 테스트 (38개) "120 먹었어" → feeding
+00:00 +9 -21: 🍼 수유 테스트 (38개) "120 먹었어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "120 먹었어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +9 -21: 🍼 수유 테스트 (38개) "80 줬어" → feeding
+00:00 +9 -22: 🍼 수유 테스트 (38개) "80 줬어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "80 줬어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +9 -22: 🍼 수유 테스트 (38개) "분유 100ml 먹었어 👶" → feeding
+00:00 +10 -22: 🍼 수유 테스트 (38개) "놀다가 분유 100ml 먹었어" → feeding
+00:00 +11 -22: 🍼 수유 테스트 (38개) "수유했어" → feeding
+00:00 +11 -23: 🍼 수유 테스트 (38개) "수유했어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "수유했어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +11 -23: 🍼 수유 테스트 (38개) "직수했어" → feeding
+00:00 +11 -24: 🍼 수유 테스트 (38개) "직수했어" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "직수했어" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +11 -24: 🍼 수유 테스트 (38개) "유축 120ml" → feeding
+00:00 +12 -24: 🍼 수유 테스트 (38개) "완분이야" → feeding
+00:00 +12 -25: 🍼 수유 테스트 (38개) "완분이야" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "완분이야" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -25: 🍼 수유 테스트 (38개) "혼합수유 중" → feeding
+00:00 +12 -26: 🍼 수유 테스트 (38개) "혼합수유 중" → feeding [E]
+  Expected: RecordCategory:<RecordCategory.feeding>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "혼합수유 중" → 기대: feeding, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -26: 😴 수면 테스트 (38개) "아기 잠들었어" → sleep
+00:00 +12 -27: 😴 수면 테스트 (38개) "아기 잠들었어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "아기 잠들었어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -27: 😴 수면 테스트 (38개) "낮잠 잤어" → sleep
+00:00 +12 -28: 😴 수면 테스트 (38개) "낮잠 잤어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "낮잠 잤어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -28: 😴 수면 테스트 (38개) "밤잠 들었어" → sleep
+00:00 +12 -29: 😴 수면 테스트 (38개) "밤잠 들었어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "밤잠 들었어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -29: 😴 수면 테스트 (38개) "깼어" → sleep
+00:00 +12 -30: 😴 수면 테스트 (38개) "깼어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "깼어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -30: 😴 수면 테스트 (38개) "아기 깨어났어" → sleep
+00:00 +12 -31: 😴 수면 테스트 (38개) "아기 깨어났어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "아기 깨어났어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -31: 😴 수면 테스트 (38개) "일어났어" → sleep
+00:00 +12 -32: 😴 수면 테스트 (38개) "일어났어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "일어났어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -32: 😴 수면 테스트 (38개) "1시간 잤어" → sleep
+00:00 +12 -33: 😴 수면 테스트 (38개) "1시간 잤어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "1시간 잤어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -33: 😴 수면 테스트 (38개) "30분 낮잠" → sleep
+00:00 +12 -34: 😴 수면 테스트 (38개) "30분 낮잠" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "30분 낮잠" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -34: 😴 수면 테스트 (38개) "꿀잠 자는 중" → sleep
+00:00 +12 -35: 😴 수면 테스트 (38개) "꿀잠 자는 중" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "꿀잠 자는 중" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -35: 😴 수면 테스트 (38개) "잠투정 시작" → sleep
+00:00 +12 -36: 😴 수면 테스트 (38개) "잠투정 시작" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "잠투정 시작" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -36: 😴 수면 테스트 (38개) "재웠어" → sleep
+00:00 +12 -37: 😴 수면 테스트 (38개) "재웠어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "재웠어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -37: 😴 수면 테스트 (38개) "눈 떴어" → sleep
+00:00 +12 -38: 😴 수면 테스트 (38개) "눈 떴어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "눈 떴어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -38: 😴 수면 테스트 (38개) "쪽잠 잤어" → sleep
+00:00 +12 -39: 😴 수면 테스트 (38개) "쪽잠 잤어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "쪽잠 잤어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -39: 😴 수면 테스트 (38개) "토닥토닥 재웠어" → sleep
+00:00 +12 -40: 😴 수면 테스트 (38개) "토닥토닥 재웠어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "토닥토닥 재웠어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -40: 😴 수면 테스트 (38개) "자다가 깼어" → sleep
+00:00 +12 -41: 😴 수면 테스트 (38개) "자다가 깼어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "자다가 깼어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -41: 😴 수면 테스트 (38개) "선잠만 잤어" → sleep
+00:00 +12 -42: 😴 수면 테스트 (38개) "선잠만 잤어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "선잠만 잤어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -42: 😴 수면 테스트 (38개) "기상했어" → sleep
+00:00 +12 -43: 😴 수면 테스트 (38개) "기상했어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "기상했어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -43: 😴 수면 테스트 (38개) "잠들었다 금방 깼어" → sleep
+00:00 +12 -44: 😴 수면 테스트 (38개) "잠들었다 금방 깼어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "잠들었다 금방 깼어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -44: 😴 수면 테스트 (38개) "1시에 자서 이제 일어났어" → sleep
+00:00 +12 -45: 😴 수면 테스트 (38개) "1시에 자서 이제 일어났어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "1시에 자서 이제 일어났어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -45: 😴 수면 테스트 (38개) "자고 일어났어" → sleep
+00:00 +12 -46: 😴 수면 테스트 (38개) "자고 일어났어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "자고 일어났어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -46: 😴 수면 테스트 (38개) "잤는데 깼어" → sleep
+00:00 +12 -47: 😴 수면 테스트 (38개) "잤는데 깼어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "잤는데 깼어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -47: 😴 수면 테스트 (38개) "2시에 자서 방금 깼어" → sleep
+00:00 +12 -48: 😴 수면 테스트 (38개) "2시에 자서 방금 깼어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "2시에 자서 방금 깼어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -48: 😴 수면 테스트 (38개) "2시간 전에 잠들었어" → sleep
+00:00 +12 -49: 😴 수면 테스트 (38개) "2시간 전에 잠들었어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "2시간 전에 잠들었어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -49: 😴 수면 테스트 (38개) "1시에 깼어" → sleep
+00:00 +12 -50: 😴 수면 테스트 (38개) "1시에 깼어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "1시에 깼어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -50: 😴 수면 테스트 (38개) "잣어" → sleep
+00:00 +12 -51: 😴 수면 테스트 (38개) "잣어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "잣어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -51: 😴 수면 테스트 (38개) "잠들엇어" → sleep
+00:00 +12 -52: 😴 수면 테스트 (38개) "잠들엇어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "잠들엇어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -52: 😴 수면 테스트 (38개) "깨엇어" → sleep
+00:00 +12 -53: 😴 수면 테스트 (38개) "깨엇어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "깨엇어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -53: 😴 수면 테스트 (38개) "일어낫어" → sleep
+00:00 +12 -54: 😴 수면 테스트 (38개) "일어낫어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "일어낫어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -54: 😴 수면 테스트 (38개) "아기 자요" → sleep
+00:00 +12 -55: 😴 수면 테스트 (38개) "아기 자요" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "아기 자요" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -55: 😴 수면 테스트 (38개) "잤어" → sleep
+00:00 +12 -56: 😴 수면 테스트 (38개) "잤어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "잤어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -56: 😴 수면 테스트 (38개) "잠" → sleep
+00:00 +12 -57: 😴 수면 테스트 (38개) "잠" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "잠" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -57: 😴 수면 테스트 (38개) "드디어 잠들었어 1시간째 재운 끝에" → sleep
+00:00 +12 -58: 😴 수면 테스트 (38개) "드디어 잠들었어 1시간째 재운 끝에" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "드디어 잠들었어 1시간째 재운 끝에" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -58: 😴 수면 테스트 (38개) "또 깼어ㅠㅠㅠ 10분만에" → sleep
+00:00 +12 -59: 😴 수면 테스트 (38개) "또 깼어ㅠㅠㅠ 10분만에" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "또 깼어ㅠㅠㅠ 10분만에" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -59: 😴 수면 테스트 (38개) "잠들었어 😴" → sleep
+00:00 +12 -60: 😴 수면 테스트 (38개) "잠들었어 😴" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "잠들었어 😴" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -60: 😴 수면 테스트 (38개) "울다가 겨우 잠들었어" → sleep
+00:00 +12 -61: 😴 수면 테스트 (38개) "울다가 겨우 잠들었어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "울다가 겨우 잠들었어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -61: 😴 수면 테스트 (38개) "새벽 3시에 깼어" → sleep
+00:00 +12 -62: 😴 수면 테스트 (38개) "새벽 3시에 깼어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "새벽 3시에 깼어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -62: 😴 수면 테스트 (38개) "낮잠 시작" → sleep
+00:00 +12 -63: 😴 수면 테스트 (38개) "낮잠 시작" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "낮잠 시작" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -63: 😴 수면 테스트 (38개) "밤잠 10시에 들었어" → sleep
+00:00 +12 -64: 😴 수면 테스트 (38개) "밤잠 10시에 들었어" → sleep [E]
+  Expected: RecordCategory:<RecordCategory.sleep>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "밤잠 10시에 들었어" → 기대: sleep, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -64: 🧷 기저귀 테스트 (22개) "기저귀 갈았어" → diaper
+00:00 +12 -65: 🧷 기저귀 테스트 (22개) "기저귀 갈았어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "기저귀 갈았어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -65: 🧷 기저귀 테스트 (22개) "응가했어" → diaper
+00:00 +12 -66: 🧷 기저귀 테스트 (22개) "응가했어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "응가했어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -66: 🧷 기저귀 테스트 (22개) "대변 봤어" → diaper
+00:00 +12 -67: 🧷 기저귀 테스트 (22개) "대변 봤어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "대변 봤어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -67: 🧷 기저귀 테스트 (22개) "소변만 봤어" → diaper
+00:00 +12 -68: 🧷 기저귀 테스트 (22개) "소변만 봤어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "소변만 봤어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -68: 🧷 기저귀 테스트 (22개) "똥 쌌어" → diaper
+00:00 +12 -69: 🧷 기저귀 테스트 (22개) "똥 쌌어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "똥 쌌어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -69: 🧷 기저귀 테스트 (22개) "기저귀 교체" → diaper
+00:00 +12 -70: 🧷 기저귀 테스트 (22개) "기저귀 교체" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "기저귀 교체" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -70: 🧷 기저귀 테스트 (22개) "묽은 변 봤어" → diaper
+00:00 +12 -71: 🧷 기저귀 테스트 (22개) "묽은 변 봤어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "묽은 변 봤어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -71: 🧷 기저귀 테스트 (22개) "노란 변이야" → diaper
+00:00 +12 -72: 🧷 기저귀 테스트 (22개) "노란 변이야" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "노란 변이야" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -72: 🧷 기저귀 테스트 (22개) "물변 나왔어" → diaper
+00:00 +12 -73: 🧷 기저귀 테스트 (22개) "물변 나왔어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "물변 나왔어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -73: 🧷 기저귀 테스트 (22개) "소변이랑 대변 같이" → diaper
+00:00 +12 -74: 🧷 기저귀 테스트 (22개) "소변이랑 대변 같이" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "소변이랑 대변 같이" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -74: 🧷 기저귀 테스트 (22개) "기저귀 갈아줬어" → diaper
+00:00 +12 -75: 🧷 기저귀 테스트 (22개) "기저귀 갈아줬어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "기저귀 갈아줬어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -75: 🧷 기저귀 테스트 (22개) "오줌 쌌어" → diaper
+00:00 +12 -76: 🧷 기저귀 테스트 (22개) "오줌 쌌어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "오줌 쌌어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -76: 🧷 기저귀 테스트 (22개) "쉬했어" → diaper
+00:00 +12 -77: 🧷 기저귀 테스트 (22개) "쉬했어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "쉬했어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -77: 🧷 기저귀 테스트 (22개) "10분 전 기저귀 갈았어" → diaper
+00:00 +12 -78: 🧷 기저귀 테스트 (22개) "10분 전 기저귀 갈았어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "10분 전 기저귀 갈았어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -78: 🧷 기저귀 테스트 (22개) "기저기 갈았어" → diaper
+00:00 +12 -79: 🧷 기저귀 테스트 (22개) "기저기 갈았어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "기저기 갈았어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -79: 🧷 기저귀 테스트 (22개) "기져귀 교체" → diaper
+00:00 +12 -80: 🧷 기저귀 테스트 (22개) "기져귀 교체" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "기져귀 교체" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -80: 🧷 기저귀 테스트 (22개) "갈았어" → diaper
+00:00 +12 -81: 🧷 기저귀 테스트 (22개) "갈았어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "갈았어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -81: 🧷 기저귀 테스트 (22개) "응가 폭발했어ㅋㅋ 기저귀 갈아줬어" → diaper
+00:00 +12 -82: 🧷 기저귀 테스트 (22개) "응가 폭발했어ㅋㅋ 기저귀 갈아줬어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "응가 폭발했어ㅋㅋ 기저귀 갈아줬어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -82: 🧷 기저귀 테스트 (22개) "응가!!! 💩" → diaper
+00:00 +12 -83: 🧷 기저귀 테스트 (22개) "응가!!! 💩" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "응가!!! 💩" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -83: 🧷 기저귀 테스트 (22개) "방금 기저귀 갈았어" → diaper
+00:00 +12 -84: 🧷 기저귀 테스트 (22개) "방금 기저귀 갈았어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "방금 기저귀 갈았어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -84: 🧷 기저귀 테스트 (22개) "대변 봤어 묽은 변" → diaper
+00:00 +12 -85: 🧷 기저귀 테스트 (22개) "대변 봤어 묽은 변" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "대변 봤어 묽은 변" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -85: 🧷 기저귀 테스트 (22개) "소변 많이 봤어" → diaper
+00:00 +12 -86: 🧷 기저귀 테스트 (22개) "소변 많이 봤어" → diaper [E]
+  Expected: RecordCategory:<RecordCategory.diaper>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "소변 많이 봤어" → 기대: diaper, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -86: 🏥 건강 테스트 (25개) "체온 37.5도" → health
+00:00 +12 -87: 🏥 건강 테스트 (25개) "체온 37.5도" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "체온 37.5도" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -87: 🏥 건강 테스트 (25개) "열 38도야" → health
+00:00 +12 -88: 🏥 건강 테스트 (25개) "열 38도야" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "열 38도야" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -88: 🏥 건강 테스트 (25개) "해열제 먹였어" → health
+00:00 +12 -89: 🏥 건강 테스트 (25개) "해열제 먹였어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "해열제 먹였어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -89: 🏥 건강 테스트 (25개) "감기약 줬어" → health
+00:00 +12 -90: 🏥 건강 테스트 (25개) "감기약 줬어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "감기약 줬어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -90: 🏥 건강 테스트 (25개) "타이레놀 먹였어" → health
+00:00 +12 -91: 🏥 건강 테스트 (25개) "타이레놀 먹였어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "타이레놀 먹였어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -91: 🏥 건강 테스트 (25개) "기침약 복용" → health
+00:00 +12 -92: 🏥 건강 테스트 (25개) "기침약 복용" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "기침약 복용" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -92: 🏥 건강 테스트 (25개) "항생제 먹였어" → health
+00:00 +12 -93: 🏥 건강 테스트 (25개) "항생제 먹였어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "항생제 먹였어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -93: 🏥 건강 테스트 (25개) "유산균 줬어" → health
+00:00 +12 -94: 🏥 건강 테스트 (25개) "유산균 줬어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "유산균 줬어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -94: 🏥 건강 테스트 (25개) "병원 갔다왔어" → health
+00:00 +12 -95: 🏥 건강 테스트 (25개) "병원 갔다왔어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "병원 갔다왔어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -95: 🏥 건강 테스트 (25개) "예방접종 했어" → health
+00:00 +12 -96: 🏥 건강 테스트 (25개) "예방접종 했어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "예방접종 했어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -96: 🏥 건강 테스트 (25개) "콧물 나와" → health
+00:00 +12 -97: 🏥 건강 테스트 (25개) "콧물 나와" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "콧물 나와" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -97: 🏥 건강 테스트 (25개) "기침 심해" → health
+00:00 +12 -98: 🏥 건강 테스트 (25개) "기침 심해" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "기침 심해" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -98: 🏥 건강 테스트 (25개) "구토했어" → health
+00:00 +12 -99: 🏥 건강 테스트 (25개) "구토했어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "구토했어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -99: 🏥 건강 테스트 (25개) "설사했어" → health
+00:00 +12 -100: 🏥 건강 테스트 (25개) "설사했어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "설사했어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -100: 🏥 건강 테스트 (25개) "발진 생겼어" → health
+00:00 +12 -101: 🏥 건강 테스트 (25개) "발진 생겼어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "발진 생겼어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -101: 🏥 건강 테스트 (25개) "두드러기 났어" → health
+00:00 +12 -102: 🏥 건강 테스트 (25개) "두드러기 났어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "두드러기 났어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -102: 🏥 건강 테스트 (25개) "열이 안 내려가" → health
+00:00 +12 -103: 🏥 건강 테스트 (25개) "열이 안 내려가" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "열이 안 내려가" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -103: 🏥 건강 테스트 (25개) "약 먹었어" → health
+00:00 +12 -104: 🏥 건강 테스트 (25개) "약 먹었어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "약 먹었어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -104: 🏥 건강 테스트 (25개) "투약 완료" → health
+00:00 +12 -105: 🏥 건강 테스트 (25개) "투약 완료" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "투약 완료" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -105: 🏥 건강 테스트 (25개) "비타민 줬어" → health
+00:00 +12 -106: 🏥 건강 테스트 (25개) "비타민 줬어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "비타민 줬어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -106: 🏥 건강 테스트 (25개) "분유 먹다 토했어" → health
+00:00 +12 -107: 🏥 건강 테스트 (25개) "분유 먹다 토했어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "분유 먹다 토했어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -107: 🏥 건강 테스트 (25개) "약" → health
+00:00 +12 -108: 🏥 건강 테스트 (25개) "약" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "약" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -108: 🏥 건강 테스트 (25개) "열이 37.8도야 병원 가야하나" → health
+00:00 +12 -109: 🏥 건강 테스트 (25개) "열이 37.8도야 병원 가야하나" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "열이 37.8도야 병원 가야하나" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -109: 🏥 건강 테스트 (25개) "이유식 먹다 토했어" → health
+00:00 +12 -110: 🏥 건강 테스트 (25개) "이유식 먹다 토했어" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "이유식 먹다 토했어" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -110: 🏥 건강 테스트 (25개) "감기 걸린 것 같아" → health
+00:00 +12 -111: 🏥 건강 테스트 (25개) "감기 걸린 것 같아" → health [E]
+  Expected: RecordCategory:<RecordCategory.health>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "감기 걸린 것 같아" → 기대: health, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -111: 🥣 이유식 테스트 (18개) "이유식 먹었어" → babyfood
+00:00 +12 -112: 🥣 이유식 테스트 (18개) "이유식 먹었어" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "이유식 먹었어" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -112: 🥣 이유식 테스트 (18개) "소고기죽 줬어" → babyfood
+00:00 +12 -113: 🥣 이유식 테스트 (18개) "소고기죽 줬어" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "소고기죽 줬어" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -113: 🥣 이유식 테스트 (18개) "당근 호박 죽" → babyfood
+00:00 +12 -114: 🥣 이유식 테스트 (18개) "당근 호박 죽" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "당근 호박 죽" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -114: 🥣 이유식 테스트 (18개) "이유식 100ml" → babyfood
+00:00 +12 -115: 🥣 이유식 테스트 (18개) "이유식 100ml" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.feeding>
+  ❌ "이유식 100ml" → 기대: babyfood, 실제: feeding [확정] (50%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -115: 🥣 이유식 테스트 (18개) "감자 퓨레 먹였어" → babyfood
+00:00 +12 -116: 🥣 이유식 테스트 (18개) "감자 퓨레 먹였어" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "감자 퓨레 먹였어" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -116: 🥣 이유식 테스트 (18개) "고구마 으깬 거 줬어" → babyfood
+00:00 +12 -117: 🥣 이유식 테스트 (18개) "고구마 으깬 거 줬어" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "고구마 으깬 거 줬어" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -117: 🥣 이유식 테스트 (18개) "닭고기 미음" → babyfood
+00:00 +12 -118: 🥣 이유식 테스트 (18개) "닭고기 미음" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "닭고기 미음" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -118: 🥣 이유식 테스트 (18개) "브로콜리 이유식" → babyfood
+00:00 +12 -119: 🥣 이유식 테스트 (18개) "브로콜리 이유식" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "브로콜리 이유식" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -119: 🥣 이유식 테스트 (18개) "시금치죽 먹음" → babyfood
+00:00 +12 -120: 🥣 이유식 테스트 (18개) "시금치죽 먹음" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "시금치죽 먹음" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -120: 🥣 이유식 테스트 (18개) "오트밀 죽 줬어" → babyfood
+00:00 +12 -121: 🥣 이유식 테스트 (18개) "오트밀 죽 줬어" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "오트밀 죽 줬어" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -121: 🥣 이유식 테스트 (18개) "이유식 3숟가락" → babyfood
+00:00 +12 -122: 🥣 이유식 테스트 (18개) "이유식 3숟가락" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "이유식 3숟가락" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -122: 🥣 이유식 테스트 (18개) "계란 노른자 줬어" → babyfood
+00:00 +12 -123: 🥣 이유식 테스트 (18개) "계란 노른자 줬어" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "계란 노른자 줬어" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -123: 🥣 이유식 테스트 (18개) "3시에 이유식 먹었어" → babyfood
+00:00 +12 -124: 🥣 이유식 테스트 (18개) "3시에 이유식 먹었어" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "3시에 이유식 먹었어" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -124: 🥣 이유식 테스트 (18개) "이유식 먹고 응가했어" → babyfood
+00:00 +12 -125: 🥣 이유식 테스트 (18개) "이유식 먹고 응가했어" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "이유식 먹고 응가했어" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -125: 🥣 이유식 테스트 (18개) "이유식 먹엇어" → babyfood
+00:00 +12 -126: 🥣 이유식 테스트 (18개) "이유식 먹엇어" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "이유식 먹엇어" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -126: 🥣 이유식 테스트 (18개) "밥 먹었어" → babyfood
+00:00 +12 -127: 🥣 이유식 테스트 (18개) "밥 먹었어" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "밥 먹었어" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -127: 🥣 이유식 테스트 (18개) "이유식 3숟가락밖에 안 먹음ㅠㅠ" → babyfood
+00:00 +12 -128: 🥣 이유식 테스트 (18개) "이유식 3숟가락밖에 안 먹음ㅠㅠ" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "이유식 3숟가락밖에 안 먹음ㅠㅠ" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -128: 🥣 이유식 테스트 (18개) "점심때 이유식 먹었어" → babyfood
+00:00 +12 -129: 🥣 이유식 테스트 (18개) "점심때 이유식 먹었어" → babyfood [E]
+  Expected: RecordCategory:<RecordCategory.babyfood>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "점심때 이유식 먹었어" → 기대: babyfood, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -129: 🍎 간식 테스트 (14개) "딸기 먹었어" → snack
+00:00 +12 -130: 🍎 간식 테스트 (14개) "딸기 먹었어" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "딸기 먹었어" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -130: 🍎 간식 테스트 (14개) "바나나 반개 줬어" → snack
+00:00 +12 -131: 🍎 간식 테스트 (14개) "바나나 반개 줬어" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "바나나 반개 줬어" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -131: 🍎 간식 테스트 (14개) "뻥튀기 줬어" → snack
+00:00 +12 -132: 🍎 간식 테스트 (14개) "뻥튀기 줬어" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "뻥튀기 줬어" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -132: 🍎 간식 테스트 (14개) "떡뻥 먹음" → snack
+00:00 +12 -133: 🍎 간식 테스트 (14개) "떡뻥 먹음" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "떡뻥 먹음" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -133: 🍎 간식 테스트 (14개) "요거트 먹었어" → snack
+00:00 +12 -134: 🍎 간식 테스트 (14개) "요거트 먹었어" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "요거트 먹었어" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -134: 🍎 간식 테스트 (14개) "사과 갈아서 줬어" → snack
+00:00 +12 -135: 🍎 간식 테스트 (14개) "사과 갈아서 줬어" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "사과 갈아서 줬어" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -135: 🍎 간식 테스트 (14개) "블루베리 조금 줬어" → snack
+00:00 +12 -136: 🍎 간식 테스트 (14개) "블루베리 조금 줬어" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "블루베리 조금 줬어" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -136: 🍎 간식 테스트 (14개) "간식 먹었어" → snack
+00:00 +12 -137: 🍎 간식 테스트 (14개) "간식 먹었어" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "간식 먹었어" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -137: 🍎 간식 테스트 (14개) "쌀과자 줬어" → snack
+00:00 +12 -138: 🍎 간식 테스트 (14개) "쌀과자 줬어" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "쌀과자 줬어" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -138: 🍎 간식 테스트 (14개) "포도 먹음" → snack
+00:00 +12 -139: 🍎 간식 테스트 (14개) "포도 먹음" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "포도 먹음" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -139: 🍎 간식 테스트 (14개) "과일 줬어" → snack
+00:00 +12 -140: 🍎 간식 테스트 (14개) "과일 줬어" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "과일 줬어" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -140: 🍎 간식 테스트 (14개) "귤 한쪽 먹었어" → snack
+00:00 +12 -141: 🍎 간식 테스트 (14개) "귤 한쪽 먹었어" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "귤 한쪽 먹었어" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -141: 🍎 간식 테스트 (14개) "수박 줬어" → snack
+00:00 +12 -142: 🍎 간식 테스트 (14개) "수박 줬어" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "수박 줬어" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -142: 🍎 간식 테스트 (14개) "키위 먹였어" → snack
+00:00 +12 -143: 🍎 간식 테스트 (14개) "키위 먹였어" → snack [E]
+  Expected: RecordCategory:<RecordCategory.snack>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "키위 먹였어" → 기대: snack, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +12 -143: 📝 기타 테스트 (31개) "외출" → other
+00:00 +13 -143: 📝 기타 테스트 (31개) "외출했어" → other
+00:00 +14 -143: 📝 기타 테스트 (31개) "산책 갔어" → other
+00:00 +15 -143: 📝 기타 테스트 (31개) "목욕했어" → other
+00:00 +16 -143: 📝 기타 테스트 (31개) "목욕 시켰어" → other
+00:00 +17 -143: 📝 기타 테스트 (31개) "씻겼어" → other
+00:00 +18 -143: 📝 기타 테스트 (31개) "산책 다녀왔어" → other
+00:00 +19 -143: 📝 기타 테스트 (31개) "목욕하고 잠들었어" → other
+00:00 +20 -143: 📝 기타 테스트 (31개) "아기 배고파" → other
+00:00 +21 -143: 📝 기타 테스트 (31개) "오늘 날씨 좋다" → other
+00:00 +22 -143: 📝 기타 테스트 (31개) "남편 퇴근" → other
+00:00 +23 -143: 📝 기타 테스트 (31개) "드라마 재밌다" → other
+00:00 +24 -143: 📝 기타 테스트 (31개) "소아과 예약해야 하나" → other
+00:00 +25 -143: 📝 기타 테스트 (31개) "아기 잘 크고 있나" → other
+00:00 +26 -143: 📝 기타 테스트 (31개) "분유 얼마나 먹어야 해" → other
+00:00 +27 -143: 📝 기타 테스트 (31개) "모곡했어" → other
+00:00 +28 -143: 📝 기타 테스트 (31개) "아기" → other
+00:00 +29 -143: 📝 기타 테스트 (31개) "무서워했어" → other
+00:00 +30 -143: 📝 기타 테스트 (31개) "약속 잡았어" → other
+00:00 +31 -143: 📝 기타 테스트 (31개) "쉬는 날이야" → other
+00:00 +32 -143: 📝 기타 테스트 (31개) "예약 취소했어" → other
+00:00 +33 -143: 📝 기타 테스트 (31개) "열심히 놀았어" → other
+00:00 +34 -143: 📝 기타 테스트 (31개) "젖었어 옷이" → other
+00:00 +35 -143: 📝 기타 테스트 (31개) "안녕하세요" → other
+00:00 +36 -143: 📝 기타 테스트 (31개) "오늘 아기가 너무 귀엽다" → other
+00:00 +37 -143: 📝 기타 테스트 (31개) "이유식 만들어야지" → other
+00:00 +38 -143: 📝 기타 테스트 (31개) "분유 사와야 해" → other
+00:00 +39 -143: 📝 기타 테스트 (31개) "어떡해 안 먹어" → other
+00:00 +40 -143: 📝 기타 테스트 (31개) "왜 이렇게 안 자지" → other
+00:00 +41 -143: 📝 기타 테스트 (31개) "목욕하고 로션 발랐어" → other
+00:00 +42 -143: 📝 기타 테스트 (31개) "공원 산책 30분 했어" → other
+00:00 +43 -143: ⭐ 성장 테스트 (10개) "뒤집기 했어" → milestone
+00:00 +43 -144: ⭐ 성장 테스트 (10개) "뒤집기 했어" → milestone [E]
+  Expected: RecordCategory:<RecordCategory.milestone>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "뒤집기 했어" → 기대: milestone, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +43 -144: ⭐ 성장 테스트 (10개) "걸음마 시작했어" → milestone
+00:00 +43 -145: ⭐ 성장 테스트 (10개) "걸음마 시작했어" → milestone [E]
+  Expected: RecordCategory:<RecordCategory.milestone>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "걸음마 시작했어" → 기대: milestone, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +43 -145: ⭐ 성장 테스트 (10개) "옹알이 했어" → milestone
+00:00 +43 -146: ⭐ 성장 테스트 (10개) "옹알이 했어" → milestone [E]
+  Expected: RecordCategory:<RecordCategory.milestone>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "옹알이 했어" → 기대: milestone, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +43 -146: ⭐ 성장 테스트 (10개) "혼자 앉았어" → milestone
+00:00 +43 -147: ⭐ 성장 테스트 (10개) "혼자 앉았어" → milestone [E]
+  Expected: RecordCategory:<RecordCategory.milestone>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "혼자 앉았어" → 기대: milestone, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +43 -147: ⭐ 성장 테스트 (10개) "처음 웃었어" → milestone
+00:00 +43 -148: ⭐ 성장 테스트 (10개) "처음 웃었어" → milestone [E]
+  Expected: RecordCategory:<RecordCategory.milestone>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "처음 웃었어" → 기대: milestone, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +43 -148: ⭐ 성장 테스트 (10개) "이가 나왔어" → milestone
+00:00 +43 -149: ⭐ 성장 테스트 (10개) "이가 나왔어" → milestone [E]
+  Expected: RecordCategory:<RecordCategory.milestone>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "이가 나왔어" → 기대: milestone, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +43 -149: ⭐ 성장 테스트 (10개) "엄마라고 했어" → milestone
+00:00 +43 -150: ⭐ 성장 테스트 (10개) "엄마라고 했어" → milestone [E]
+  Expected: RecordCategory:<RecordCategory.milestone>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "엄마라고 했어" → 기대: milestone, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +43 -150: ⭐ 성장 테스트 (10개) "손뼉 쳤어" → milestone
+00:00 +43 -151: ⭐ 성장 테스트 (10개) "손뼉 쳤어" → milestone [E]
+  Expected: RecordCategory:<RecordCategory.milestone>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "손뼉 쳤어" → 기대: milestone, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +43 -151: ⭐ 성장 테스트 (10개) "뒤집기 성공" → milestone
+00:00 +43 -152: ⭐ 성장 테스트 (10개) "뒤집기 성공" → milestone [E]
+  Expected: RecordCategory:<RecordCategory.milestone>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "뒤집기 성공" → 기대: milestone, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +43 -152: ⭐ 성장 테스트 (10개) "첫 걸음마 했어" → milestone
+00:00 +43 -153: ⭐ 성장 테스트 (10개) "첫 걸음마 했어" → milestone [E]
+  Expected: RecordCategory:<RecordCategory.milestone>
+    Actual: RecordCategory:<RecordCategory.other>
+  ❌ "첫 걸음마 했어" → 기대: milestone, 실제: other [확정] (30%)
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test/nlp_full_test.dart 364:11                      main.<fn>.<fn>
+  
+00:00 +43 -153: 📊 전체 정확도 요약
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📊 NLP 파서 테스트 결과 요약
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  전체: 43/196 (21.9%)
+
+  🍼 수유: 12/38 (32%) ██████░░░░░░░░░░░░░░
+  😴 수면: 0/38 (0%) ░░░░░░░░░░░░░░░░░░░░
+  🧷 기저귀: 0/22 (0%) ░░░░░░░░░░░░░░░░░░░░
+  🏥 건강: 0/25 (0%) ░░░░░░░░░░░░░░░░░░░░
+  🥣 이유식: 0/18 (0%) ░░░░░░░░░░░░░░░░░░░░
+  🍎 간식: 0/14 (0%) ░░░░░░░░░░░░░░░░░░░░
+  📝 기타: 31/31 (100%) ████████████████████
+  ⭐ 성장: 0/10 (0%) ░░░░░░░░░░░░░░░░░░░░
+
+  ── 전체 결과 (입력창 │ 기록 내용) ──
+  ────────────────────────────────────────────────────────────────────────────────
+  ✅  분유 120ml 먹었어                 │ 🍼 수유(분유) 120ml 기록 [확정] (50%)
+  ❌  분유 80 먹음                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  모유 수유했어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  모유 15분 먹었어                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  젖병으로 100cc 줬어                │ 🍼 수유(분유) 100ml 기록 [확정] (50%)
+  ❌  직수 20분 했어                    │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  완분 160ml                     │ 🍼 수유(분유) 160ml 기록 [확정] (50%)
+  ✅  유축 120ml 먹였어                 │ 🍼 수유(분유) 120ml 기록 [확정] (50%)
+  ❌  반병 먹었어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  한병 다 먹었음                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  분유 100밀리리터                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  아기 젖 물렸어                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  새벽에 분유 80ml 줬어               │ 🍼 수유(분유) 80ml 기록 [확정] (50%)
+  ❌  수유 완료                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  혼합수유 했어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  분유 먹다 잠들었어                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  아기 잠들었어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  낮잠 잤어                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  밤잠 들었어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  깼어                           │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  아기 깨어났어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  일어났어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  1시간 잤어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  30분 낮잠                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  꿀잠 자는 중                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  잠투정 시작                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  재웠어                          │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  눈 떴어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  쪽잠 잤어                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  토닥토닥 재웠어                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  자다가 깼어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  선잠만 잤어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  기상했어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  잠들었다 금방 깼어                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  1시에 자서 이제 일어났어               │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  자고 일어났어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  잤는데 깼어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  2시에 자서 방금 깼어                 │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  기저귀 갈았어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  응가했어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  대변 봤어                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  소변만 봤어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  똥 쌌어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  기저귀 교체                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  묽은 변 봤어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  노란 변이야                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  물변 나왔어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  소변이랑 대변 같이                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  기저귀 갈아줬어                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  오줌 쌌어                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  쉬했어                          │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  체온 37.5도                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  열 38도야                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  해열제 먹였어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  감기약 줬어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  타이레놀 먹였어                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  기침약 복용                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  항생제 먹였어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  유산균 줬어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  병원 갔다왔어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  예방접종 했어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  콧물 나와                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  기침 심해                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  구토했어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  설사했어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  발진 생겼어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  두드러기 났어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  열이 안 내려가                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  약 먹었어                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  투약 완료                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  비타민 줬어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  이유식 먹었어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  소고기죽 줬어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  당근 호박 죽                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  이유식 100ml                    │ 🍼 수유(분유) 100ml 기록 [확정] (50%)
+  ❌  감자 퓨레 먹였어                    │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  고구마 으깬 거 줬어                  │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  닭고기 미음                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  브로콜리 이유식                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  시금치죽 먹음                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  오트밀 죽 줬어                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  이유식 3숟가락                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  계란 노른자 줬어                    │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  딸기 먹었어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  바나나 반개 줬어                    │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  뻥튀기 줬어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  떡뻥 먹음                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  요거트 먹었어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  사과 갈아서 줬어                    │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  블루베리 조금 줬어                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  간식 먹었어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  쌀과자 줬어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  포도 먹음                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  과일 줬어                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  귤 한쪽 먹었어                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  수박 줬어                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  키위 먹였어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  외출                           │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  외출했어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  산책 갔어                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  목욕했어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  목욕 시켰어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  씻겼어                          │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  산책 다녀왔어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  뒤집기 했어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  걸음마 시작했어                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  옹알이 했어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  혼자 앉았어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  처음 웃었어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  이가 나왔어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  엄마라고 했어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  손뼉 쳤어                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  30분 전에 분유 100ml 먹었어          │ 🍼 수유(분유) 100ml 기록 [확정] (50%)
+  ❌  아까 모유 수유했어                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  3시에 이유식 먹었어                  │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  2시간 전에 잠들었어                  │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  1시에 깼어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  10분 전 기저귀 갈았어                │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  분유 먹고 잠들었어                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  이유식 먹고 응가했어                  │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  목욕하고 잠들었어                    │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  분유 먹다 토했어                    │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  아기 배고파                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  오늘 날씨 좋다                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  남편 퇴근                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  드라마 재밌다                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  소아과 예약해야 하나                  │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  아기 잘 크고 있나                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  분유 얼마나 먹어야 해                 │ 📝 조회 요청 [확정] (50%)
+  ✅  분유 120ml 먹엇어                 │ 🍼 수유(분유) 120ml 기록 [확정] (50%)
+  ❌  잣어                           │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  기저기 갈았어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  잠들엇어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  깨엇어                          │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  일어낫어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  모곡했어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  기져귀 교체                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  이유식 먹엇어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  아기 자요                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  밥 120                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  밥 먹었어                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  잤어                           │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  갈았어                          │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  약                            │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  아기                           │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  100ml                        │ 🍼 수유(분유) 100ml 기록 [확정] (50%)
+  ❌  분유                           │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  잠                            │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  ㅂㄴ 120                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  ㅁㅇ 15분                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  아 진짜 분유 120ml 겨우 먹였어         │ 🍼 수유(분유) 120ml 기록 [확정] (50%)
+  ❌  이유식 3숟가락밖에 안 먹음ㅠㅠ            │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  드디어 잠들었어 1시간째 재운 끝에          │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  또 깼어ㅠㅠㅠ 10분만에                │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  응가 폭발했어ㅋㅋ 기저귀 갈아줬어           │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  열이 37.8도야 병원 가야하나            │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  분유 반쯤 먹었어                    │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  분유 조금만 먹음                    │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  모유 수유 거의 다 먹었어               │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  120 먹었어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  80 줬어                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  분유 100ml 먹었어 👶              │ 🍼 수유(분유) 100ml 기록 [확정] (50%)
+  ❌  잠들었어 😴                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  응가!!! 💩                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  무서워했어                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  약속 잡았어                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  쉬는 날이야                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  예약 취소했어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  열심히 놀았어                      │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  젖었어 옷이                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  안녕하세요                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  오늘 아기가 너무 귀엽다                │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  이유식 만들어야지                    │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  분유 사와야 해                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  어떡해 안 먹어                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  왜 이렇게 안 자지                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  놀다가 분유 100ml 먹었어             │ 🍼 수유(분유) 100ml 기록 [확정] (50%)
+  ❌  울다가 겨우 잠들었어                  │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  이유식 먹다 토했어                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  새벽 3시에 깼어                    │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  점심때 이유식 먹었어                  │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  방금 기저귀 갈았어                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  수유했어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  직수했어                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  유축 120ml                     │ 🍼 수유(분유) 120ml 기록 [확정] (50%)
+  ❌  낮잠 시작                        │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  밤잠 10시에 들었어                  │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  대변 봤어 묽은 변                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  소변 많이 봤어                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  감기 걸린 것 같아                   │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  뒤집기 성공                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  첫 걸음마 했어                     │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  목욕하고 로션 발랐어                  │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ✅  공원 산책 30분 했어                 │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  완분이야                         │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ❌  혼합수유 중                       │ 📝 기타 기록으로 저장됩니다. [확정] (30%)
+  ────────────────────────────────────────────────────────────────────────────────
+
+  ── 실패 목록 (153개) ──
+  ❌ "분유 80 먹음" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "모유 수유했어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "모유 15분 먹었어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "직수 20분 했어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "반병 먹었어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "한병 다 먹었음" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "분유 100밀리리터" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "아기 젖 물렸어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "수유 완료" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "혼합수유 했어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "분유 먹다 잠들었어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "아기 잠들었어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "낮잠 잤어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "밤잠 들었어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "깼어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "아기 깨어났어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "일어났어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "1시간 잤어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "30분 낮잠" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "꿀잠 자는 중" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "잠투정 시작" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "재웠어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "눈 떴어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "쪽잠 잤어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "토닥토닥 재웠어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "자다가 깼어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "선잠만 잤어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "기상했어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "잠들었다 금방 깼어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "1시에 자서 이제 일어났어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "자고 일어났어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "잤는데 깼어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "2시에 자서 방금 깼어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "기저귀 갈았어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "응가했어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "대변 봤어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "소변만 봤어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "똥 쌌어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "기저귀 교체" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "묽은 변 봤어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "노란 변이야" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "물변 나왔어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "소변이랑 대변 같이" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "기저귀 갈아줬어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "오줌 쌌어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "쉬했어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "체온 37.5도" → 기대: health, 실제: other [확정] (30%)
+  ❌ "열 38도야" → 기대: health, 실제: other [확정] (30%)
+  ❌ "해열제 먹였어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "감기약 줬어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "타이레놀 먹였어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "기침약 복용" → 기대: health, 실제: other [확정] (30%)
+  ❌ "항생제 먹였어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "유산균 줬어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "병원 갔다왔어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "예방접종 했어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "콧물 나와" → 기대: health, 실제: other [확정] (30%)
+  ❌ "기침 심해" → 기대: health, 실제: other [확정] (30%)
+  ❌ "구토했어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "설사했어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "발진 생겼어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "두드러기 났어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "열이 안 내려가" → 기대: health, 실제: other [확정] (30%)
+  ❌ "약 먹었어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "투약 완료" → 기대: health, 실제: other [확정] (30%)
+  ❌ "비타민 줬어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "이유식 먹었어" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "소고기죽 줬어" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "당근 호박 죽" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "이유식 100ml" → 기대: babyfood, 실제: feeding [확정] (50%)
+  ❌ "감자 퓨레 먹였어" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "고구마 으깬 거 줬어" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "닭고기 미음" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "브로콜리 이유식" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "시금치죽 먹음" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "오트밀 죽 줬어" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "이유식 3숟가락" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "계란 노른자 줬어" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "딸기 먹었어" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "바나나 반개 줬어" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "뻥튀기 줬어" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "떡뻥 먹음" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "요거트 먹었어" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "사과 갈아서 줬어" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "블루베리 조금 줬어" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "간식 먹었어" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "쌀과자 줬어" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "포도 먹음" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "과일 줬어" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "귤 한쪽 먹었어" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "수박 줬어" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "키위 먹였어" → 기대: snack, 실제: other [확정] (30%)
+  ❌ "뒤집기 했어" → 기대: milestone, 실제: other [확정] (30%)
+  ❌ "걸음마 시작했어" → 기대: milestone, 실제: other [확정] (30%)
+  ❌ "옹알이 했어" → 기대: milestone, 실제: other [확정] (30%)
+  ❌ "혼자 앉았어" → 기대: milestone, 실제: other [확정] (30%)
+  ❌ "처음 웃었어" → 기대: milestone, 실제: other [확정] (30%)
+  ❌ "이가 나왔어" → 기대: milestone, 실제: other [확정] (30%)
+  ❌ "엄마라고 했어" → 기대: milestone, 실제: other [확정] (30%)
+  ❌ "손뼉 쳤어" → 기대: milestone, 실제: other [확정] (30%)
+  ❌ "아까 모유 수유했어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "3시에 이유식 먹었어" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "2시간 전에 잠들었어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "1시에 깼어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "10분 전 기저귀 갈았어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "분유 먹고 잠들었어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "이유식 먹고 응가했어" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "분유 먹다 토했어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "잣어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "기저기 갈았어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "잠들엇어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "깨엇어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "일어낫어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "기져귀 교체" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "이유식 먹엇어" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "아기 자요" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "밥 120" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "밥 먹었어" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "잤어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "갈았어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "약" → 기대: health, 실제: other [확정] (30%)
+  ❌ "분유" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "잠" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "ㅂㄴ 120" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "ㅁㅇ 15분" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "이유식 3숟가락밖에 안 먹음ㅠㅠ" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "드디어 잠들었어 1시간째 재운 끝에" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "또 깼어ㅠㅠㅠ 10분만에" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "응가 폭발했어ㅋㅋ 기저귀 갈아줬어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "열이 37.8도야 병원 가야하나" → 기대: health, 실제: other [확정] (30%)
+  ❌ "분유 반쯤 먹었어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "분유 조금만 먹음" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "모유 수유 거의 다 먹었어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "120 먹었어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "80 줬어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "잠들었어 😴" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "응가!!! 💩" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "울다가 겨우 잠들었어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "이유식 먹다 토했어" → 기대: health, 실제: other [확정] (30%)
+  ❌ "새벽 3시에 깼어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "점심때 이유식 먹었어" → 기대: babyfood, 실제: other [확정] (30%)
+  ❌ "방금 기저귀 갈았어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "수유했어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "직수했어" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "낮잠 시작" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "밤잠 10시에 들었어" → 기대: sleep, 실제: other [확정] (30%)
+  ❌ "대변 봤어 묽은 변" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "소변 많이 봤어" → 기대: diaper, 실제: other [확정] (30%)
+  ❌ "감기 걸린 것 같아" → 기대: health, 실제: other [확정] (30%)
+  ❌ "뒤집기 성공" → 기대: milestone, 실제: other [확정] (30%)
+  ❌ "첫 걸음마 했어" → 기대: milestone, 실제: other [확정] (30%)
+  ❌ "완분이야" → 기대: feeding, 실제: other [확정] (30%)
+  ❌ "혼합수유 중" → 기대: feeding, 실제: other [확정] (30%)
+
+  💡 위 실패 목록을 Claude에게 붙여넣기 하세요!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  153개 실패 — 개별 테스트에서 확인하세요
+00:00 +44 -153: Some tests failed.

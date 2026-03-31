@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "606442478276",
+    "project_id": "chat-baby-time",
+    "storage_bucket": "chat-baby-time.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606442478276:android:e14ea7a16de64dfb934791",
+        "android_client_info": {
+          "package_name": "com.chatbabytime.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMJGu0tthkD-He4wvd2y4Vl2c7fbzKb5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

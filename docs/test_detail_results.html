@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>아기톡톡 NLP 테스트 상세 결과</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#FFF8F0;color:#3D2C23;padding:16px}
+.header{text-align:center;padding:20px;background:linear-gradient(135deg,#FFB5A7,#FFDDD2);border-radius:16px;margin-bottom:16px}
+.header h1{font-size:20px;color:#5D3A2E}
+.header .stats{margin-top:8px;font-size:14px;color:#6D4C41}
+.header .big{font-size:28px;font-weight:800;color:#5D3A2E}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-bottom:16px}
+.summary-card{background:#fff;border-radius:12px;padding:12px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.summary-card .emoji{font-size:20px}
+.summary-card .name{font-size:12px;font-weight:600;color:#8D6E63}
+.summary-card .acc{font-size:18px;font-weight:800}
+.summary-card .detail{font-size:10px;color:#aaa}
+.bar{height:4px;border-radius:2px;background:#f0e6e0;margin-top:4px}
+.bar-fill{height:100%;border-radius:2px}
+.filter-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;position:sticky;top:0;z-index:10;background:#FFF8F0;padding:8px 0}
+.filter-btn{border:2px solid #FFE0D6;background:#fff;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s}
+.filter-btn:hover{background:#FFF0E8}
+.filter-btn.active{background:#FFB5A7;color:#fff;border-color:#FFB5A7}
+.filter-btn.fail-btn.active{background:#E57373;border-color:#E57373}
+table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 8px rgba(0,0,0,.04)}
+thead th{background:#FFF0E8;padding:10px 8px;font-size:11px;font-weight:700;color:#8D6E63;text-align:left;position:sticky;top:40px;z-index:5}
+tbody tr{transition:background .1s}
+tbody tr:hover{background:#FFF8F0}
+tbody tr.fail{background:#FFF0F0}
+tbody tr.fail:hover{background:#FFE8E8}
+td{padding:8px;font-size:12px;border-bottom:1px solid #F5EDE8;vertical-align:top}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;color:#fff}
+.conf-bar{width:50px;height:6px;background:#f0e6e0;border-radius:3px;display:inline-block;vertical-align:middle;margin-left:4px}
+.conf-fill{height:100%;border-radius:3px;background:#98D8B0}
+.intent-detail{color:#6D4C41;font-weight:600}
+.score-mini{font-size:10px;color:#aaa;margin-top:2px}
+.mark{font-size:14px}
+.group-row td{background:#FFF4EE;font-weight:700;font-size:13px;padding:12px 8px;border-bottom:2px solid #FFE0D6}
+</style></head><body>
+<div class="header">
+  <h1>🧪 아기톡톡 NLP 파이프라인 상세 테스트 결과</h1>
+  <div class="stats">총 145개 테스트 | <span class="big">86.2%</span> 정확도</div>
+  <div class="stats">✅ 125개 통과 &nbsp;|&nbsp; ❌ 20개 실패</div>
+</div>
+<div class="summary-grid"><div class="summary-card"><div class="emoji">🍼</div><div class="name">수유</div><div class="acc" style="color:#FFB5A7">83%</div><div class="detail">20/24</div><div class="bar"><div class="bar-fill" style="width:83.33333333333334%;background:#FFB5A7"></div></div></div><div class="summary-card"><div class="emoji">😴</div><div class="name">수면</div><div class="acc" style="color:#C3AED6">78%</div><div class="detail">21/27</div><div class="bar"><div class="bar-fill" style="width:77.77777777777779%;background:#C3AED6"></div></div></div><div class="summary-card"><div class="emoji">🧷</div><div class="name">기저귀</div><div class="acc" style="color:#A8D8EA">100%</div><div class="detail">17/17</div><div class="bar"><div class="bar-fill" style="width:100.0%;background:#A8D8EA"></div></div></div><div class="summary-card"><div class="emoji">🏥</div><div class="name">건강</div><div class="acc" style="color:#F8AFA6">91%</div><div class="detail">20/22</div><div class="bar"><div class="bar-fill" style="width:90.9090909090909%;background:#F8AFA6"></div></div></div><div class="summary-card"><div class="emoji">🥣</div><div class="name">이유식</div><div class="acc" style="color:#FFD4A0">81%</div><div class="detail">13/16</div><div class="bar"><div class="bar-fill" style="width:81.25%;background:#FFD4A0"></div></div></div><div class="summary-card"><div class="emoji">🍎</div><div class="name">간식</div><div class="acc" style="color:#FFEAA7">100%</div><div class="detail">14/14</div><div class="bar"><div class="bar-fill" style="width:100.0%;background:#FFEAA7"></div></div></div><div class="summary-card"><div class="emoji">📝</div><div class="name">기타</div><div class="acc" style="color:#D5DBDB">82%</div><div class="detail">14/17</div><div class="bar"><div class="bar-fill" style="width:82.35294117647058%;background:#D5DBDB"></div></div></div><div class="summary-card"><div class="emoji">⭐</div><div class="name">성장</div><div class="acc" style="color:#98D8B0">75%</div><div class="detail">6/8</div><div class="bar"><div class="bar-fill" style="width:75.0%;background:#98D8B0"></div></div></div></div><div class="filter-bar"><button class="filter-btn active" onclick="filterAll()">전체</button><button class="filter-btn fail-btn" onclick="filterFails()">❌ 실패만</button><button class="filter-btn" onclick="filterCat('feeding')">🍼 수유</button><button class="filter-btn" onclick="filterCat('sleep')">😴 수면</button><button class="filter-btn" onclick="filterCat('diaper')">🧷 기저귀</button><button class="filter-btn" onclick="filterCat('health')">🏥 건강</button><button class="filter-btn" onclick="filterCat('babyfood')">🥣 이유식</button><button class="filter-btn" onclick="filterCat('snack')">🍎 간식</button><button class="filter-btn" onclick="filterCat('other')">📝 기타</button><button class="filter-btn" onclick="filterCat('milestone')">⭐ 성장</button></div><table id="resultTable"><thead><tr>
+<th style="width:30px">#</th><th style="width:30px"></th><th>입력</th><th>기대</th><th>분류결과</th>
+<th>📋 기록 내용</th><th>⏰ 시간</th><th>신뢰도</th><th>스코어</th>
+</tr></thead><tbody><tr class="group-row" data-cat="feeding"><td colspan="9">🍼 수유 테스트 그룹</td></tr><tr class="" data-cat="feeding" data-ok="true">
+<td>1</td><td class="mark">✅</td>
+<td><strong>분유 120ml 먹었어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유 · 120ml</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:9.5</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>2</td><td class="mark">✅</td>
+<td><strong>분유 80 먹음</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유</td>
+<td>현재 시각</td>
+<td>91% <div class="conf-bar"><div class="conf-fill" style="width:91%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:6.5</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>3</td><td class="mark">✅</td>
+<td><strong>모유 수유했어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">모유</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:6.0</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>4</td><td class="mark">✅</td>
+<td><strong>모유 15분 먹었어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">모유 · 15분간</td>
+<td>현재 시각</td>
+<td>91% <div class="conf-bar"><div class="conf-fill" style="width:91%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:6.5</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>5</td><td class="mark">✅</td>
+<td><strong>젖병으로 100cc 줬어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유 · 100ml</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:7.5</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>6</td><td class="mark">✅</td>
+<td><strong>직수 20분 했어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">직수 · 20분간</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:3.0</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>7</td><td class="mark">✅</td>
+<td><strong>완분 160ml</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유(완분) · 160ml</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:6.0</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>8</td><td class="mark">✅</td>
+<td><strong>유축 120ml 먹였어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">유축 · 120ml</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:9.0</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>9</td><td class="mark">✅</td>
+<td><strong>반병 먹었어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유 · 반병</td>
+<td>현재 시각</td>
+<td>54% <div class="conf-bar"><div class="conf-fill" style="width:54%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:3.5</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>10</td><td class="mark">✅</td>
+<td><strong>한병 다 먹었음</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유 · 한병</td>
+<td>현재 시각</td>
+<td>54% <div class="conf-bar"><div class="conf-fill" style="width:54%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:3.5</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>11</td><td class="mark">✅</td>
+<td><strong>분유 100밀리리터</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유 · 100ml</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:8.5</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>12</td><td class="mark">✅</td>
+<td><strong>아기 젖 물렸어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유</td>
+<td>현재 시각</td>
+<td>66% <div class="conf-bar"><div class="conf-fill" style="width:66%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:4.5</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>13</td><td class="mark">✅</td>
+<td><strong>새벽에 분유 80ml 줬어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유 · 80ml</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:8.5</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>14</td><td class="mark">✅</td>
+<td><strong>수유 완료</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:3.0</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>15</td><td class="mark">✅</td>
+<td><strong>혼합수유 했어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">혼합수유</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:5.0</span> </div></td>
+</tr><tr class="fail" data-cat="feeding" data-ok="false">
+<td>16</td><td class="mark">❌</td>
+<td><strong>분유 먹다 잠들었어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:6.0</span> <span style="color:#FFB5A7;font-weight:600">수유:3.0</span> </div></td>
+</tr><tr class="group-row" data-cat="sleep"><td colspan="9">😴 수면 테스트 그룹</td></tr><tr class="" data-cat="sleep" data-ok="true">
+<td>17</td><td class="mark">✅</td>
+<td><strong>아기 잠들었어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:6.0</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>18</td><td class="mark">✅</td>
+<td><strong>낮잠 잤어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:11.5</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>19</td><td class="mark">✅</td>
+<td><strong>밤잠 들었어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:9.0</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>20</td><td class="mark">✅</td>
+<td><strong>깼어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">깨어남</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:5.0</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>21</td><td class="mark">✅</td>
+<td><strong>아기 깨어났어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">깨어남</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:2.5</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>22</td><td class="mark">✅</td>
+<td><strong>일어났어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">깨어남</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:5.0</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>23</td><td class="mark">✅</td>
+<td><strong>1시간 잤어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦 · 1시간</td>
+<td>1시 00분</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:2.5</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>24</td><td class="mark">✅</td>
+<td><strong>30분 낮잠</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦 · 30분</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:6.0</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>25</td><td class="mark">✅</td>
+<td><strong>꿀잠 자는 중</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">-</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:6.0</span> </div></td>
+</tr><tr class="fail" data-cat="sleep" data-ok="false">
+<td>26</td><td class="mark">❌</td>
+<td><strong>잠투정 시작</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 잠투정 시작</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>27</td><td class="mark">✅</td>
+<td><strong>재웠어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:2.5</span> </div></td>
+</tr><tr class="fail" data-cat="sleep" data-ok="false">
+<td>28</td><td class="mark">❌</td>
+<td><strong>눈 떴어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 눈 떴어</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>29</td><td class="mark">✅</td>
+<td><strong>쪽잠 잤어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:11.5</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>30</td><td class="mark">✅</td>
+<td><strong>토닥토닥 재웠어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>66% <div class="conf-bar"><div class="conf-fill" style="width:66%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:4.5</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>31</td><td class="mark">✅</td>
+<td><strong>자다가 깼어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">깨어남</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:7.5</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>32</td><td class="mark">✅</td>
+<td><strong>선잠만 잤어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:8.5</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>33</td><td class="mark">✅</td>
+<td><strong>기상했어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:3.0</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>34</td><td class="mark">✅</td>
+<td><strong>잠들었다 금방 깼어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">깨어남</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:11.0</span> </div></td>
+</tr><tr class="group-row" data-cat="diaper"><td colspan="9">🧷 기저귀 테스트 그룹</td></tr><tr class="" data-cat="diaper" data-ok="true">
+<td>35</td><td class="mark">✅</td>
+<td><strong>기저귀 갈았어</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">기저귀 교체</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:7.0</span> </div></td>
+</tr><tr class="" data-cat="diaper" data-ok="true">
+<td>36</td><td class="mark">✅</td>
+<td><strong>응가했어</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">대변</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:5.0</span> </div></td>
+</tr><tr class="" data-cat="diaper" data-ok="true">
+<td>37</td><td class="mark">✅</td>
+<td><strong>대변 봤어</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">대변</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:3.0</span> </div></td>
+</tr><tr class="" data-cat="diaper" data-ok="true">
+<td>38</td><td class="mark">✅</td>
+<td><strong>소변만 봤어</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">소변</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:3.0</span> </div></td>
+</tr><tr class="" data-cat="diaper" data-ok="true">
+<td>39</td><td class="mark">✅</td>
+<td><strong>똥 쌌어</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">대변</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:10.5</span> </div></td>
+</tr><tr class="" data-cat="diaper" data-ok="true">
+<td>40</td><td class="mark">✅</td>
+<td><strong>기저귀 교체</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">기저귀 교체</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:7.0</span> </div></td>
+</tr><tr class="" data-cat="diaper" data-ok="true">
+<td>41</td><td class="mark">✅</td>
+<td><strong>묽은 변 봤어</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">기저귀 교체 · 묽은변</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:5.0</span> </div></td>
+</tr><tr class="" data-cat="diaper" data-ok="true">
+<td>42</td><td class="mark">✅</td>
+<td><strong>노란 변이야</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">기저귀 교체 · 노란색</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:3.0</span> </div></td>
+</tr><tr class="" data-cat="diaper" data-ok="true">
+<td>43</td><td class="mark">✅</td>
+<td><strong>물변 나왔어</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">기저귀 교체 · 묽은변</td>
+<td>현재 시각</td>
+<td>79% <div class="conf-bar"><div class="conf-fill" style="width:79%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:5.5</span> </div></td>
+</tr><tr class="" data-cat="diaper" data-ok="true">
+<td>44</td><td class="mark">✅</td>
+<td><strong>소변이랑 대변 같이</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">소변+대변</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:6.0</span> </div></td>
+</tr><tr class="" data-cat="diaper" data-ok="true">
+<td>45</td><td class="mark">✅</td>
+<td><strong>기저귀 갈아줬어</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">기저귀 교체</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:9.0</span> </div></td>
+</tr><tr class="" data-cat="diaper" data-ok="true">
+<td>46</td><td class="mark">✅</td>
+<td><strong>오줌 쌌어</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">소변+대변</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:7.5</span> </div></td>
+</tr><tr class="" data-cat="diaper" data-ok="true">
+<td>47</td><td class="mark">✅</td>
+<td><strong>쉬했어</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">소변</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:5.0</span> </div></td>
+</tr><tr class="group-row" data-cat="health"><td colspan="9">🏥 건강 테스트 그룹</td></tr><tr class="" data-cat="health" data-ok="true">
+<td>48</td><td class="mark">✅</td>
+<td><strong>체온 37.5도</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">체온 37.5°C</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:6.0</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>49</td><td class="mark">✅</td>
+<td><strong>열 38도야</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">체온 38°C · 증상: 발열</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:5.0</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>50</td><td class="mark">✅</td>
+<td><strong>해열제 먹였어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">약: 해열제</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:5.0</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>51</td><td class="mark">✅</td>
+<td><strong>감기약 줬어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">약: 감기약</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:10.5</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>52</td><td class="mark">✅</td>
+<td><strong>타이레놀 먹였어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">약: 타이레놀</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:3.0</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>53</td><td class="mark">✅</td>
+<td><strong>기침약 복용</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">약: 기침약 · 증상: 기침</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:12.5</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>54</td><td class="mark">✅</td>
+<td><strong>항생제 먹였어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">약: 항생제</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:3.0</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>55</td><td class="mark">✅</td>
+<td><strong>유산균 줬어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">약: 유산균</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:2.5</span> </div></td>
+</tr><tr class="fail" data-cat="health" data-ok="false">
+<td>56</td><td class="mark">❌</td>
+<td><strong>병원 갔다왔어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#999">❓ (없음)</span></td>
+<td class="intent-detail">-</td>
+<td>현재 시각</td>
+<td>0% <div class="conf-bar"><div class="conf-fill" style="width:0%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:1.5</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>57</td><td class="mark">✅</td>
+<td><strong>예방접종 했어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">예방접종</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:3.0</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>58</td><td class="mark">✅</td>
+<td><strong>콧물 나와</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">증상: 콧물</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:2.0</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>59</td><td class="mark">✅</td>
+<td><strong>기침 심해</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">증상: 기침</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:2.0</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>60</td><td class="mark">✅</td>
+<td><strong>구토했어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">증상: 구토</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:5.0</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>61</td><td class="mark">✅</td>
+<td><strong>설사했어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">증상: 설사</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:2.0</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>62</td><td class="mark">✅</td>
+<td><strong>발진 생겼어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">증상: 발진</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:2.5</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>63</td><td class="mark">✅</td>
+<td><strong>두드러기 났어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">증상: 두드러기</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:2.5</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>64</td><td class="mark">✅</td>
+<td><strong>열이 안 내려가</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">증상: 발열</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:2.0</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>65</td><td class="mark">✅</td>
+<td><strong>약 먹었어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">💊 약 종류 선택 필요</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:5.0</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>66</td><td class="mark">✅</td>
+<td><strong>투약 완료</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">💊 약 종류 선택 필요</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:5.0</span> </div></td>
+</tr><tr class="" data-cat="health" data-ok="true">
+<td>67</td><td class="mark">✅</td>
+<td><strong>비타민 줬어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">약: 비타민</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:2.5</span> </div></td>
+</tr><tr class="group-row" data-cat="babyfood"><td colspan="9">🥣 이유식 테스트 그룹</td></tr><tr class="" data-cat="babyfood" data-ok="true">
+<td>68</td><td class="mark">✅</td>
+<td><strong>이유식 먹었어</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td>
+<td class="intent-detail">-</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFD4A0;font-weight:600">이유식:3.0</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="" data-cat="babyfood" data-ok="true">
+<td>69</td><td class="mark">✅</td>
+<td><strong>소고기죽 줬어</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td>
+<td class="intent-detail">소고기 · 죽</td>
+<td>현재 시각</td>
+<td>66% <div class="conf-bar"><div class="conf-fill" style="width:66%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFD4A0;font-weight:600">이유식:4.5</span> </div></td>
+</tr><tr class="" data-cat="babyfood" data-ok="true">
+<td>70</td><td class="mark">✅</td>
+<td><strong>당근 호박 죽</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td>
+<td class="intent-detail">당근+호박 · 죽</td>
+<td>현재 시각</td>
+<td>91% <div class="conf-bar"><div class="conf-fill" style="width:91%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFD4A0;font-weight:600">이유식:6.5</span> </div></td>
+</tr><tr class="fail" data-cat="babyfood" data-ok="false">
+<td>71</td><td class="mark">❌</td>
+<td><strong>이유식 100ml</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유 · 100ml</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:3.0</span> <span style="color:#FFD4A0;font-weight:600">이유식:3.0</span> </div></td>
+</tr><tr class="" data-cat="babyfood" data-ok="true">
+<td>72</td><td class="mark">✅</td>
+<td><strong>감자 퓨레 먹였어</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td>
+<td class="intent-detail">감자 · 퓨레</td>
+<td>현재 시각</td>
+<td>66% <div class="conf-bar"><div class="conf-fill" style="width:66%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFD4A0;font-weight:600">이유식:4.5</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="" data-cat="babyfood" data-ok="true">
+<td>73</td><td class="mark">✅</td>
+<td><strong>고구마 으깬 거 줬어</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td>
+<td class="intent-detail">고구마 · 으깬것</td>
+<td>현재 시각</td>
+<td>60% <div class="conf-bar"><div class="conf-fill" style="width:60%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFD4A0;font-weight:600">이유식:4.0</span> </div></td>
+</tr><tr class="" data-cat="babyfood" data-ok="true">
+<td>74</td><td class="mark">✅</td>
+<td><strong>닭고기 미음</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td>
+<td class="intent-detail">닭고기 · 미음</td>
+<td>현재 시각</td>
+<td>66% <div class="conf-bar"><div class="conf-fill" style="width:66%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFD4A0;font-weight:600">이유식:4.5</span> </div></td>
+</tr><tr class="" data-cat="babyfood" data-ok="true">
+<td>75</td><td class="mark">✅</td>
+<td><strong>브로콜리 이유식</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td>
+<td class="intent-detail">브로콜리</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFD4A0;font-weight:600">이유식:5.0</span> </div></td>
+</tr><tr class="" data-cat="babyfood" data-ok="true">
+<td>76</td><td class="mark">✅</td>
+<td><strong>시금치죽 먹음</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td>
+<td class="intent-detail">시금치 · 죽</td>
+<td>현재 시각</td>
+<td>66% <div class="conf-bar"><div class="conf-fill" style="width:66%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFD4A0;font-weight:600">이유식:4.5</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="" data-cat="babyfood" data-ok="true">
+<td>77</td><td class="mark">✅</td>
+<td><strong>오트밀 죽 줬어</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td>
+<td class="intent-detail">오트밀 · 죽</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFD4A0;font-weight:600">이유식:5.0</span> </div></td>
+</tr><tr class="" data-cat="babyfood" data-ok="true">
+<td>78</td><td class="mark">✅</td>
+<td><strong>이유식 3숟가락</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td>
+<td class="intent-detail">3숟가락</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFD4A0;font-weight:600">이유식:3.0</span> </div></td>
+</tr><tr class="" data-cat="babyfood" data-ok="true">
+<td>79</td><td class="mark">✅</td>
+<td><strong>계란 노른자 줬어</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td>
+<td class="intent-detail">계란</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFD4A0;font-weight:600">이유식:2.0</span> </div></td>
+</tr><tr class="group-row" data-cat="snack"><td colspan="9">🍎 간식 테스트 그룹</td></tr><tr class="" data-cat="snack" data-ok="true">
+<td>80</td><td class="mark">✅</td>
+<td><strong>딸기 먹었어</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">딸기</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:2.0</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="" data-cat="snack" data-ok="true">
+<td>81</td><td class="mark">✅</td>
+<td><strong>바나나 반개 줬어</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">바나나</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:2.0</span> </div></td>
+</tr><tr class="" data-cat="snack" data-ok="true">
+<td>82</td><td class="mark">✅</td>
+<td><strong>뻥튀기 줬어</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">뻥튀기</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:2.5</span> </div></td>
+</tr><tr class="" data-cat="snack" data-ok="true">
+<td>83</td><td class="mark">✅</td>
+<td><strong>떡뻥 먹음</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">떡뻥</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:2.5</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="" data-cat="snack" data-ok="true">
+<td>84</td><td class="mark">✅</td>
+<td><strong>요거트 먹었어</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">요거트</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:2.0</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="" data-cat="snack" data-ok="true">
+<td>85</td><td class="mark">✅</td>
+<td><strong>사과 갈아서 줬어</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">사과</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:2.0</span> <span style="color:#A8D8EA;font-weight:600">기저귀:2.0</span> </div></td>
+</tr><tr class="" data-cat="snack" data-ok="true">
+<td>86</td><td class="mark">✅</td>
+<td><strong>블루베리 조금 줬어</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">블루베리</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:2.0</span> </div></td>
+</tr><tr class="" data-cat="snack" data-ok="true">
+<td>87</td><td class="mark">✅</td>
+<td><strong>간식 먹었어</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">간식</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:3.0</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="" data-cat="snack" data-ok="true">
+<td>88</td><td class="mark">✅</td>
+<td><strong>쌀과자 줬어</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">쌀과자</td>
+<td>현재 시각</td>
+<td>66% <div class="conf-bar"><div class="conf-fill" style="width:66%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:4.5</span> <span style="color:#FFD4A0;font-weight:600">이유식:1.5</span> </div></td>
+</tr><tr class="" data-cat="snack" data-ok="true">
+<td>89</td><td class="mark">✅</td>
+<td><strong>포도 먹음</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">포도</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:2.0</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="" data-cat="snack" data-ok="true">
+<td>90</td><td class="mark">✅</td>
+<td><strong>과일 줬어</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">과일</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:2.0</span> </div></td>
+</tr><tr class="" data-cat="snack" data-ok="true">
+<td>91</td><td class="mark">✅</td>
+<td><strong>귤 한쪽 먹었어</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">귤</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:2.0</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="" data-cat="snack" data-ok="true">
+<td>92</td><td class="mark">✅</td>
+<td><strong>수박 줬어</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">수박</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:2.0</span> </div></td>
+</tr><tr class="" data-cat="snack" data-ok="true">
+<td>93</td><td class="mark">✅</td>
+<td><strong>키위 먹였어</strong></td>
+<td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td><td><span class="tag" style="background:#FFEAA7">🍎 간식</span></td>
+<td class="intent-detail">키위</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFEAA7;font-weight:600">간식:2.0</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="group-row" data-cat="other"><td colspan="9">📝 기타 테스트 그룹</td></tr><tr class="" data-cat="other" data-ok="true">
+<td>94</td><td class="mark">✅</td>
+<td><strong>외출</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">외출</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#D5DBDB;font-weight:600">기타:3.0</span> </div></td>
+</tr><tr class="" data-cat="other" data-ok="true">
+<td>95</td><td class="mark">✅</td>
+<td><strong>외출했어</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">외출</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#D5DBDB;font-weight:600">기타:6.0</span> </div></td>
+</tr><tr class="" data-cat="other" data-ok="true">
+<td>96</td><td class="mark">✅</td>
+<td><strong>산책 갔어</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">산책</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#D5DBDB;font-weight:600">기타:5.0</span> </div></td>
+</tr><tr class="" data-cat="other" data-ok="true">
+<td>97</td><td class="mark">✅</td>
+<td><strong>목욕했어</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">목욕</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#D5DBDB;font-weight:600">기타:6.0</span> </div></td>
+</tr><tr class="" data-cat="other" data-ok="true">
+<td>98</td><td class="mark">✅</td>
+<td><strong>목욕 시켰어</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">목욕</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#D5DBDB;font-weight:600">기타:6.0</span> </div></td>
+</tr><tr class="" data-cat="other" data-ok="true">
+<td>99</td><td class="mark">✅</td>
+<td><strong>씻겼어</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">목욕</td>
+<td>현재 시각</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#D5DBDB;font-weight:600">기타:5.0</span> </div></td>
+</tr><tr class="" data-cat="other" data-ok="true">
+<td>100</td><td class="mark">✅</td>
+<td><strong>산책 다녀왔어</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">산책</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#D5DBDB;font-weight:600">기타:2.5</span> </div></td>
+</tr><tr class="group-row" data-cat="milestone"><td colspan="9">⭐ 성장 테스트 그룹</td></tr><tr class="" data-cat="milestone" data-ok="true">
+<td>101</td><td class="mark">✅</td>
+<td><strong>뒤집기 했어</strong></td>
+<td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td><td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td>
+<td class="intent-detail">뒤집기</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#98D8B0;font-weight:600">성장:3.0</span> </div></td>
+</tr><tr class="" data-cat="milestone" data-ok="true">
+<td>102</td><td class="mark">✅</td>
+<td><strong>걸음마 시작했어</strong></td>
+<td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td><td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td>
+<td class="intent-detail">걸음마</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#98D8B0;font-weight:600">성장:3.0</span> </div></td>
+</tr><tr class="" data-cat="milestone" data-ok="true">
+<td>103</td><td class="mark">✅</td>
+<td><strong>옹알이 했어</strong></td>
+<td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td><td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td>
+<td class="intent-detail">옹알이</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#98D8B0;font-weight:600">성장:3.0</span> </div></td>
+</tr><tr class="" data-cat="milestone" data-ok="true">
+<td>104</td><td class="mark">✅</td>
+<td><strong>혼자 앉았어</strong></td>
+<td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td><td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td>
+<td class="intent-detail">혼자앉기</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#98D8B0;font-weight:600">성장:3.0</span> </div></td>
+</tr><tr class="" data-cat="milestone" data-ok="true">
+<td>105</td><td class="mark">✅</td>
+<td><strong>처음 웃었어</strong></td>
+<td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td><td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td>
+<td class="intent-detail">웃기</td>
+<td>현재 시각</td>
+<td>60% <div class="conf-bar"><div class="conf-fill" style="width:60%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#98D8B0;font-weight:600">성장:4.0</span> </div></td>
+</tr><tr class="fail" data-cat="milestone" data-ok="false">
+<td>106</td><td class="mark">❌</td>
+<td><strong>이가 나왔어</strong></td>
+<td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 이가 나왔어</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="fail" data-cat="milestone" data-ok="false">
+<td>107</td><td class="mark">❌</td>
+<td><strong>엄마라고 했어</strong></td>
+<td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 엄마라고 했어</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="" data-cat="milestone" data-ok="true">
+<td>108</td><td class="mark">✅</td>
+<td><strong>손뼉 쳤어</strong></td>
+<td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td><td><span class="tag" style="background:#98D8B0">⭐ 성장</span></td>
+<td class="intent-detail">손뼉치기</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#98D8B0;font-weight:600">성장:2.5</span> </div></td>
+</tr><tr class="group-row" data-cat="feeding"><td colspan="9">🍼 수유 테스트 그룹</td></tr><tr class="" data-cat="feeding" data-ok="true">
+<td>109</td><td class="mark">✅</td>
+<td><strong>30분 전에 분유 100ml 먹었어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유 · 100ml</td>
+<td>30분 전</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:9.5</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>110</td><td class="mark">✅</td>
+<td><strong>아까 모유 수유했어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">모유</td>
+<td>약 30분 전</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:6.0</span> </div></td>
+</tr><tr class="group-row" data-cat="babyfood"><td colspan="9">🥣 이유식 테스트 그룹</td></tr><tr class="" data-cat="babyfood" data-ok="true">
+<td>111</td><td class="mark">✅</td>
+<td><strong>3시에 이유식 먹었어</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td>
+<td class="intent-detail">-</td>
+<td>3시 00분</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFD4A0;font-weight:600">이유식:3.0</span> <span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="group-row" data-cat="sleep"><td colspan="9">😴 수면 테스트 그룹</td></tr><tr class="" data-cat="sleep" data-ok="true">
+<td>112</td><td class="mark">✅</td>
+<td><strong>2시간 전에 잠들었어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦 · 2시간</td>
+<td>2시간 전</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:6.0</span> </div></td>
+</tr><tr class="" data-cat="sleep" data-ok="true">
+<td>113</td><td class="mark">✅</td>
+<td><strong>1시에 깼어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">깨어남</td>
+<td>1시 00분</td>
+<td>72% <div class="conf-bar"><div class="conf-fill" style="width:72%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:5.0</span> </div></td>
+</tr><tr class="group-row" data-cat="diaper"><td colspan="9">🧷 기저귀 테스트 그룹</td></tr><tr class="" data-cat="diaper" data-ok="true">
+<td>114</td><td class="mark">✅</td>
+<td><strong>10분 전 기저귀 갈았어</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">기저귀 교체</td>
+<td>10분 전</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:7.0</span> </div></td>
+</tr><tr class="group-row" data-cat="feeding"><td colspan="9">🍼 수유 테스트 그룹</td></tr><tr class="fail" data-cat="feeding" data-ok="false">
+<td>115</td><td class="mark">❌</td>
+<td><strong>분유 먹고 잠들었어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:6.0</span> <span style="color:#FFB5A7;font-weight:600">수유:3.0</span> </div></td>
+</tr><tr class="group-row" data-cat="babyfood"><td colspan="9">🥣 이유식 테스트 그룹</td></tr><tr class="fail" data-cat="babyfood" data-ok="false">
+<td>116</td><td class="mark">❌</td>
+<td><strong>이유식 먹고 응가했어</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">대변</td>
+<td>현재 시각</td>
+<td>62% <div class="conf-bar"><div class="conf-fill" style="width:62%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:5.0</span> <span style="color:#FFD4A0;font-weight:600">이유식:3.0</span> </div></td>
+</tr><tr class="group-row" data-cat="other"><td colspan="9">📝 기타 테스트 그룹</td></tr><tr class="fail" data-cat="other" data-ok="false">
+<td>117</td><td class="mark">❌</td>
+<td><strong>목욕하고 잠들었어</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:6.0</span> <span style="color:#D5DBDB;font-weight:600">기타:3.0</span> </div></td>
+</tr><tr class="group-row" data-cat="health"><td colspan="9">🏥 건강 테스트 그룹</td></tr><tr class="fail" data-cat="health" data-ok="false">
+<td>118</td><td class="mark">❌</td>
+<td><strong>분유 먹다 토했어</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:3.0</span> <span style="color:#F8AFA6;font-weight:600">건강:2.5</span> </div></td>
+</tr><tr class="group-row" data-cat="other"><td colspan="9">📝 기타 테스트 그룹</td></tr><tr class="" data-cat="other" data-ok="true">
+<td>119</td><td class="mark">✅</td>
+<td><strong>아기 배고파</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 아기 배고파</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="" data-cat="other" data-ok="true">
+<td>120</td><td class="mark">✅</td>
+<td><strong>오늘 날씨 좋다</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 오늘 날씨 좋다</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="" data-cat="other" data-ok="true">
+<td>121</td><td class="mark">✅</td>
+<td><strong>남편 퇴근</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 남편 퇴근</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="" data-cat="other" data-ok="true">
+<td>122</td><td class="mark">✅</td>
+<td><strong>드라마 재밌다</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 드라마 재밌다</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="fail" data-cat="other" data-ok="false">
+<td>123</td><td class="mark">❌</td>
+<td><strong>소아과 예약해야 하나</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">-</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:2.0</span> </div></td>
+</tr><tr class="" data-cat="other" data-ok="true">
+<td>124</td><td class="mark">✅</td>
+<td><strong>아기 잘 크고 있나</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 아기 잘 크고 있나</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="fail" data-cat="other" data-ok="false">
+<td>125</td><td class="mark">❌</td>
+<td><strong>분유 얼마나 먹어야 해</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:3.0</span> </div></td>
+</tr><tr class="group-row" data-cat="feeding"><td colspan="9">🍼 수유 테스트 그룹</td></tr><tr class="" data-cat="feeding" data-ok="true">
+<td>126</td><td class="mark">✅</td>
+<td><strong>분유 120ml 먹엇어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유 · 120ml</td>
+<td>현재 시각</td>
+<td>95% <div class="conf-bar"><div class="conf-fill" style="width:95%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:8.5</span> </div></td>
+</tr><tr class="group-row" data-cat="sleep"><td colspan="9">😴 수면 테스트 그룹</td></tr><tr class="fail" data-cat="sleep" data-ok="false">
+<td>127</td><td class="mark">❌</td>
+<td><strong>잣어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 잣어</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="group-row" data-cat="diaper"><td colspan="9">🧷 기저귀 테스트 그룹</td></tr><tr class="" data-cat="diaper" data-ok="true">
+<td>128</td><td class="mark">✅</td>
+<td><strong>기저기 갈았어</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">기저귀 교체</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:2.0</span> </div></td>
+</tr><tr class="group-row" data-cat="sleep"><td colspan="9">😴 수면 테스트 그룹</td></tr><tr class="" data-cat="sleep" data-ok="true">
+<td>129</td><td class="mark">✅</td>
+<td><strong>잠들엇어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>85% <div class="conf-bar"><div class="conf-fill" style="width:85%;background:#98D8B0"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:6.0</span> </div></td>
+</tr><tr class="fail" data-cat="sleep" data-ok="false">
+<td>130</td><td class="mark">❌</td>
+<td><strong>깨엇어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 깨엇어</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="fail" data-cat="sleep" data-ok="false">
+<td>131</td><td class="mark">❌</td>
+<td><strong>일어낫어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 일어낫어</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="group-row" data-cat="other"><td colspan="9">📝 기타 테스트 그룹</td></tr><tr class="" data-cat="other" data-ok="true">
+<td>132</td><td class="mark">✅</td>
+<td><strong>모곡했어</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 모곡했어</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="group-row" data-cat="diaper"><td colspan="9">🧷 기저귀 테스트 그룹</td></tr><tr class="" data-cat="diaper" data-ok="true">
+<td>133</td><td class="mark">✅</td>
+<td><strong>기져귀 교체</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">기저귀 교체</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:2.0</span> </div></td>
+</tr><tr class="group-row" data-cat="babyfood"><td colspan="9">🥣 이유식 테스트 그룹</td></tr><tr class="" data-cat="babyfood" data-ok="true">
+<td>134</td><td class="mark">✅</td>
+<td><strong>이유식 먹엇어</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td>
+<td class="intent-detail">-</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFD4A0;font-weight:600">이유식:3.0</span> </div></td>
+</tr><tr class="group-row" data-cat="sleep"><td colspan="9">😴 수면 테스트 그룹</td></tr><tr class="" data-cat="sleep" data-ok="true">
+<td>135</td><td class="mark">✅</td>
+<td><strong>아기 자요</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:2.5</span> </div></td>
+</tr><tr class="group-row" data-cat="feeding"><td colspan="9">🍼 수유 테스트 그룹</td></tr><tr class="fail" data-cat="feeding" data-ok="false">
+<td>136</td><td class="mark">❌</td>
+<td><strong>밥 120</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 밥 120</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="group-row" data-cat="babyfood"><td colspan="9">🥣 이유식 테스트 그룹</td></tr><tr class="fail" data-cat="babyfood" data-ok="false">
+<td>137</td><td class="mark">❌</td>
+<td><strong>밥 먹었어</strong></td>
+<td><span class="tag" style="background:#FFD4A0">🥣 이유식</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 밥 먹었어</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="group-row" data-cat="feeding"><td colspan="9">🍼 수유 테스트 그룹</td></tr><tr class="fail" data-cat="feeding" data-ok="false">
+<td>138</td><td class="mark">❌</td>
+<td><strong>먹었어</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 먹었어</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:1.0</span> </div></td>
+</tr><tr class="group-row" data-cat="sleep"><td colspan="9">😴 수면 테스트 그룹</td></tr><tr class="" data-cat="sleep" data-ok="true">
+<td>139</td><td class="mark">✅</td>
+<td><strong>잤어</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#C3AED6">😴 수면</span></td>
+<td class="intent-detail">잠듦</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#C3AED6;font-weight:600">수면:2.5</span> </div></td>
+</tr><tr class="group-row" data-cat="diaper"><td colspan="9">🧷 기저귀 테스트 그룹</td></tr><tr class="" data-cat="diaper" data-ok="true">
+<td>140</td><td class="mark">✅</td>
+<td><strong>갈았어</strong></td>
+<td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td><td><span class="tag" style="background:#A8D8EA">🧷 기저귀</span></td>
+<td class="intent-detail">기저귀 교체</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#A8D8EA;font-weight:600">기저귀:2.0</span> </div></td>
+</tr><tr class="group-row" data-cat="health"><td colspan="9">🏥 건강 테스트 그룹</td></tr><tr class="" data-cat="health" data-ok="true">
+<td>141</td><td class="mark">✅</td>
+<td><strong>약</strong></td>
+<td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td><td><span class="tag" style="background:#F8AFA6">🏥 건강</span></td>
+<td class="intent-detail">-</td>
+<td>현재 시각</td>
+<td>40% <div class="conf-bar"><div class="conf-fill" style="width:40%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#F8AFA6;font-weight:600">건강:2.0</span> </div></td>
+</tr><tr class="group-row" data-cat="sleep"><td colspan="9">😴 수면 테스트 그룹</td></tr><tr class="fail" data-cat="sleep" data-ok="false">
+<td>142</td><td class="mark">❌</td>
+<td><strong>잠</strong></td>
+<td><span class="tag" style="background:#C3AED6">😴 수면</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 잠</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="group-row" data-cat="other"><td colspan="9">📝 기타 테스트 그룹</td></tr><tr class="" data-cat="other" data-ok="true">
+<td>143</td><td class="mark">✅</td>
+<td><strong>아기</strong></td>
+<td><span class="tag" style="background:#D5DBDB">📝 기타</span></td><td><span class="tag" style="background:#D5DBDB">📝 기타</span></td>
+<td class="intent-detail">메모: 아기</td>
+<td>현재 시각</td>
+<td>30% <div class="conf-bar"><div class="conf-fill" style="width:30%;background:#F8AFA6"></div></div></td>
+<td><div class="score-mini"><span style="color:#ccc">없음</span></div></td>
+</tr><tr class="group-row" data-cat="feeding"><td colspan="9">🍼 수유 테스트 그룹</td></tr><tr class="" data-cat="feeding" data-ok="true">
+<td>144</td><td class="mark">✅</td>
+<td><strong>100ml</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유 · 100ml</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:3.0</span> </div></td>
+</tr><tr class="" data-cat="feeding" data-ok="true">
+<td>145</td><td class="mark">✅</td>
+<td><strong>분유</strong></td>
+<td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td><td><span class="tag" style="background:#FFB5A7">🍼 수유</span></td>
+<td class="intent-detail">분유</td>
+<td>현재 시각</td>
+<td>50% <div class="conf-bar"><div class="conf-fill" style="width:50%;background:#FFD4A0"></div></div></td>
+<td><div class="score-mini"><span style="color:#FFB5A7;font-weight:600">수유:3.0</span> </div></td>
+</tr></tbody></table>
+<script>
+function filterAll(){
+  document.querySelectorAll('tbody tr').forEach(r=>r.style.display='');
+  document.querySelectorAll('.filter-btn').forEach(b=>{b.classList.remove('active')});
+  document.querySelector('.filter-btn').classList.add('active');
+}
+function filterFails(){
+  document.querySelectorAll('tbody tr').forEach(r=>{
+    if(r.classList.contains('group-row')){r.style.display='none';return}
+    r.style.display=r.dataset.ok==='false'?'':'none';
+  });
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.fail-btn').classList.add('active');
+}
+function filterCat(cat){
+  document.querySelectorAll('tbody tr').forEach(r=>{
+    r.style.display=r.dataset.cat===cat?'':'none';
+  });
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+</script></body></html>

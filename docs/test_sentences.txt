@@ -1,0 +1,145 @@
+분유 120ml 먹었어|feeding
+분유 80 먹음|feeding
+모유 수유했어|feeding
+모유 15분 먹었어|feeding
+젖병으로 100cc 줬어|feeding
+직수 20분 했어|feeding
+완분 160ml|feeding
+유축 120ml 먹였어|feeding
+반병 먹었어|feeding
+한병 다 먹었음|feeding
+분유 100밀리리터|feeding
+아기 젖 물렸어|feeding
+새벽에 분유 80ml 줬어|feeding
+수유 완료|feeding
+혼합수유 했어|feeding
+분유 먹다 잠들었어|feeding
+아기 잠들었어|sleep
+낮잠 잤어|sleep
+밤잠 들었어|sleep
+깼어|sleep
+아기 깨어났어|sleep
+일어났어|sleep
+1시간 잤어|sleep
+30분 낮잠|sleep
+꿀잠 자는 중|sleep
+잠투정 시작|sleep
+재웠어|sleep
+눈 떴어|sleep
+쪽잠 잤어|sleep
+토닥토닥 재웠어|sleep
+자다가 깼어|sleep
+선잠만 잤어|sleep
+기상했어|sleep
+잠들었다 금방 깼어|sleep
+기저귀 갈았어|diaper
+응가했어|diaper
+대변 봤어|diaper
+소변만 봤어|diaper
+똥 쌌어|diaper
+기저귀 교체|diaper
+묽은 변 봤어|diaper
+노란 변이야|diaper
+물변 나왔어|diaper
+소변이랑 대변 같이|diaper
+기저귀 갈아줬어|diaper
+오줌 쌌어|diaper
+쉬했어|diaper
+체온 37.5도|health
+열 38도야|health
+해열제 먹였어|health
+감기약 줬어|health
+타이레놀 먹였어|health
+기침약 복용|health
+항생제 먹였어|health
+유산균 줬어|health
+병원 갔다왔어|health
+예방접종 했어|health
+콧물 나와|health
+기침 심해|health
+구토했어|health
+설사했어|health
+발진 생겼어|health
+두드러기 났어|health
+열이 안 내려가|health
+약 먹었어|health
+투약 완료|health
+비타민 줬어|health
+이유식 먹었어|babyfood
+소고기죽 줬어|babyfood
+당근 호박 죽|babyfood
+이유식 100ml|babyfood
+감자 퓨레 먹였어|babyfood
+고구마 으깬 거 줬어|babyfood
+닭고기 미음|babyfood
+브로콜리 이유식|babyfood
+시금치죽 먹음|babyfood
+오트밀 죽 줬어|babyfood
+이유식 3숟가락|babyfood
+계란 노른자 줬어|babyfood
+딸기 먹었어|snack
+바나나 반개 줬어|snack
+뻥튀기 줬어|snack
+떡뻥 먹음|snack
+요거트 먹었어|snack
+사과 갈아서 줬어|snack
+블루베리 조금 줬어|snack
+간식 먹었어|snack
+쌀과자 줬어|snack
+포도 먹음|snack
+과일 줬어|snack
+귤 한쪽 먹었어|snack
+수박 줬어|snack
+키위 먹였어|snack
+외출|other
+외출했어|other
+산책 갔어|other
+목욕했어|other
+목욕 시켰어|other
+씻겼어|other
+산책 다녀왔어|other
+뒤집기 했어|milestone
+걸음마 시작했어|milestone
+옹알이 했어|milestone
+혼자 앉았어|milestone
+처음 웃었어|milestone
+이가 나왔어|milestone
+엄마라고 했어|milestone
+손뼉 쳤어|milestone
+30분 전에 분유 100ml 먹었어|feeding
+아까 모유 수유했어|feeding
+3시에 이유식 먹었어|babyfood
+2시간 전에 잠들었어|sleep
+1시에 깼어|sleep
+10분 전 기저귀 갈았어|diaper
+분유 먹고 잠들었어|feeding
+이유식 먹고 응가했어|babyfood
+목욕하고 잠들었어|other
+분유 먹다 토했어|health
+아기 배고파|other
+오늘 날씨 좋다|other
+남편 퇴근|other
+드라마 재밌다|other
+소아과 예약해야 하나|other
+아기 잘 크고 있나|other
+분유 얼마나 먹어야 해|other
+분유 120ml 먹엇어|feeding
+잣어|sleep
+기저기 갈았어|diaper
+잠들엇어|sleep
+깨엇어|sleep
+일어낫어|sleep
+모곡했어|other
+기져귀 교체|diaper
+이유식 먹엇어|babyfood
+아기 자요|sleep
+밥 120|feeding
+밥 먹었어|babyfood
+먹었어|feeding
+잤어|sleep
+갈았어|diaper
+약|health
+잠|sleep
+아기|other
+100ml|feeding
+분유|feeding

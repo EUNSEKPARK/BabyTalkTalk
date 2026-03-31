@@ -1,0 +1,2 @@
+com/dexterous/flutterlocalnotifications/utils/LongUtils.class
+com/dexterous/flutterlocalnotifications/FlutterLocalNotificationsPlugin.class

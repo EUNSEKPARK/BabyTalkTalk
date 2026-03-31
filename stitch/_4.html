@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#ecc159",
+              "on-background": "#e2e0fc",
+              "surface-container-lowest": "#0c0c20",
+              "on-error-container": "#ffdad6",
+              "surface-container-low": "#1a1a2e",
+              "surface-dim": "#111125",
+              "on-primary-container": "#006a54",
+              "tertiary": "#fff3df",
+              "inverse-surface": "#e2e0fc",
+              "on-secondary": "#2e2e46",
+              "on-primary": "#00382b",
+              "on-error": "#690005",
+              "on-secondary-container": "#b7b6d3",
+              "surface-bright": "#37374d",
+              "primary-fixed-dim": "#28dfb4",
+              "secondary-fixed": "#e1e0ff",
+              "on-primary-fixed": "#002118",
+              "primary-fixed": "#55fcd0",
+              "on-secondary-fixed-variant": "#44455d",
+              "on-surface": "#e2e0fc",
+              "secondary": "#c5c4e2",
+              "tertiary-fixed": "#ffdf9a",
+              "secondary-fixed-dim": "#c5c4e2",
+              "primary-container": "#46f1c5",
+              "surface-tint": "#28dfb4",
+              "outline": "#85948d",
+              "surface-container-high": "#28283d",
+              "surface": "#111125",
+              "on-tertiary-fixed": "#251a00",
+              "on-tertiary-fixed-variant": "#5a4300",
+              "secondary-container": "#464760",
+              "background": "#111125",
+              "error": "#ffb4ab",
+              "on-secondary-fixed": "#191930",
+              "inverse-primary": "#006b55",
+              "outline-variant": "#3b4a44",
+              "surface-container": "#1e1e32",
+              "tertiary-container": "#ffd268",
+              "error-container": "#93000a",
+              "inverse-on-surface": "#2f2e44",
+              "on-primary-fixed-variant": "#00513f",
+              "on-tertiary-container": "#775900",
+              "surface-variant": "#333348",
+              "surface-container-highest": "#333348",
+              "on-surface-variant": "#bacac2",
+              "on-tertiary": "#3f2e00",
+              "primary": "#ccffeb"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #111125;
+            color: #E2E0FC;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-effect {
+            background: rgba(30, 30, 50, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .asymmetric-card {
+            border-top-left-radius: 3rem;
+            border-bottom-right-radius: 3rem;
+            border-top-right-radius: 2rem;
+            border-bottom-left-radius: 2rem;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-[#111125]/80 backdrop-blur-md dark:bg-[#111125]/80">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img alt="AI Avatar 베비" class="w-full h-full object-cover" data-alt="Cute baby illustration avatar for profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMb6u6CV_HVDWpqxhSmDpCGf_dnmsJiMi2tOiIIkSt027ZTXNJsFWzO7du8qW5fuKpiSXeKqQNR_NYoV2mHXwqiaNnKqCeXAUXa9mz1Z6HBz2DQZBGmE2gAt7z8wNUjNcWDEsIlr1bbbE4SYadY2v1aj6hcvfQhIKtIFGVKol0bwFl66GdFJuXjmOYBOovDcAXCkWY4dee3VQm2oAPoQabhPsyi38Ou3QTqCvxkY_E-x1XGuixVXvDfDxkFbCn1YrCQVoOw6PyFIFf"/>
+</div>
+<h1 class="font-headline text-lg font-bold tracking-tight text-on-surface">베비 · 13개월 18일 (D+411)</h1>
+</div>
+<button class="text-[#46F1C5] hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<main class="pt-24 px-6 space-y-8">
+<!-- Baby Info Card (Asymmetric) -->
+<section class="asymmetric-card bg-surface-container p-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
+<div class="relative z-10 flex items-center gap-6">
+<div class="w-24 h-24 rounded-full border-4 border-primary-container/20 p-1">
+<img alt="오복이" class="w-full h-full rounded-full object-cover" data-alt="Close up photo of a smiling cute baby" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ15HXpZ_jbO7xTfovNVU-I4sAI_YgGgYNJnAQO-9C1M1JIw20gS6suLiLViEw0DAy-b1Al9l-FDKoQLCaqS4BlfZdz-ElX7TwYOQL9Q4UMbSX4tfxCV94hUlFpInKrJ7Kzki8pTykeEjzOx7zTLcYc2mfw9dD8f-GWkhkkevskj56ilqO1ZOrW1TW1Kxq8roOplRh7o3H_OuCh8wbNRxEvD8sx__DwV0xgkhXiIsLQzRC7kdbIvHSP15eamIHucan8w9sm1E0Lmyf"/>
+</div>
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-on-surface">오복이</h2>
+<p class="text-on-surface-variant font-medium mt-1">D+411, 58주 5일</p>
+<div class="flex items-center gap-2 mt-4 bg-surface-container-low px-3 py-1.5 rounded-full w-max">
+<span class="material-symbols-outlined text-[16px] text-primary-container">group</span>
+<span class="text-xs font-semibold text-on-surface-variant">은석 외 1명 관리 중</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Grid (2x2) -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Growth Analysis -->
+<div class="bg-surface-container-low p-5 rounded-lg space-y-3 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">성장 분석 보고서</p>
+<p class="text-[11px] text-on-surface-variant mt-0.5">AI가 분석한 주간 리포트</p>
+</div>
+</div>
+<!-- Milestones -->
+<div class="bg-surface-container-low p-5 rounded-lg space-y-3 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">마일스톤</p>
+<p class="text-[11px] text-on-surface-variant mt-0.5">발달 단계 체크리스트</p>
+</div>
+</div>
+<!-- Growth Curve -->
+<div class="bg-surface-container-low p-5 rounded-lg space-y-3 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary-fixed-dim group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">legend_toggle</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">성장곡선</p>
+<p class="text-[11px] text-on-surface-variant mt-0.5">키·몸무게 표준 비교</p>
+</div>
+</div>
+<!-- Parenting Info -->
+<div class="bg-surface-container-low p-5 rounded-lg space-y-3 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-surface-bright flex items-center justify-center text-on-surface-variant group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">tips_and_updates</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">육아 정보</p>
+<p class="text-[11px] text-on-surface-variant mt-0.5">맞춤 가이드와 팁</p>
+</div>
+</div>
+</section>
+<!-- Growth Diary Preview -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline font-bold text-on-surface px-1">최근 성장 일기</h3>
+<span class="text-xs font-semibold text-primary-container">전체보기</span>
+</div>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar -mx-6 px-6">
+<!-- Diary Items -->
+<div class="min-w-[140px] aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden relative group shrink-0">
+<img alt="Diary 1" class="w-full h-full object-cover" data-alt="Baby grabbing a wooden toy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRxbBI_LYKl43tyndZsEG-GNAIKrqqPYnxagwqUdG3MoIov2au0TP2dMzc3720TJYcqg1of8btCGYPWljV-QAKUwSwVX3u9MJWio_SJJZ6gL_Qi_vmO1yXyLRPM-uTkCHKW7c6oRRn0JfF6T7-2Xblo0tvnQMLHbO6geDhIcbZtj0MPwu2YtY0ybtNNjJORQR-c57O-TnYCMttktP1fDQWoDO1bF0oMcCzD-tjuI1F_aV9CE5RGk1Aw-aZwEYhnA4R424KauNoLW9c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<p class="absolute bottom-3 left-3 text-[10px] font-bold text-white">2024.05.20</p>
+</div>
+<div class="min-w-[140px] aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden relative group shrink-0">
+<img alt="Diary 2" class="w-full h-full object-cover" data-alt="Baby sleeping peacefully in a crib" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxqmPXUMrcFiOk--mz2eOjNcMdKV9djm7gu3TozajJhGMS-sxKYIXHgIjrc_pB4gUzWL6c5k9srXHiiR9az2GyJ24AbXaMzunUSgWXQTfLj8SbeZgI72FBX7hs2RQCWB0QpfCztgoEwCT_FGgHymFikuklkSja_KHLCdeHBQHXsyoKnohn20q0eVH_8XQDVmKQ1hejMHV7VQRUJZLLv4xv4Wr8yvTRVdGw3k-cjMGazTn9IU6hnEyq7JEg_CvwQxsBABaW7SXh6755"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<p class="absolute bottom-3 left-3 text-[10px] font-bold text-white">2024.05.18</p>
+</div>
+<div class="min-w-[140px] aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden relative group shrink-0">
+<img alt="Diary 3" class="w-full h-full object-cover" data-alt="Close up of baby tiny feet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoxkdXjj1lnX8TfeK5IXSVuFLkFLPByudV7afo0dl1rtHHaO1bW7Ji6cmlHEwFGexC8Ar9SAhRXi7YSawTOPF4eXIq4q8Lwxyx6pISGit3fUY-LKxbXGaZLtal1UB8kP7W3HzQm1tDnuNptttms92lsAkhJj62h6GYp1KMJJr-aiDYJljU_fzzqWKbTQa6oJfwCeFE0JWRPRg2-tg4TCY0IxA-yub0NXlIkLoAYofmaSYzMb-qfHj_f3_vtmGW9khVxngVUQ_b1r4Z"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<p class="absolute bottom-3 left-3 text-[10px] font-bold text-white">2024.05.15</p>
+</div>
+<div class="min-w-[140px] aspect-[4/5] bg-surface-container-low rounded-lg overflow-hidden relative group shrink-0">
+<img alt="Diary 4" class="w-full h-full object-cover" data-alt="Baby laughing while being held" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWM1Zi5vHPBLJglxy61PpRJ5A5ydC61HXRIdLgKwkKK8UV3cjdsWcA-zh5g7kJpMK2Y7Q0nK7Nqnj3WRtdADfIR-R4I-FjYM-tB9GBda6PsTsU_0eRyD6mTIaei5jQ7KR9Az_ckH51ZilykOrGjVarcW13yaxwn9laE5zMRfrnT-_TAhd3Lbb1Ztxzlsf1aevPukc8gcimsPYWj25lHX0F1Fn-sm5NAFrvEhW_PQhYXDmFGoP5eiUT-JyYLQZURLHiszRAtB7qgp0I"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<p class="absolute bottom-3 left-3 text-[10px] font-bold text-white">2024.05.12</p>
+</div>
+</div>
+</section>
+<!-- Large Start Button -->
+<button class="w-full py-5 rounded-full bg-gradient-to-br from-[#CCFFEB] to-[#46F1C5] text-[#00382B] font-extrabold text-lg shadow-[0_8px_32px_rgba(70,241,197,0.2)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+            기록 시작하기
+        </button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-8 left-0 right-0 flex justify-around items-center px-4 h-20 bg-[#1E1E32]/60 backdrop-blur-[20px] dark:bg-[#1E1E32]/60 rounded-t-[24px] mb-[40px] mx-auto max-w-[90%] z-50 shadow-[0_0_32px_0_rgba(12,12,32,0.08)]">
+<div class="flex flex-col items-center justify-center text-[#BACAC2] p-2 hover:text-[#46F1C5] transition-all">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide mt-1">채팅</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#BACAC2] p-2 hover:text-[#46F1C5] transition-all">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide mt-1">패턴</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#BACAC2] p-2 hover:text-[#46F1C5] transition-all">
+<span class="material-symbols-outlined">insert_chart</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide mt-1">통계</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#BACAC2] p-2 hover:text-[#46F1C5] transition-all">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide mt-1">공개일기</span>
+</div>
+<!-- Active Tab: Profile -->
+<div class="flex flex-col items-center justify-center bg-gradient-to-br from-[#CCFFEB] to-[#46F1C5] text-[#00382B] rounded-full p-3 scale-110 -translate-y-2 shadow-[0_0_15px_rgba(70,241,197,0.3)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-plus-jakarta text-[10px] font-bold tracking-wide mt-0.5">프로필</span>
+</div>
+</nav>
+</body></html>

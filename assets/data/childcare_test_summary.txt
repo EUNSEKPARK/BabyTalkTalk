@@ -1,0 +1,220 @@
+============================================================
+육아 기록 앱 NLP 테스트 데이터셋 요약
+생성일: 2026-03-26 13:00:19
+총 문장 수: 10,000
+============================================================
+
+카테고리별 분포:
+----------------------------------------
+  feeding                    1500  ( 15.0%)
+  diaper                     1200  ( 12.0%)
+  multi_intent                800  (  8.0%)
+  babyfood                    800  (  8.0%)
+  feeding_incomplete          800  (  8.0%)
+  sleep_start                 700  (  7.0%)
+  update                      600  (  6.0%)
+  sleep_end                   500  (  5.0%)
+  temperature                 500  (  5.0%)
+  medicine                    400  (  4.0%)
+  query                       400  (  4.0%)
+  sleep_duration              400  (  4.0%)
+  noise                       400  (  4.0%)
+  typo                        300  (  3.0%)
+  bath                        300  (  3.0%)
+  hospital                    200  (  2.0%)
+  contextual                  200  (  2.0%)
+----------------------------------------
+  합계                        10000  (100.0%)
+
+
+============================================================
+카테고리별 샘플 (각 3개):
+============================================================
+
+
+[babyfood]
+  입력: 좀 전에 소고기죽 80그램 먹었어ㅎ
+  라벨: {"intent": "babyfood", "entities": {"type": "소고기죽", "amount": 80, "unit": "g", "time": "relative"}, "status": "complete"}
+
+  입력: 그니까 새벽 4시 30분에 바나나 110g 먹였어!
+  라벨: {"intent": "babyfood", "entities": {"type": "바나나", "amount": 110, "unit": "g", "time": "16:30"}, "status": "complete"}
+
+  입력: 음 소고기죽 먹여줬어 16숟가락..
+  라벨: {"intent": "babyfood", "entities": {"type": "소고기죽", "amount": 16, "unit": "spoon", "time": "none"}, "status": "complete"}
+
+
+[bath]
+  입력: 어 목욕시켰어~
+  라벨: {"intent": "bath", "entities": {"time": "period"}, "status": "complete"}
+
+  입력: 음 점심에 우리 아들 씻겨줬어요
+  라벨: {"intent": "bath", "entities": {"time": "period"}, "status": "complete"}
+
+  입력: 그니까 15분 전 아들 샤워했어ㅋㅋ
+  라벨: {"intent": "bath", "entities": {"time": "relative"}, "status": "complete"}
+
+
+[contextual]
+  입력: 분유
+  라벨: {"intent": "followup_type", "entities": {"value": "formula"}, "status": "contextual"}
+
+  입력: ㅇㅇ
+  라벨: {"intent": "confirm", "entities": {"value": true}, "status": "contextual"}
+
+  입력: 아닌데
+  라벨: {"intent": "deny", "entities": {"value": false}, "status": "contextual"}
+
+
+[diaper]
+  입력: 그니까 어제 녹색소변 기저기 교체했어~
+  라벨: {"intent": "diaper", "entities": {"type": "pee", "state": "녹색", "time": "period"}, "status": "complete"}
+
+  입력: 음 베이비 대변ㅋㅋ
+  라벨: {"intent": "diaper", "entities": {"type": "poop", "state": "딱딱한", "time": "none"}, "status": "complete"}
+
+  입력: 그니까 기져귀 갈아줬음
+  라벨: {"intent": "diaper", "entities": {"type": "poop", "state": "묽은", "time": "21:50"}, "status": "complete"}
+
+
+[feeding]
+  입력: 그 좀 전에 아긔 모유 140 수유했어ㅋ
+  라벨: {"intent": "feeding", "entities": {"type": "모유", "amount": 140, "unit": "ml", "time": "relative"}, "status": "complete"}
+
+  입력: 그니까 애기 점심에 분유 먹이기 완료 230CCㅎ
+  라벨: {"intent": "feeding", "entities": {"type": "분유", "amount": 230, "unit": "ml", "time": "period"}, "status": "complete"}
+
+  입력: 아 그제 17시30분에 모유 180밀리 마셨어ㅋ
+  라벨: {"intent": "feeding", "entities": {"type": "모유", "amount": 180, "unit": "ml", "time": "17:30"}, "status": "complete"}
+
+
+[feeding_incomplete]
+  입력: 음 둘째 밥 줬어!
+  라벨: {"intent": "feeding", "entities": {"type": "우유", "amount": null, "unit": null, "time": "relative"}, "status": "incomplete", "missing": ["amount"]}
+
+  입력: 어 2시간 전 분유 줬음요
+  라벨: {"intent": "feeding", "entities": {"type": "분유", "amount": null, "unit": null, "time": "relative"}, "status": "incomplete", "missing": ["amount"]}
+
+  입력: 아 모유 먹임ㅋ
+  라벨: {"intent": "feeding", "entities": {"type": "모유", "amount": null, "unit": null, "time": "18:55"}, "status": "incomplete", "missing": ["amount"]}
+
+
+[hospital]
+  입력: 쪼꼬미 병원 다녀왔어~
+  라벨: {"intent": "hospital", "entities": {}, "status": "complete"}
+
+  입력: 아 건강검진 받았어ㅎ
+  라벨: {"intent": "hospital", "entities": {}, "status": "complete"}
+
+  입력: 그 예방접종 했어
+  라벨: {"intent": "hospital", "entities": {}, "status": "complete"}
+
+
+[medicine]
+  입력: 23:00에 감기약 먹였어ㅋ
+  라벨: {"intent": "medicine", "entities": {"type": "감기약", "time": "23:00"}, "status": "complete"}
+
+  입력: 그 타이레놀 먹임ㅎ
+  라벨: {"intent": "medicine", "entities": {"type": "타이레놀", "time": "13:40"}, "status": "complete"}
+
+  입력: 아 그리고 첫째 해열제 먹였어ㅎ
+  라벨: {"intent": "medicine", "entities": {"type": "해열제", "time": "none"}, "status": "complete"}
+
+
+[multi_intent]
+  입력: 음 아기 잠깨고 바로 젖 수유 완료~
+  라벨: {"intent": "multi", "intents": ["sleep_end", "feeding"], "status": "needs_separation"}
+
+  입력: 아 그리고 아이 열 36.0도라서 타이레놀 먹였어..
+  라벨: {"intent": "multi", "intents": ["temperature", "medicine"], "status": "needs_separation"}
+
+  입력: 막내 쉬했어 끝나고 유축 먹었어
+  라벨: {"intent": "multi", "intents": ["diaper", "feeding"], "status": "needs_separation"}
+
+
+[noise]
+  입력: 응
+  라벨: {"intent": "none", "status": "noise"}
+
+  입력: 시간이 너무 빨라
+  라벨: {"intent": "none", "status": "noise"}
+
+  입력: 돌잔치 준비해야지
+  라벨: {"intent": "none", "status": "noise"}
+
+
+[query]
+  입력: 어 우리 애기 언제 마지막으로 잤어?ㅋㅋ
+  라벨: {"intent": "query", "status": "query"}
+
+  입력: 첫째 이번 주 수면 패턴은?요
+  라벨: {"intent": "query", "status": "query"}
+
+  입력: 오늘 총 수유량?
+  라벨: {"intent": "query", "status": "query"}
+
+
+[sleep_duration]
+  입력: 아 그리고 애기 1시간 20분 잤어요
+  라벨: {"intent": "sleep_duration", "entities": {"hours": 1, "minutes": 20}, "status": "complete"}
+
+  입력: 낮잠 3시간ㅋ
+  라벨: {"intent": "sleep_duration", "entities": {"hours": 3, "minutes": 0}, "status": "complete"}
+
+  입력: 음 낮잠 30분ㅋㅋ
+  라벨: {"intent": "sleep_duration", "entities": {"hours": 0, "minutes": 30}, "status": "complete"}
+
+
+[sleep_end]
+  입력: 딸 깼음!
+  라벨: {"intent": "sleep_end", "entities": {"time": "relative"}, "status": "complete"}
+
+  입력: 그니까 아가 일어났어ㅋㅋ
+  라벨: {"intent": "sleep_end", "entities": {"time": "period"}, "status": "complete"}
+
+  입력: 아 16시에 작은애 일어났어!
+  라벨: {"intent": "sleep_end", "entities": {"time": "16:50"}, "status": "complete"}
+
+
+[sleep_start]
+  입력: 어 낮잠 시작ㅋㅋ
+  라벨: {"intent": "sleep_start", "entities": {"time": "none"}, "status": "complete"}
+
+  입력: 아 그리고 아기 자요ㅋ
+  라벨: {"intent": "sleep_start", "entities": {"time": "none"}, "status": "complete"}
+
+  입력: 아 그리고 우리 아기 재웠어ㅋ
+  라벨: {"intent": "sleep_start", "entities": {"time": "04:55"}, "status": "complete"}
+
+
+[temperature]
+  입력: 아 그리고 아긔 온도 재봤음 38.2도
+  라벨: {"intent": "temperature", "entities": {"value": 38.2, "time": "17:05"}, "status": "complete"}
+
+  입력: 그니까 우리 딸 체온 재봄 38.4도..
+  라벨: {"intent": "temperature", "entities": {"value": 38.4, "time": "23:05"}, "status": "complete"}
+
+  입력: 그니까 우리 아이 37.9도~
+  라벨: {"intent": "temperature", "entities": {"value": 37.9, "time": "period"}, "status": "complete"}
+
+
+[typo]
+  입력: 큰애 자들었어!
+  라벨: {"intent": "sleep_start", "status": "needs_normalization", "note": "typo:잠들었어→자들었어"}
+
+  입력: 아긔 이러났어~
+  라벨: {"intent": "sleep_end", "status": "needs_normalization", "note": "typo:일어났어→이러났어"}
+
+  입력: 응가 ㅇ..
+  라벨: {"intent": "diaper", "status": "needs_normalization", "note": "abbr:ㅇ=응/확인"}
+
+
+[update]
+  입력: 그 아까 먹인 거 240ml 아니라 100ml야!
+  라벨: {"intent": "update", "entities": {"field": "amount", "old": 240, "new": 100}, "status": "action_required"}
+
+  입력: 아 아까 기록한 시간 잘못 됐어 20시로 바꿔줘ㅋ
+  라벨: {"intent": "update", "entities": {"field": "time"}, "status": "action_required"}
+
+  입력: 그니까 아까 먹인 거 220ml 아니라 230ml야
+  라벨: {"intent": "update", "entities": {"field": "amount", "old": 220, "new": 230}, "status": "action_required"}
+
