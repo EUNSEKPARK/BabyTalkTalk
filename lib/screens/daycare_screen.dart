@@ -69,7 +69,7 @@ class DaycareScreen extends StatelessWidget {
                       Text('가족 그룹이 없습니다', style: TextStyle(
                         fontSize: 15, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
                       const SizedBox(height: 8),
-                      Text('먼저 설정 > 알림 및 백업 > 가족 공유에서\n가족 그룹을 만들어주세요.',
+                      Text('먼저 하단 설정 탭 > 가족 공유에서\n가족 그룹을 만들어주세요.',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 12, color: AppTheme.textSecondary)),
                     ],

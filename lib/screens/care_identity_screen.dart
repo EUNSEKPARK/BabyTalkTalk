@@ -222,7 +222,7 @@ class _CareIdentityScreenState extends State<CareIdentityScreen> {
               icon: Icons.home_filled,
               title: '메인 육아 담당자예요',
               subtitle:
-                  '이 기기에서 주로 기록해요. 가족을 초대할 때는 하단 「설정」→ 「알림 및 백업」→ 「가족 공유 설정」에서 '
+                  '이 기기에서 주로 기록해요. 가족을 초대할 때는 하단 「설정」탭에서 「가족 공유」를 연 뒤 '
                   '「새 가족 그룹 만들기」를 한 뒤, 초대 코드를 「복사」하거나 「공유」로 전달하면 됩니다.',
               onPressed: _finishing ? null : _onPrimaryPath,
             ),

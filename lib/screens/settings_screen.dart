@@ -11,9 +11,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:chat_baby_time/services/notification_service.dart';
 import 'package:chat_baby_time/services/record_service.dart';
 import 'package:chat_baby_time/services/nlp_analytics_service.dart';
-import 'package:chat_baby_time/services/family_service.dart';
 import 'package:chat_baby_time/screens/nlp_analytics_screen.dart';
-import 'package:chat_baby_time/screens/family_screen.dart';
 import 'package:chat_baby_time/utils/app_theme.dart';
 import 'package:chat_baby_time/screens/tutorial_screen.dart';
 
@@ -32,47 +30,6 @@ class SettingsScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         children: [
-          // ── 가족 공유 ──
-          Text(
-            '가족 공유',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: AppTheme.primary,
-                  fontWeight: FontWeight.w700,
-                ),
-          ),
-          const SizedBox(height: 8),
-          Consumer<FamilyService>(
-            builder: (context, familyService, _) {
-              final isInFamily = familyService.isInFamily;
-              final memberCount = familyService.familyGroup?.members.length ?? 0;
-              return Card(
-                color: AppTheme.surfaceContainer,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                child: ListTile(
-                  leading: Icon(
-                    isInFamily ? Icons.family_restroom : Icons.group_add_outlined,
-                    color: isInFamily ? AppTheme.primary : Colors.grey,
-                  ),
-                  title: Text(isInFamily ? '가족 공유 중' : '가족 공유 설정'),
-                  subtitle: Text(
-                    isInFamily
-                        ? '${memberCount}명이 함께 기록하고 있어요'
-                        : '엄마, 아빠가 함께 기록을 공유해요',
-                    style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                  ),
-                  trailing: const Icon(Icons.chevron_right_rounded),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => const FamilyScreen()),
-                    );
-                  },
-                ),
-              );
-            },
-          ),
-          const SizedBox(height: 28),
-
           Text(
             '수유 알림',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:chat_baby_time/utils/app_theme.dart';
 import 'package:chat_baby_time/services/record_service.dart';
+import 'package:chat_baby_time/services/family_service.dart';
 import 'package:chat_baby_time/services/widget_sync_service.dart';
 import 'package:chat_baby_time/screens/growth_report_screen.dart';
 import 'package:chat_baby_time/screens/milestone_screen.dart';
@@ -14,6 +15,7 @@ import 'package:chat_baby_time/screens/growth_curve_screen.dart';
 import 'package:chat_baby_time/screens/parenting_info_screen.dart';
 import 'package:chat_baby_time/screens/growth_diary_screen.dart';
 import 'package:chat_baby_time/screens/settings_screen.dart';
+import 'package:chat_baby_time/screens/family_screen.dart';
 import 'package:chat_baby_time/screens/my_info_screen.dart';
 import 'package:chat_baby_time/screens/lullaby_screen.dart';
 import 'package:chat_baby_time/screens/timer_screen.dart';
@@ -330,6 +332,68 @@ class ProfileScreen extends StatelessWidget {
               ),
 
               const SliverToBoxAdapter(child: SizedBox(height: 24)),
+
+              // 가족 공유 (설정 탭에서 바로 진입)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '가족 공유',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: AppTheme.primary,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Consumer<FamilyService>(
+                        builder: (context, familyService, _) {
+                          final isInFamily = familyService.isInFamily;
+                          final memberCount =
+                              familyService.familyGroup?.members.length ?? 0;
+                          return Material(
+                            color: AppTheme.surfaceContainer,
+                            borderRadius: BorderRadius.circular(16),
+                            child: ListTile(
+                              leading: Icon(
+                                isInFamily
+                                    ? Icons.family_restroom
+                                    : Icons.group_add_outlined,
+                                color: isInFamily
+                                    ? AppTheme.primary
+                                    : AppTheme.onSurfaceVariant,
+                              ),
+                              title: Text(
+                                  isInFamily ? '가족 공유 중' : '가족 공유 설정'),
+                              subtitle: Text(
+                                isInFamily
+                                    ? '${memberCount}명이 함께 기록하고 있어요'
+                                    : '초대 코드로 엄마·아빠가 함께 기록해요',
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.grey[600]),
+                              ),
+                              trailing: const Icon(
+                                  Icons.chevron_right_rounded),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16)),
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const FamilyScreen()),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SliverToBoxAdapter(child: SizedBox(height: 20)),
 
               // 내 정보
               SliverToBoxAdapter(
