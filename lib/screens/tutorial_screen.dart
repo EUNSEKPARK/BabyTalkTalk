@@ -80,6 +80,20 @@ class _TutorialScreenState extends State<TutorialScreen> {
       iconData: Icons.insights_rounded,
       gradientColors: [Color(0xFFFFF0DD), Color(0xFFFFDEB4)],
     ),
+    _TutorialPageData(
+      imagePath: 'assets/images/onboarding_feature.png',
+      title: '기록을 공유하세요',
+      subtitle: '설정 탭의 공유하기 또는 패턴 화면에서\n오늘 요약·CSV·백업 파일을\n가족이나 소아과 선생님에게 보낼 수 있어요',
+      iconData: Icons.ios_share_rounded,
+      gradientColors: [Color(0xFFE0F7FA), Color(0xFF80DEEA)],
+    ),
+    _TutorialPageData(
+      imagePath: 'assets/images/onboarding_feature.png',
+      title: '홈 위젯으로 더 빠르게',
+      subtitle: '설정 탭에서 홈 위젯을 추가하면\n앱을 열지 않고 수유·기저귀·수면을\n한 번의 탭으로 바로 기록할 수 있어요',
+      iconData: Icons.widgets_rounded,
+      gradientColors: [Color(0xFFE8F5E9), Color(0xFF81C784)],
+    ),
   ];
 
   void _nextPage() {

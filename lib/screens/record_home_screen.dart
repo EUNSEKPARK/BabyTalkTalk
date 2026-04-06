@@ -9,8 +9,8 @@ import 'package:chat_baby_time/utils/app_theme.dart';
 import 'package:chat_baby_time/widgets/category_disambiguation_chips.dart';
 import 'package:chat_baby_time/widgets/feeding_type_disambiguation_chips.dart';
 import 'package:chat_baby_time/utils/time_utils.dart';
-import 'package:chat_baby_time/screens/record_detail_screen.dart';
 import 'package:chat_baby_time/screens/chat_screen.dart';
+import 'package:chat_baby_time/screens/my_info_screen.dart';
 import 'package:chat_baby_time/widgets/record_edit_sheet.dart';
 import 'package:chat_baby_time/widgets/guided_record_button_section.dart';
 import 'package:chat_baby_time/services/nlp_analytics_service.dart';
@@ -986,62 +986,83 @@ class _RecordHomeScreenState extends State<RecordHomeScreen>
       padding: const EdgeInsets.fromLTRB(20, 12, 12, 8),
       child: Row(
         children: [
-          // 아바타 이미지
-          Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: AppTheme.primary.withOpacity(0.25),
-                width: 2,
-              ),
-            ),
-            child: ClipOval(
-              child: Image.asset(
-                'assets/images/baby_avatar_default.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const SizedBox(width: 10),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  ageText,
-                  style: const TextStyle(
-                    color: AppTheme.primary,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: -0.3,
-                  ),
-                ),
-                // 녹음 중 상태 텍스트
-                if (speechService.isListening)
-                  Row(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (_) => const MyInfoScreen(),
+                    ),
+                  );
+                },
+                borderRadius: BorderRadius.circular(12),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+                  child: Row(
                     children: [
                       Container(
-                        width: 6,
-                        height: 6,
-                        decoration: const BoxDecoration(
+                        width: 36,
+                        height: 36,
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color(0xFFFF6B6B),
+                          border: Border.all(
+                            color: AppTheme.primary.withOpacity(0.25),
+                            width: 2,
+                          ),
+                        ),
+                        child: ClipOval(
+                          child: Image.asset(
+                            'assets/images/baby_avatar_default.png',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                      const SizedBox(width: 4),
-                      const Text(
-                        '음성 녹음 중...',
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Color(0xFFFF8E8E),
-                          fontWeight: FontWeight.w500,
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              ageText,
+                              style: const TextStyle(
+                                color: AppTheme.primary,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: -0.3,
+                              ),
+                            ),
+                            if (speechService.isListening)
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 6,
+                                    height: 6,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Color(0xFFFF6B6B),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  const Text(
+                                    '음성 녹음 중...',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: Color(0xFFFF8E8E),
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-              ],
+                ),
+              ),
             ),
           ),
           IconButton(
@@ -1546,6 +1567,10 @@ class _RecordHomeScreenState extends State<RecordHomeScreen>
                               bg = AppTheme.primaryFixed.withOpacity(0.2);
                               fg = AppTheme.primary;
                               icon = Icons.touch_app_outlined;
+                            } else if (src == 'widget') {
+                              bg = AppTheme.secondary.withOpacity(0.15);
+                              fg = AppTheme.secondary;
+                              icon = Icons.widgets_outlined;
                             } else {
                               bg = AppTheme.primary.withOpacity(0.15);
                               fg = AppTheme.primary;

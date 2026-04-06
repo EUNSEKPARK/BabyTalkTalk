@@ -9,17 +9,42 @@
     android:orientation="vertical"
     android:padding="12dp">
 
-    <TextView
-        android:id="@+id/widget_baby_name"
+    <!-- 상단: 아기 이름 + 다음 루틴 -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="#0C0C20"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        tools:text="아기 이름" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
+        <TextView
+            android:id="@+id/widget_baby_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#0C0C20"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="아기 이름" />
+
+        <TextView
+            android:id="@+id/widget_next_routine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_badge_background"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:textColor="#46F1C5"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            tools:text="수유 30분 후" />
+    </LinearLayout>
+
+    <!-- 오늘 요약 -->
     <TextView
         android:id="@+id/widget_summary"
         android:layout_width="match_parent"
@@ -29,8 +54,9 @@
         android:maxLines="1"
         android:textColor="#5C5C70"
         android:textSize="13sp"
-        tools:text="오늘 수유 0 · 기저귀 0 · 수면 0" />
+        tools:text="오늘 수유 3 · 기저귀 2 · 수면 1" />
 
+    <!-- 마지막 기록 상세 -->
     <TextView
         android:id="@+id/widget_detail"
         android:layout_width="match_parent"
@@ -42,4 +68,53 @@
         android:textSize="12sp"
         android:textStyle="bold"
         tools:text="마지막 수유 30분 전" />
+
+    <!-- 퀵 액션 버튼 영역 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/btn_quick_feeding"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/widget_button_feeding"
+            android:gravity="center"
+            android:text="🍼 수유"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btn_quick_diaper"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/widget_button_diaper"
+            android:gravity="center"
+            android:text="🧷 기저귀"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btn_quick_sleep"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/widget_button_sleep"
+            android:gravity="center"
+            android:text="😴 수면"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 </LinearLayout>

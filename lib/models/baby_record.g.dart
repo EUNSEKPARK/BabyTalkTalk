@@ -30,6 +30,10 @@ class BabyRecordAdapter extends TypeAdapter<BabyRecord> {
       medicine: fields[10] as String?,
       memo: fields[11] as String?,
       inputSource: fields[13] as String?,
+      authorId: fields[14] as String?,
+      authorName: fields[15] as String?,
+      profileId: fields[16] as String?,
+      photoPath: fields[17] as String?,
       createdAt: fields[12] as DateTime?,
     );
   }
@@ -37,7 +41,7 @@ class BabyRecordAdapter extends TypeAdapter<BabyRecord> {
   @override
   void write(BinaryWriter writer, BabyRecord obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(18)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -65,7 +69,15 @@ class BabyRecordAdapter extends TypeAdapter<BabyRecord> {
       ..writeByte(12)
       ..write(obj.createdAt)
       ..writeByte(13)
-      ..write(obj.inputSource);
+      ..write(obj.inputSource)
+      ..writeByte(14)
+      ..write(obj.authorId)
+      ..writeByte(15)
+      ..write(obj.authorName)
+      ..writeByte(16)
+      ..write(obj.profileId)
+      ..writeByte(17)
+      ..write(obj.photoPath);
   }
 
   @override
@@ -102,6 +114,12 @@ class RecordCategoryAdapter extends TypeAdapter<RecordCategory> {
         return RecordCategory.babyfood;
       case 7:
         return RecordCategory.snack;
+      case 8:
+        return RecordCategory.bath;
+      case 9:
+        return RecordCategory.pumping;
+      case 10:
+        return RecordCategory.tummytime;
       default:
         return RecordCategory.feeding;
     }
@@ -133,6 +151,15 @@ class RecordCategoryAdapter extends TypeAdapter<RecordCategory> {
         break;
       case RecordCategory.snack:
         writer.writeByte(7);
+        break;
+      case RecordCategory.bath:
+        writer.writeByte(8);
+        break;
+      case RecordCategory.pumping:
+        writer.writeByte(9);
+        break;
+      case RecordCategory.tummytime:
+        writer.writeByte(10);
         break;
     }
   }

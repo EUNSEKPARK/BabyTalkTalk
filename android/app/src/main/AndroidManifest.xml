@@ -10,6 +10,8 @@
     <!-- 갤러리에서 일기 표지 이미지 선택 (Android 13+) -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
+    <!-- 정확한 알림 스케줄링 (Android 12+) -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
 
     <application
         android:label="아기톡톡"
@@ -41,6 +43,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
+        <!-- 홈 위젯 프로바이더 -->
         <receiver
             android:name=".BabyTimeWidgetProvider"
             android:exported="true"
@@ -53,6 +56,18 @@
                 android:resource="@xml/baby_time_widget_info" />
         </receiver>
 
+        <!-- 위젯 퀵 액션 리시버 (앱 실행 없이 즉시 기록) -->
+        <receiver
+            android:name=".QuickRecordReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.chatbabytime.app.ACTION_QUICK_FEEDING" />
+                <action android:name="com.chatbabytime.app.ACTION_QUICK_DIAPER" />
+                <action android:name="com.chatbabytime.app.ACTION_QUICK_SLEEP" />
+            </intent-filter>
+        </receiver>
+
+        <!-- flutter_local_notifications 리시버 -->
         <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
         <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
             <intent-filter>

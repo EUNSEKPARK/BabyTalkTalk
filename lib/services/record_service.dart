@@ -4,9 +4,12 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:chat_baby_time/constants/growth_diary_assets.dart';
 import 'package:chat_baby_time/models/baby_record.dart';
 import 'package:chat_baby_time/models/baby_profile.dart';
+import 'package:chat_baby_time/services/family_service.dart';
+import 'package:chat_baby_time/services/notification_service.dart';
 
 /// 육아 기록 데이터 관리 서비스
 class RecordService extends ChangeNotifier {
@@ -15,6 +18,7 @@ class RecordService extends ChangeNotifier {
   static const String _growthBoxName = 'growth_measurements';
   static const String _milestoneBoxName = 'milestone_checks';
   static const String _diaryCoverBoxName = 'growth_diary_covers';
+  static const String _prefActiveProfileId = 'active_profile_id';
 
   late Box<BabyRecord> _recordBox;
   late Box<BabyProfile> _profileBox;
@@ -24,16 +28,108 @@ class RecordService extends ChangeNotifier {
   Directory? _appDocsDirectory;
 
   bool _initialized = false;
-  List<BabyRecord> _records = [];
+  List<BabyRecord> _allRecords = []; // 전체 기록 (모든 프로필)
+  List<BabyRecord> _records = []; // 현재 활성 프로필의 기록
   BabyProfile? _profile;
+  String? _activeProfileId;
   String? _lastError;
+
+  /// 가족 공유 기록 (Firestore에서 받은 다른 가족 구성원의 기록)
+  List<BabyRecord> _familyRecords = [];
+
+  /// 가족 공유 기록 포함 전체 기록 (현재 활성 프로필 기준)
+  List<BabyRecord> get allRecords {
+    if (_familyRecords.isEmpty) return _records;
+    final merged = <String, BabyRecord>{};
+    for (final r in _records) {
+      merged[r.id] = r;
+    }
+    for (final r in _familyRecords) {
+      // 가족 기록도 현재 프로필 기준으로 필터 (profileId가 없으면 포함)
+      if (r.profileId == null || r.profileId == _activeProfileId) {
+        merged.putIfAbsent(r.id, () => r);
+      }
+    }
+    final list = merged.values.toList();
+    list.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+    return list;
+  }
+
+  /// Firestore에서 동기화된 기록 반영
+  void mergeFamilyRecords(List<Map<String, dynamic>> firestoreRecords) {
+    _familyRecords = firestoreRecords.map((data) {
+      return _recordFromFirestore(data);
+    }).toList();
+    notifyListeners();
+  }
+
+  static BabyRecord _recordFromFirestore(Map<String, dynamic> data) {
+    final catIdx = data['category'] as int? ?? 0;
+    final category = catIdx >= 0 && catIdx < RecordCategory.values.length
+        ? RecordCategory.values[catIdx]
+        : RecordCategory.other;
+
+    FeedingType? feedingType;
+    final ft = data['feedingType'] as int?;
+    if (ft != null && ft >= 0 && ft < FeedingType.values.length) {
+      feedingType = FeedingType.values[ft];
+    }
+
+    SleepStatus? sleepStatus;
+    final ss = data['sleepStatus'] as int?;
+    if (ss != null && ss >= 0 && ss < SleepStatus.values.length) {
+      sleepStatus = SleepStatus.values[ss];
+    }
+
+    DiaperType? diaperType;
+    final dt = data['diaperType'] as int?;
+    if (dt != null && dt >= 0 && dt < DiaperType.values.length) {
+      diaperType = DiaperType.values[dt];
+    }
+
+    return BabyRecord(
+      id: data['id'] as String? ?? '',
+      category: category,
+      timestamp: DateTime.fromMillisecondsSinceEpoch(
+        data['timestamp'] as int? ?? 0,
+      ),
+      rawInput: data['rawInput'] as String?,
+      feedingType: feedingType,
+      amountMl: (data['amountMl'] as num?)?.toInt(),
+      durationMinutes: (data['durationMinutes'] as num?)?.toInt(),
+      sleepStatus: sleepStatus,
+      diaperType: diaperType,
+      temperature: (data['temperature'] as num?)?.toDouble(),
+      medicine: data['medicine'] as String?,
+      memo: data['memo'] as String?,
+      inputSource: data['inputSource'] as String?,
+      authorId: data['authorId'] as String?,
+      authorName: data['authorName'] as String?,
+      profileId: data['profileId'] as String?,
+      photoPath: data['photoPath'] as String?,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(
+        data['createdAt'] as int? ?? 0,
+      ),
+    );
+  }
 
   bool get initialized => _initialized;
   List<BabyRecord> get records => _records;
   BabyProfile? get profile => _profile;
+  String? get activeProfileId => _activeProfileId;
   String? get lastError => _lastError;
 
   bool get hasProfile => _profile != null;
+
+  /// 등록된 모든 아기 프로필 목록
+  List<BabyProfile> get allProfiles {
+    try {
+      return _profileBox.values.toList();
+    } catch (e) {
+      debugPrint('allProfiles error: $e');
+      return _profile != null ? [_profile!] : [];
+    }
+  }
 
   /// 개별 Hive 박스를 안전하게 열기 (손상 시 삭제 후 재생성)
   Future<Box<T>> _openBoxSafe<T>(String name) async {
@@ -61,40 +157,90 @@ class RecordService extends ChangeNotifier {
       _milestoneBox = await _openBoxSafe(_milestoneBoxName);
       _diaryCoverBox = await _openBoxSafe<String>(_diaryCoverBoxName);
 
-      // 레코드 로드 (개별 항목 오류 시 건너뛰기)
-      _records = [];
+      // 전체 레코드 로드 (개별 항목 오류 시 건너뛰기)
+      _allRecords = [];
       for (final key in _recordBox.keys) {
         try {
           final record = _recordBox.get(key);
           if (record != null) {
-            _records.add(record);
+            _allRecords.add(record);
           }
         } catch (e) {
           debugPrint('레코드 로드 실패 (key=$key): $e');
         }
       }
-      _records.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+      _allRecords.sort((a, b) => b.timestamp.compareTo(a.timestamp));
 
-      // 프로필 로드
+      // 프로필 로드 및 마이그레이션
       if (_profileBox.isNotEmpty) {
         try {
-          _profile = _profileBox.getAt(0);
+          // 기존 단일 프로필 → 멀티 프로필 마이그레이션
+          final firstProfile = _profileBox.getAt(0);
+          if (firstProfile != null && firstProfile.profileId.isEmpty) {
+            // profileId가 없는 기존 프로필에 ID 부여
+            firstProfile.profileId = DateTime.now().microsecondsSinceEpoch.toRadixString(36);
+            await _profileBox.putAt(0, firstProfile);
+          }
+
+          // 활성 프로필 ID 로드
+          final prefs = await SharedPreferences.getInstance();
+          _activeProfileId = prefs.getString(_prefActiveProfileId);
+
+          // 활성 프로필 ID가 없거나 유효하지 않으면 첫 번째 프로필로 설정
+          final profiles = _profileBox.values.toList();
+          if (_activeProfileId == null ||
+              !profiles.any((p) => p.profileId == _activeProfileId)) {
+            _activeProfileId = profiles.first.profileId;
+            await prefs.setString(_prefActiveProfileId, _activeProfileId!);
+          }
+
+          _profile = profiles.firstWhere(
+            (p) => p.profileId == _activeProfileId,
+            orElse: () => profiles.first,
+          );
+
+          // 기존 기록 중 profileId가 없는 것들은 첫 번째 프로필에 할당
+          final defaultId = profiles.first.profileId;
+          for (final r in _allRecords) {
+            if (r.profileId == null || r.profileId!.isEmpty) {
+              r.profileId = defaultId;
+              await _recordBox.put(r.id, r);
+            }
+          }
         } catch (e) {
           debugPrint('프로필 로드 실패: $e');
-          // 손상된 프로필 제거
           await _profileBox.clear();
           _profile = null;
+          _activeProfileId = null;
         }
       }
+
+      // 활성 프로필 기준으로 기록 필터링
+      _filterRecordsByActiveProfile();
 
       _initialized = true;
     } catch (e) {
       debugPrint('RecordService init error: $e');
       _lastError = '데이터 초기화 중 오류가 발생했습니다.';
-      _initialized = true; // 에러 시에도 초기화 완료로 표시하여 앱 진행
+      _initialized = true;
     }
 
     notifyListeners();
+  }
+
+  /// 활성 프로필 기준으로 기록 필터링
+  void _filterRecordsByActiveProfile() {
+    if (_activeProfileId == null) {
+      _records = List.from(_allRecords);
+    } else {
+      _records = _allRecords
+          .where((r) =>
+              r.profileId == null ||
+              r.profileId!.isEmpty ||
+              r.profileId == _activeProfileId)
+          .toList();
+    }
+    _records.sort((a, b) => b.timestamp.compareTo(a.timestamp));
   }
 
   void clearError() {
@@ -104,10 +250,25 @@ class RecordService extends ChangeNotifier {
 
   // ===== 프로필 관리 =====
 
+  /// 현재 활성 프로필 저장 (기존 호환)
   Future<void> saveProfile(BabyProfile profile) async {
     try {
-      if (_profileBox.isEmpty) {
+      if (_activeProfileId != null) {
+        // 기존 프로필 수정
+        profile.profileId = _activeProfileId!;
+        final idx = _profileBox.values
+            .toList()
+            .indexWhere((p) => p.profileId == _activeProfileId);
+        if (idx >= 0) {
+          await _profileBox.putAt(idx, profile);
+        } else {
+          await _profileBox.add(profile);
+        }
+      } else if (_profileBox.isEmpty) {
         await _profileBox.add(profile);
+        _activeProfileId = profile.profileId;
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString(_prefActiveProfileId, _activeProfileId!);
       } else {
         await _profileBox.putAt(0, profile);
       }
@@ -120,15 +281,139 @@ class RecordService extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// 새 아기 프로필 추가
+  Future<void> addNewProfile(BabyProfile profile) async {
+    try {
+      await _profileBox.add(profile);
+      // 새로 추가한 프로필을 활성으로 전환
+      await switchProfile(profile.profileId);
+      _lastError = null;
+    } catch (e) {
+      debugPrint('addNewProfile error: $e');
+      _lastError = '프로필 추가에 실패했습니다.';
+      notifyListeners();
+    }
+  }
+
+  /// 활성 프로필 전환
+  Future<void> switchProfile(String profileId) async {
+    try {
+      final profiles = _profileBox.values.toList();
+      final target = profiles.firstWhere(
+        (p) => p.profileId == profileId,
+      );
+      _activeProfileId = profileId;
+      _profile = target;
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_prefActiveProfileId, profileId);
+
+      _filterRecordsByActiveProfile();
+      _lastError = null;
+      notifyListeners();
+    } catch (e) {
+      debugPrint('switchProfile error: $e');
+      _lastError = '프로필 전환에 실패했습니다.';
+      notifyListeners();
+    }
+  }
+
+  /// 특정 프로필 수정
+  Future<void> updateProfile(BabyProfile updated) async {
+    try {
+      final profiles = _profileBox.values.toList();
+      final idx = profiles.indexWhere((p) => p.profileId == updated.profileId);
+      if (idx >= 0) {
+        await _profileBox.putAt(idx, updated);
+        if (updated.profileId == _activeProfileId) {
+          _profile = updated;
+        }
+        _lastError = null;
+        notifyListeners();
+      }
+    } catch (e) {
+      debugPrint('updateProfile error: $e');
+      _lastError = '프로필 수정에 실패했습니다.';
+      notifyListeners();
+    }
+  }
+
+  /// 프로필 삭제 (해당 프로필의 기록도 모두 삭제)
+  Future<String?> deleteProfile(String profileId) async {
+    try {
+      final profiles = _profileBox.values.toList();
+      if (profiles.length <= 1) {
+        return '마지막 프로필은 삭제할 수 없습니다.';
+      }
+
+      // 해당 프로필의 기록 삭제
+      final recordsToDelete =
+          _allRecords.where((r) => r.profileId == profileId).toList();
+      for (final r in recordsToDelete) {
+        await _recordBox.delete(r.id);
+      }
+      _allRecords.removeWhere((r) => r.profileId == profileId);
+
+      // 프로필 삭제
+      final idx = profiles.indexWhere((p) => p.profileId == profileId);
+      if (idx >= 0) {
+        await _profileBox.deleteAt(idx);
+      }
+
+      // 활성 프로필이 삭제된 경우 첫 번째로 전환
+      if (_activeProfileId == profileId) {
+        final remaining = _profileBox.values.toList();
+        if (remaining.isNotEmpty) {
+          await switchProfile(remaining.first.profileId);
+        }
+      } else {
+        _filterRecordsByActiveProfile();
+        notifyListeners();
+      }
+
+      return null;
+    } catch (e) {
+      debugPrint('deleteProfile error: $e');
+      return '프로필 삭제에 실패했습니다.';
+    }
+  }
+
+  /// 현재 프로필의 기록 수
+  int recordCountForProfile(String profileId) {
+    return _allRecords.where((r) => r.profileId == profileId).length;
+  }
+
+  /// 가족 서비스 연결 (Firestore 동기화용)
+  FamilyService? _familyService;
+  void attachFamilyService(FamilyService fs) {
+    _familyService = fs;
+  }
+
+  /// 알림 서비스 연결 (루틴 엔진 연동)
+  NotificationService? _notificationService;
+  void attachNotificationService(NotificationService ns) {
+    _notificationService = ns;
+  }
+
   // ===== 기록 CRUD =====
 
   Future<bool> addRecord(BabyRecord record) async {
     try {
+      // 활성 프로필 ID 자동 할당
+      record.profileId ??= _activeProfileId;
       await _recordBox.put(record.id, record);
-      _records.insert(0, record);
-      _records.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+      _allRecords.insert(0, record);
+      _allRecords.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+      _filterRecordsByActiveProfile();
       _lastError = null;
       notifyListeners();
+
+      // 루틴 엔진에 기록 추가 알림 → 다음 알림 재스케줄
+      _notificationService?.onRecordAdded(record.category);
+
+      // 가족 공유 중이면 Firestore에도 업로드
+      _familyService?.uploadRecord(record);
+
       return true;
     } catch (e) {
       debugPrint('addRecord error: $e');
@@ -141,6 +426,11 @@ class RecordService extends ChangeNotifier {
   Future<bool> updateRecord(BabyRecord record) async {
     try {
       await _recordBox.put(record.id, record);
+      final allIdx = _allRecords.indexWhere((r) => r.id == record.id);
+      if (allIdx >= 0) {
+        _allRecords[allIdx] = record;
+        _allRecords.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+      }
       final idx = _records.indexWhere((r) => r.id == record.id);
       if (idx >= 0) {
         _records[idx] = record;
@@ -148,6 +438,10 @@ class RecordService extends ChangeNotifier {
       }
       _lastError = null;
       notifyListeners();
+
+      // 가족 공유 중이면 Firestore에도 업데이트
+      _familyService?.uploadRecord(record);
+
       return true;
     } catch (e) {
       debugPrint('updateRecord error: $e');
@@ -160,9 +454,14 @@ class RecordService extends ChangeNotifier {
   Future<bool> deleteRecord(String id) async {
     try {
       await _recordBox.delete(id);
+      _allRecords.removeWhere((r) => r.id == id);
       _records.removeWhere((r) => r.id == id);
       _lastError = null;
       notifyListeners();
+
+      // 가족 공유 중이면 Firestore에서도 삭제
+      _familyService?.deleteRemoteRecord(id);
+
       return true;
     } catch (e) {
       debugPrint('deleteRecord error: $e');
@@ -177,16 +476,19 @@ class RecordService extends ChangeNotifier {
   Future<bool> addGrowthMeasurement({
     required double heightCm,
     required double weightKg,
+    double? headCircCm,
     DateTime? date,
   }) async {
     try {
       final measureDate = date ?? DateTime.now();
       final key = '${measureDate.year}-${measureDate.month.toString().padLeft(2, '0')}-${measureDate.day.toString().padLeft(2, '0')}';
-      await _growthBox.put(key, {
+      final data = <String, dynamic>{
         'heightCm': heightCm,
         'weightKg': weightKg,
         'date': measureDate.millisecondsSinceEpoch,
-      });
+      };
+      if (headCircCm != null) data['headCircCm'] = headCircCm;
+      await _growthBox.put(key, data);
       _lastError = null;
       notifyListeners();
       return true;
@@ -208,6 +510,7 @@ class RecordService extends ChangeNotifier {
             'key': key,
             'heightCm': (data['heightCm'] as num?)?.toDouble() ?? 0,
             'weightKg': (data['weightKg'] as num?)?.toDouble() ?? 0,
+            'headCircCm': (data['headCircCm'] as num?)?.toDouble(),
             'date': DateTime.fromMillisecondsSinceEpoch(data['date'] as int),
           });
         }
@@ -461,6 +764,7 @@ class RecordService extends ChangeNotifier {
             'birthWeight': _profile!.birthWeight,
             'birthHeight': _profile!.birthHeight,
             'growthStageIndex': _profile!.growthStageIndex,
+            'profileId': _profile!.profileId,
           };
 
     final recordsJson = _records.map(_recordToJson).toList();
@@ -586,29 +890,42 @@ class RecordService extends ChangeNotifier {
       }
 
       // 복원 후 안전한 레코드 로드
-      _records = [];
+      _allRecords = [];
       for (final key in _recordBox.keys) {
         try {
           final record = _recordBox.get(key);
           if (record != null) {
-            _records.add(record);
+            _allRecords.add(record);
           }
         } catch (e) {
           debugPrint('복원 후 레코드 로드 실패 (key=$key): $e');
         }
       }
-      _records.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+      _allRecords.sort((a, b) => b.timestamp.compareTo(a.timestamp));
 
       if (_profileBox.isNotEmpty) {
         try {
           _profile = _profileBox.getAt(0);
+          _activeProfileId = _profile?.profileId;
+          // 복원된 기록에 profileId 할당
+          if (_activeProfileId != null) {
+            for (final r in _allRecords) {
+              if (r.profileId == null || r.profileId!.isEmpty) {
+                r.profileId = _activeProfileId;
+                await _recordBox.put(r.id, r);
+              }
+            }
+          }
         } catch (e) {
           debugPrint('복원 후 프로필 로드 실패: $e');
           _profile = null;
+          _activeProfileId = null;
         }
       } else {
         _profile = null;
+        _activeProfileId = null;
       }
+      _filterRecordsByActiveProfile();
       _lastError = null;
       notifyListeners();
       return null;
@@ -633,6 +950,8 @@ class RecordService extends ChangeNotifier {
       'medicine': r.medicine,
       'memo': r.memo,
       'createdAt': r.createdAt.toIso8601String(),
+      'profileId': r.profileId,
+      'photoPath': r.photoPath,
     };
   }
 
@@ -673,6 +992,8 @@ class RecordService extends ChangeNotifier {
       temperature: (j['temperature'] as num?)?.toDouble(),
       medicine: j['medicine'] as String?,
       memo: j['memo'] as String?,
+      profileId: j['profileId'] as String?,
+      photoPath: j['photoPath'] as String?,
       createdAt: DateTime.parse(j['createdAt'] as String),
     );
   }
@@ -687,6 +1008,7 @@ class RecordService extends ChangeNotifier {
       birthWeight: (p['birthWeight'] as num?)?.toDouble(),
       birthHeight: (p['birthHeight'] as num?)?.toDouble(),
       growthStageIndex: (p['growthStageIndex'] as int?) ?? 0,
+      profileId: p['profileId'] as String?,
     );
   }
 }

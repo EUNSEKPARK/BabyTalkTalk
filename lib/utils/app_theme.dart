@@ -78,6 +78,9 @@ class AppTheme {
   static const Color babyfoodColor = Color(0xFFF4A460);     // 샌디 브라운
   static const Color snackColor = Color(0xFFE091D3);        // 라이트 퍼플 핑크
   static const Color otherColor = Color(0xFFBDBDBD);        // 그레이
+  static const Color bathColor = Color(0xFF81D4FA);          // 라이트 블루
+  static const Color pumpingColor = Color(0xFFCE93D8);       // 라이트 퍼플
+  static const Color tummytimeColor = Color(0xFFA5D6A7);     // 라이트 그린
 
   // 카테고리 연한 배경색 (카드 아이콘 배경용)
   static const Color feedingBg = Color(0xFFFFE5E5);
@@ -87,6 +90,9 @@ class AppTheme {
   static const Color milestoneBg = Color(0xFFFFF0DD);
   static const Color babyfoodBg = Color(0xFFFFF0E0);
   static const Color snackBg = Color(0xFFFCE4F6);
+  static const Color bathBg = Color(0xFFE1F5FE);
+  static const Color pumpingBg = Color(0xFFF3E5F5);
+  static const Color tummytimeBg = Color(0xFFE8F5E9);
   static const Color otherBg = Color(0xFFF0F0F0);
 
   // Legacy compatibility aliases
@@ -118,6 +124,12 @@ class AppTheme {
         return babyfoodColor;
       case 'snack':
         return snackColor;
+      case 'bath':
+        return bathColor;
+      case 'pumping':
+        return pumpingColor;
+      case 'tummytime':
+        return tummytimeColor;
       default:
         return otherColor;
     }
@@ -139,6 +151,12 @@ class AppTheme {
         return babyfoodBg;
       case 'snack':
         return snackBg;
+      case 'bath':
+        return bathBg;
+      case 'pumping':
+        return pumpingBg;
+      case 'tummytime':
+        return tummytimeBg;
       default:
         return otherBg;
     }

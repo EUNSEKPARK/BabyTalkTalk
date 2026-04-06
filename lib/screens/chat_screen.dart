@@ -589,6 +589,12 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
         return '건강';
       case RecordCategory.milestone:
         return '성장';
+      case RecordCategory.bath:
+        return '목욕';
+      case RecordCategory.pumping:
+        return '유축';
+      case RecordCategory.tummytime:
+        return '터미타임';
       case RecordCategory.other:
         return '기타';
     }

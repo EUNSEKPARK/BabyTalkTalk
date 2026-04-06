@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:chat_baby_time/models/baby_profile.dart';
 import 'package:chat_baby_time/services/record_service.dart';
+import 'package:chat_baby_time/services/care_onboarding_service.dart';
 import 'package:chat_baby_time/utils/app_theme.dart';
 import 'package:intl/intl.dart';
 
@@ -49,7 +50,11 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
 
   void _save() async {
     final name = _nameController.text.trim().isEmpty ? '우리 아기' : _nameController.text.trim();
-    
+    final recordService = context.read<RecordService>();
+
+    // 기존 프로필 수정 시 profileId 유지
+    final existingId = recordService.profile?.profileId;
+
     final profile = BabyProfile(
       name: name,
       birthDate: _birthDate,
@@ -61,13 +66,20 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
           ? double.tryParse(_heightController.text)
           : null,
       growthStageIndex: _growthStage,
+      profileId: existingId,
     );
 
-    await context.read<RecordService>().saveProfile(profile);
+    await recordService.saveProfile(profile);
 
     if (!mounted) return;
     if (widget.isInitialSetup) {
-      Navigator.pushReplacementNamed(context, '/home');
+      final careDone = await CareOnboardingService.isIdentityStepDone();
+      if (!mounted) return;
+      if (!careDone) {
+        Navigator.pushReplacementNamed(context, '/care_identity');
+      } else {
+        Navigator.pushReplacementNamed(context, '/home');
+      }
     } else {
       Navigator.pop(context);
     }

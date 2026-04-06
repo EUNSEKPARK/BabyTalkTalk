@@ -21,6 +21,12 @@ enum RecordCategory {
   babyfood, // 이유식
   @HiveField(7)
   snack, // 간식
+  @HiveField(8)
+  bath, // 목욕
+  @HiveField(9)
+  pumping, // 유축
+  @HiveField(10)
+  tummytime, // 터미타임
 }
 
 /// 수유 타입
@@ -107,6 +113,22 @@ class BabyRecord extends HiveObject {
   @HiveField(13)
   String? inputSource;
 
+  /// 기록 작성자 UID (가족 공유용)
+  @HiveField(14)
+  String? authorId;
+
+  /// 기록 작성자 닉네임 ("엄마", "아빠" 등)
+  @HiveField(15)
+  String? authorName;
+
+  /// 연결된 아기 프로필 ID (멀티 아이 지원)
+  @HiveField(16)
+  String? profileId;
+
+  /// 첨부 사진 경로 (로컬)
+  @HiveField(17)
+  String? photoPath;
+
   BabyRecord({
     required this.id,
     required this.category,
@@ -121,6 +143,10 @@ class BabyRecord extends HiveObject {
     this.medicine,
     this.memo,
     this.inputSource,
+    this.authorId,
+    this.authorName,
+    this.profileId,
+    this.photoPath,
     DateTime? createdAt,
   }) : createdAt = createdAt ?? DateTime.now();
 
@@ -133,6 +159,8 @@ class BabyRecord extends HiveObject {
         return '⚡';
       case 'guided':
         return '🔘';
+      case 'widget':
+        return '📱';
       case 'chat':
       default:
         return '💬';
@@ -148,6 +176,8 @@ class BabyRecord extends HiveObject {
         return '빠른입력';
       case 'guided':
         return '버튼입력';
+      case 'widget':
+        return '위젯';
       case 'chat':
       default:
         return '채팅';
@@ -171,6 +201,12 @@ class BabyRecord extends HiveObject {
         return '이유식';
       case RecordCategory.snack:
         return '간식';
+      case RecordCategory.bath:
+        return '목욕';
+      case RecordCategory.pumping:
+        return '유축';
+      case RecordCategory.tummytime:
+        return '터미타임';
       case RecordCategory.other:
         return '기타';
     }
@@ -193,6 +229,12 @@ class BabyRecord extends HiveObject {
         return '🥣';
       case RecordCategory.snack:
         return '🍪';
+      case RecordCategory.bath:
+        return '🛁';
+      case RecordCategory.pumping:
+        return '🍶';
+      case RecordCategory.tummytime:
+        return '👶';
       case RecordCategory.other:
         return '📝';
     }
@@ -237,6 +279,17 @@ class BabyRecord extends HiveObject {
         return [temp, med].where((s) => s.isNotEmpty).join(', ');
       case RecordCategory.milestone:
         return memo ?? '성장 기록';
+      case RecordCategory.bath:
+        final dur = durationMinutes != null ? ' ${durationMinutes}분' : '';
+        final memoStr = memo != null && memo!.isNotEmpty ? ' · $memo' : '';
+        return '목욕$dur$memoStr';
+      case RecordCategory.pumping:
+        final amount = amountMl != null ? ' ${amountMl}ml' : '';
+        final dur = durationMinutes != null ? ' ${durationMinutes}분' : '';
+        return '유축$amount$dur';
+      case RecordCategory.tummytime:
+        final dur = durationMinutes != null ? ' ${durationMinutes}분' : '';
+        return '터미타임$dur';
       case RecordCategory.other:
         return memo ?? '기타 기록';
     }

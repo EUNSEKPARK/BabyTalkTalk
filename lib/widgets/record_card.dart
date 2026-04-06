@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:chat_baby_time/models/baby_record.dart';
@@ -57,6 +58,12 @@ class _RecordCardState extends State<RecordCard>
         return AppTheme.babyfoodColor;
       case RecordCategory.snack:
         return AppTheme.snackColor;
+      case RecordCategory.bath:
+        return AppTheme.bathColor;
+      case RecordCategory.pumping:
+        return AppTheme.pumpingColor;
+      case RecordCategory.tummytime:
+        return AppTheme.tummytimeColor;
       case RecordCategory.other:
         return AppTheme.otherColor;
     }
@@ -83,6 +90,12 @@ class _RecordCardState extends State<RecordCard>
         return 'assets/images/icon_hospital.png';
       case RecordCategory.milestone:
         return 'assets/images/icon_outing.png';
+      case RecordCategory.bath:
+        return 'assets/images/icon_bath.png';
+      case RecordCategory.pumping:
+        return 'assets/images/icon_breastfeeding.png';
+      case RecordCategory.tummytime:
+        return 'assets/images/icon_outing.png';
       case RecordCategory.other:
         return 'assets/images/icon_bath.png';
     }
@@ -104,6 +117,12 @@ class _RecordCardState extends State<RecordCard>
         return AppTheme.babyfoodBg;
       case RecordCategory.snack:
         return AppTheme.snackBg;
+      case RecordCategory.bath:
+        return AppTheme.bathBg;
+      case RecordCategory.pumping:
+        return AppTheme.pumpingBg;
+      case RecordCategory.tummytime:
+        return AppTheme.tummytimeBg;
       case RecordCategory.other:
         return AppTheme.otherBg;
     }
@@ -370,6 +389,27 @@ class _RecordCardState extends State<RecordCard>
                               const SizedBox(width: 6),
                               // 입력 소스 표시
                               _InputSourceBadge(record: widget.record),
+                              // 작성자 표시 (가족 공유 시)
+                              if (widget.record.authorName != null &&
+                                  widget.record.authorName!.isNotEmpty) ...[
+                                const SizedBox(width: 6),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 6, vertical: 2),
+                                  decoration: BoxDecoration(
+                                    color: Colors.purple.withOpacity(0.08),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text(
+                                    widget.record.authorName!,
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.purple[400],
+                                    ),
+                                  ),
+                                ),
+                              ],
                               const Spacer(),
                               // 시간
                               Text(
@@ -403,6 +443,18 @@ class _RecordCardState extends State<RecordCard>
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          if (widget.record.photoPath != null &&
+                              File(widget.record.photoPath!).existsSync())
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.photo_outlined, size: 14, color: AppTheme.textHint),
+                                  const SizedBox(width: 4),
+                                  Text('사진 첨부됨', style: TextStyle(fontSize: 11, color: AppTheme.textHint)),
+                                ],
                               ),
                             ),
                         ],

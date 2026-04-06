@@ -57,6 +57,9 @@ class FieldValidationNode {
           break;
 
         case RecordCategory.milestone:
+        case RecordCategory.bath:
+        case RecordCategory.pumping:
+        case RecordCategory.tummytime:
         case RecordCategory.other:
           // 최소한의 검증
           break;
@@ -229,6 +232,12 @@ class FieldValidationNode {
       case RecordCategory.snack:
         return '간식 기록을 다시 입력해주세요.';
       case RecordCategory.milestone:
+      case RecordCategory.bath:
+        return '목욕 기록을 다시 입력해주세요.';
+      case RecordCategory.pumping:
+        return '유축 기록을 다시 입력해주세요. (예: 유축 80ml)';
+      case RecordCategory.tummytime:
+        return '터미타임 기록을 다시 입력해주세요.';
       case RecordCategory.other:
         return '기록을 다시 입력해주세요.';
     }

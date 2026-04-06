@@ -23,13 +23,14 @@ class BabyProfileAdapter extends TypeAdapter<BabyProfile> {
       birthWeight: fields[3] as double?,
       birthHeight: fields[4] as double?,
       growthStageIndex: (fields[5] as int?) ?? 0,
+      profileId: fields[6] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, BabyProfile obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class BabyProfileAdapter extends TypeAdapter<BabyProfile> {
       ..writeByte(4)
       ..write(obj.birthHeight)
       ..writeByte(5)
-      ..write(obj.growthStageIndex);
+      ..write(obj.growthStageIndex)
+      ..writeByte(6)
+      ..write(obj.profileId);
   }
 
   @override

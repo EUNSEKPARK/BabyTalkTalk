@@ -1248,10 +1248,35 @@ class NlpParser {
           message: '성장/마일스톤 기록',
         );
       default:
-        // 외출/산책/목욕 등 기타 카테고리
+        // 목욕/터미타임/유축 → 전용 카테고리, 그 외 → 기타
+        if (lower.contains('목욕')) {
+          return ParseResult.success(
+            BabyRecord(
+              id: _uuid.v4(),
+              category: RecordCategory.bath,
+              timestamp: timestamp,
+              rawInput: trimmed,
+              memo: trimmed,
+            ),
+            confidence: confidence,
+            message: '목욕 기록 완료',
+          );
+        }
+        if (lower.contains('터미타임') || lower.contains('터미 타임') || lower.contains('tummy')) {
+          return ParseResult.success(
+            BabyRecord(
+              id: _uuid.v4(),
+              category: RecordCategory.tummytime,
+              timestamp: timestamp,
+              rawInput: trimmed,
+              memo: trimmed,
+            ),
+            confidence: confidence,
+            message: '터미타임 기록 완료',
+          );
+        }
         final otherLabel = lower.contains('외출') ? '외출' :
-            lower.contains('산책') ? '산책' :
-            lower.contains('목욕') ? '목욕' : '기타';
+            lower.contains('산책') ? '산책' : '기타';
         return ParseResult.success(
           BabyRecord(
             id: _uuid.v4(),
@@ -1302,6 +1327,65 @@ class NlpParser {
           ),
           confidence: confidence,
           message: '성장/마일스톤 기록',
+        );
+      case RecordCategory.bath:
+        final bathDur =
+            RegExp(r'(\d+)\s*(분|분간)').firstMatch(lower);
+        final bathDm = bathDur != null
+            ? int.tryParse(bathDur.group(1) ?? '')
+            : null;
+        return ParseResult.success(
+          BabyRecord(
+            id: _uuid.v4(),
+            category: RecordCategory.bath,
+            timestamp: timestamp,
+            rawInput: trimmed,
+            durationMinutes: bathDm,
+            memo: trimmed,
+          ),
+          confidence: confidence,
+          message: '목욕 기록 완료',
+        );
+      case RecordCategory.pumping:
+        final pumpMlMatch =
+            RegExp(r'(\d+)\s*(ml|cc)').firstMatch(lower);
+        final pumpMl = pumpMlMatch != null
+            ? int.tryParse(pumpMlMatch.group(1) ?? '')
+            : null;
+        final pumpDur =
+            RegExp(r'(\d+)\s*(분|분간)').firstMatch(lower);
+        final pumpDm = pumpDur != null
+            ? int.tryParse(pumpDur.group(1) ?? '')
+            : null;
+        return ParseResult.success(
+          BabyRecord(
+            id: _uuid.v4(),
+            category: RecordCategory.pumping,
+            timestamp: timestamp,
+            rawInput: trimmed,
+            amountMl: pumpMl,
+            durationMinutes: pumpDm,
+            memo: trimmed,
+          ),
+          confidence: confidence,
+          message: '유축 기록 완료',
+        );
+      case RecordCategory.tummytime:
+        final ttDur =
+            RegExp(r'(\d+)\s*(분|분간)').firstMatch(lower);
+        final ttDm =
+            ttDur != null ? int.tryParse(ttDur.group(1) ?? '') : null;
+        return ParseResult.success(
+          BabyRecord(
+            id: _uuid.v4(),
+            category: RecordCategory.tummytime,
+            timestamp: timestamp,
+            rawInput: trimmed,
+            durationMinutes: ttDm,
+            memo: trimmed,
+          ),
+          confidence: confidence,
+          message: '터미타임 기록 완료',
         );
       case RecordCategory.other:
         return ParseResult.success(

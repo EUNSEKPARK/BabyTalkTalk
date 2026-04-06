@@ -15,12 +15,14 @@ class GrowthCurveScreen extends StatefulWidget {
 class _GrowthCurveScreenState extends State<GrowthCurveScreen> {
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
+  final TextEditingController _headController = TextEditingController();
   bool _isSaving = false;
 
   @override
   void dispose() {
     _heightController.dispose();
     _weightController.dispose();
+    _headController.dispose();
     super.dispose();
   }
 
@@ -66,10 +68,13 @@ class _GrowthCurveScreenState extends State<GrowthCurveScreen> {
 
     setState(() => _isSaving = true);
 
+    final headCirc = double.tryParse(_headController.text.trim());
+
     final recordService = context.read<RecordService>();
     final success = await recordService.addGrowthMeasurement(
       heightCm: height,
       weightKg: weight,
+      headCircCm: headCirc,
     );
 
     setState(() => _isSaving = false);
@@ -77,9 +82,11 @@ class _GrowthCurveScreenState extends State<GrowthCurveScreen> {
     if (success && mounted) {
       _heightController.clear();
       _weightController.clear();
+      _headController.clear();
+      final headStr = headCirc != null ? ', 두위 ${headCirc}cm' : '';
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('기록 완료! 키 ${height}cm, 몸무게 ${weight}kg'),
+          content: Text('기록 완료! 키 ${height}cm, 몸무게 ${weight}kg$headStr'),
           backgroundColor: AppTheme.primary,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -99,17 +106,17 @@ class _GrowthCurveScreenState extends State<GrowthCurveScreen> {
 
   Map<String, String> _getWHOStandardForAge(int ageInMonths) {
     if (ageInMonths < 1) {
-      return {'avgHeight': '50.5', 'heightMin': '48.5', 'heightMax': '52.5', 'avgWeight': '3.7', 'weightMin': '3.0', 'weightMax': '4.3'};
+      return {'avgHeight': '50.5', 'heightMin': '48.5', 'heightMax': '52.5', 'avgWeight': '3.7', 'weightMin': '3.0', 'weightMax': '4.3', 'avgHeadCirc': '35.0', 'headCircMin': '33.0', 'headCircMax': '37.0'};
     } else if (ageInMonths < 3) {
-      return {'avgHeight': '58.5', 'heightMin': '55.5', 'heightMax': '61.5', 'avgWeight': '5.8', 'weightMin': '4.8', 'weightMax': '6.8'};
+      return {'avgHeight': '58.5', 'heightMin': '55.5', 'heightMax': '61.5', 'avgWeight': '5.8', 'weightMin': '4.8', 'weightMax': '6.8', 'avgHeadCirc': '39.0', 'headCircMin': '37.0', 'headCircMax': '41.0'};
     } else if (ageInMonths < 6) {
-      return {'avgHeight': '66.0', 'heightMin': '62.5', 'heightMax': '69.5', 'avgWeight': '7.6', 'weightMin': '6.3', 'weightMax': '8.9'};
+      return {'avgHeight': '66.0', 'heightMin': '62.5', 'heightMax': '69.5', 'avgWeight': '7.6', 'weightMin': '6.3', 'weightMax': '8.9', 'avgHeadCirc': '42.0', 'headCircMin': '40.0', 'headCircMax': '44.0'};
     } else if (ageInMonths < 9) {
-      return {'avgHeight': '72.0', 'heightMin': '68.0', 'heightMax': '76.0', 'avgWeight': '8.8', 'weightMin': '7.3', 'weightMax': '10.3'};
+      return {'avgHeight': '72.0', 'heightMin': '68.0', 'heightMax': '76.0', 'avgWeight': '8.8', 'weightMin': '7.3', 'weightMax': '10.3', 'avgHeadCirc': '44.0', 'headCircMin': '42.0', 'headCircMax': '46.0'};
     } else if (ageInMonths < 12) {
-      return {'avgHeight': '77.0', 'heightMin': '72.5', 'heightMax': '81.5', 'avgWeight': '9.7', 'weightMin': '8.0', 'weightMax': '11.4'};
+      return {'avgHeight': '77.0', 'heightMin': '72.5', 'heightMax': '81.5', 'avgWeight': '9.7', 'weightMin': '8.0', 'weightMax': '11.4', 'avgHeadCirc': '45.5', 'headCircMin': '43.5', 'headCircMax': '47.5'};
     } else {
-      return {'avgHeight': '82.0', 'heightMin': '77.0', 'heightMax': '87.0', 'avgWeight': '10.8', 'weightMin': '8.9', 'weightMax': '12.7'};
+      return {'avgHeight': '82.0', 'heightMin': '77.0', 'heightMax': '87.0', 'avgWeight': '10.8', 'weightMin': '8.9', 'weightMax': '12.7', 'avgHeadCirc': '46.5', 'headCircMin': '44.5', 'headCircMax': '48.5'};
     }
   }
 
@@ -167,6 +174,17 @@ class _GrowthCurveScreenState extends State<GrowthCurveScreen> {
                     labelStyle: const TextStyle(color: AppTheme.onSurfaceVariant),
                   ),
                 ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _headController,
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  decoration: InputDecoration(
+                    labelText: '두위 (cm) - 선택',
+                    hintText: '예: 36.5',
+                    prefixIcon: Icon(Icons.circle_outlined, color: AppTheme.secondary),
+                    labelStyle: const TextStyle(color: AppTheme.onSurfaceVariant),
+                  ),
+                ),
                 const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
@@ -207,6 +225,21 @@ class _GrowthCurveScreenState extends State<GrowthCurveScreen> {
               color: AppTheme.tertiary,
               icon: Icons.scale,
             ),
+            // Head circumference chart (only if data exists)
+            if (measurements.any((m) => m['headCircCm'] != null)) ...[
+              const SizedBox(height: 16),
+              _buildGrowthChart(
+                title: '두위 성장 곡선',
+                measurements: measurements.where((m) => m['headCircCm'] != null).toList(),
+                dataKey: 'headCircCm',
+                unit: 'cm',
+                whoMin: double.tryParse(whoStandards['headCircMin'] ?? '') ?? 0,
+                whoMax: double.tryParse(whoStandards['headCircMax'] ?? '') ?? 0,
+                whoAvg: double.tryParse(whoStandards['avgHeadCirc'] ?? '') ?? 0,
+                color: AppTheme.secondary,
+                icon: Icons.circle_outlined,
+              ),
+            ],
             const SizedBox(height: 24),
           ],
 
@@ -275,6 +308,18 @@ class _GrowthCurveScreenState extends State<GrowthCurveScreen> {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
+                                  if (m['headCircCm'] != null) ...[
+                                    const SizedBox(width: 16),
+                                    Icon(Icons.circle_outlined, size: 16, color: AppTheme.secondary),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      '${m['headCircCm']}cm',
+                                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                        color: AppTheme.onSurface,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
                                 ],
                               ),
                             ),
@@ -321,6 +366,10 @@ class _GrowthCurveScreenState extends State<GrowthCurveScreen> {
                   _InfoRow(label: '평균 몸무게', value: '${whoStandards["avgWeight"]} kg'),
                   const SizedBox(height: 12),
                   _InfoRow(label: '정상 범위 (몸무게)', value: '${whoStandards["weightMin"]} ~ ${whoStandards["weightMax"]} kg'),
+                  const SizedBox(height: 12),
+                  _InfoRow(label: '평균 두위', value: '${whoStandards["avgHeadCirc"]} cm'),
+                  const SizedBox(height: 12),
+                  _InfoRow(label: '정상 범위 (두위)', value: '${whoStandards["headCircMin"]} ~ ${whoStandards["headCircMax"]} cm'),
                 ],
                 const SizedBox(height: 16),
                 Container(

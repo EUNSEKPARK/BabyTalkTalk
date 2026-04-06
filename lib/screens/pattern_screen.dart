@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:chat_baby_time/services/record_service.dart';
 import 'package:chat_baby_time/models/baby_record.dart';
 import 'package:chat_baby_time/utils/time_utils.dart';
@@ -154,17 +158,8 @@ class _PatternScreenState extends State<PatternScreen> {
                 ],
               ),
               IconButton(
-                icon: Icon(Icons.more_horiz, color: AppTheme.primary),
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: const Text('준비 중인 기능입니다'),
-                      backgroundColor: AppTheme.surfaceContainerHigh,
-                      behavior: SnackBarBehavior.floating,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    ),
-                  );
-                },
+                icon: Icon(Icons.ios_share_rounded, color: AppTheme.primary),
+                onPressed: () => _showShareSheet(context, recordService),
               ),
             ],
           ),
@@ -785,6 +780,171 @@ class _PatternScreenState extends State<PatternScreen> {
     );
   }
 
+  // ─────────────────────────────────────────
+  // 공유하기
+  // ─────────────────────────────────────────
+
+  void _showShareSheet(BuildContext context, RecordService recordService) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppTheme.surfaceContainer,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // 핸들 바
+                Container(
+                  width: 36,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: AppTheme.onSurfaceVariant.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  '패턴 공유하기',
+                  style: TextStyle(
+                    color: AppTheme.onSurface,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // 텍스트 요약 공유
+                _ShareOption(
+                  icon: Icons.text_snippet_outlined,
+                  label: '텍스트로 공유',
+                  subtitle: '오늘 요약을 텍스트로 공유합니다',
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    _shareAsText(context, recordService);
+                  },
+                ),
+                const SizedBox(height: 12),
+                // CSV 내보내기
+                _ShareOption(
+                  icon: Icons.table_chart_outlined,
+                  label: 'CSV 파일로 내보내기',
+                  subtitle: '선택한 카테고리의 기록을 CSV로 저장합니다',
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    _shareAsCsv(context, recordService);
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _shareAsText(
+      BuildContext context, RecordService recordService) async {
+    final profile = recordService.profile;
+    final babyName = profile?.name ?? '아기';
+    final now = DateTime.now();
+    final dateStr = DateFormat('yyyy년 M월 d일').format(now);
+
+    final filtered = _getFilteredRecords(recordService.records);
+    final todayFiltered = filtered
+        .where((r) =>
+            r.timestamp.year == now.year &&
+            r.timestamp.month == now.month &&
+            r.timestamp.day == now.day)
+        .toList();
+
+    final buffer = StringBuffer();
+    buffer.writeln('📊 $babyName의 $_selectedCategory 패턴 ($dateStr)');
+    buffer.writeln();
+
+    if (todayFiltered.isEmpty) {
+      buffer.writeln('오늘 $_selectedCategory 기록이 없습니다.');
+    } else {
+      buffer.writeln('오늘 $_selectedCategory ${todayFiltered.length}건:');
+      for (final r in todayFiltered) {
+        buffer.writeln(
+            '  • ${TimeUtils.formatTime(r.timestamp)} — ${r.summary}');
+      }
+    }
+
+    // 평균 간격 추가
+    if (filtered.length > 1) {
+      Duration total = Duration.zero;
+      int count = 0;
+      for (int i = 0; i < filtered.length - 1 && i < 10; i++) {
+        final diff =
+            filtered[i].timestamp.difference(filtered[i + 1].timestamp);
+        if (!diff.isNegative) {
+          total += diff;
+          count++;
+        }
+      }
+      if (count > 0) {
+        final avg = total ~/ count;
+        buffer.writeln();
+        buffer.writeln(
+            '⏱ 평균 간격: ${avg.inHours}시간 ${avg.inMinutes % 60}분');
+      }
+    }
+
+    buffer.writeln();
+    buffer.writeln('— 아기톡톡 앱에서 기록');
+
+    await SharePlus.instance.share(
+      ShareParams(text: buffer.toString()),
+    );
+  }
+
+  Future<void> _shareAsCsv(
+      BuildContext context, RecordService recordService) async {
+    final filtered = _getFilteredRecords(recordService.records);
+    if (filtered.isEmpty) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('$_selectedCategory 기록이 없습니다'),
+            backgroundColor: AppTheme.surfaceContainerHigh,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)),
+          ),
+        );
+      }
+      return;
+    }
+
+    final buffer = StringBuffer();
+    buffer.writeln('날짜,시간,카테고리,요약,양(ml),시간(분)');
+    for (final r in filtered) {
+      final date = DateFormat('yyyy-MM-dd').format(r.timestamp);
+      final time = DateFormat('HH:mm').format(r.timestamp);
+      final summary = r.summary.replaceAll(',', ' ');
+      buffer.writeln(
+          '$date,$time,$_selectedCategory,$summary,${r.amountMl ?? ''},${r.durationMinutes ?? ''}');
+    }
+
+    final dir = await getTemporaryDirectory();
+    final fileName =
+        '패턴_${_selectedCategory}_${DateFormat('yyyyMMdd').format(DateTime.now())}.csv';
+    final file = File('${dir.path}/$fileName');
+    await file.writeAsString(buffer.toString());
+
+    await SharePlus.instance.share(
+      ShareParams(
+        files: [XFile(file.path)],
+        subject: '아기톡톡 $_selectedCategory 패턴 데이터',
+      ),
+    );
+  }
+
   Widget _buildInsightCard(BuildContext context) {
     return Consumer<RecordService>(
       builder: (context, recordService, _) {
@@ -885,6 +1045,78 @@ class _PatternScreenState extends State<PatternScreen> {
           ),
         );
       },
+    );
+  }
+}
+
+/// 공유 옵션 아이템 위젯
+class _ShareOption extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String subtitle;
+  final VoidCallback onTap;
+
+  const _ShareOption({
+    required this.icon,
+    required this.label,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: AppTheme.surfaceContainerHigh,
+      borderRadius: BorderRadius.circular(14),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(14),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          child: Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppTheme.primaryContainer.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(icon, color: AppTheme.primary, size: 20),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      label,
+                      style: TextStyle(
+                        color: AppTheme.onSurface,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        color: AppTheme.onSurfaceVariant,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.chevron_right_rounded,
+                color: AppTheme.onSurfaceVariant,
+                size: 20,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

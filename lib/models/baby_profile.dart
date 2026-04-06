@@ -22,6 +22,10 @@ class BabyProfile extends HiveObject {
   @HiveField(5)
   int growthStageIndex; // 0: formula, 1: weaning, 2: toddler
 
+  /// 고유 프로필 ID (멀티 아이 지원)
+  @HiveField(6)
+  String profileId;
+
   BabyProfile({
     required this.name,
     required this.birthDate,
@@ -29,7 +33,12 @@ class BabyProfile extends HiveObject {
     this.birthWeight,
     this.birthHeight,
     this.growthStageIndex = 0,
-  });
+    String? profileId,
+  }) : profileId = profileId ?? _generateId();
+
+  static String _generateId() {
+    return DateTime.now().microsecondsSinceEpoch.toRadixString(36);
+  }
 
   /// 현재 개월수
   int get ageInMonths {

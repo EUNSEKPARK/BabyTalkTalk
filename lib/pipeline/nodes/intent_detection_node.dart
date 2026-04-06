@@ -38,6 +38,9 @@ class IntentDetectionNode {
           _detectSnackIntent(normalizedText, result);
           break;
         case RecordCategory.milestone:
+        case RecordCategory.bath:
+        case RecordCategory.pumping:
+        case RecordCategory.tummytime:
         case RecordCategory.other:
           // 특별한 의도 감지 없음
           break;

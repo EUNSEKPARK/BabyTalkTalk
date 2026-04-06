@@ -10,9 +10,10 @@ import 'package:share_plus/share_plus.dart';
 
 import 'package:chat_baby_time/services/notification_service.dart';
 import 'package:chat_baby_time/services/record_service.dart';
-import 'package:chat_baby_time/services/widget_sync_service.dart';
 import 'package:chat_baby_time/services/nlp_analytics_service.dart';
+import 'package:chat_baby_time/services/family_service.dart';
 import 'package:chat_baby_time/screens/nlp_analytics_screen.dart';
+import 'package:chat_baby_time/screens/family_screen.dart';
 import 'package:chat_baby_time/utils/app_theme.dart';
 import 'package:chat_baby_time/screens/tutorial_screen.dart';
 
@@ -31,6 +32,47 @@ class SettingsScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         children: [
+          // ── 가족 공유 ──
+          Text(
+            '가족 공유',
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: AppTheme.primary,
+                  fontWeight: FontWeight.w700,
+                ),
+          ),
+          const SizedBox(height: 8),
+          Consumer<FamilyService>(
+            builder: (context, familyService, _) {
+              final isInFamily = familyService.isInFamily;
+              final memberCount = familyService.familyGroup?.members.length ?? 0;
+              return Card(
+                color: AppTheme.surfaceContainer,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                child: ListTile(
+                  leading: Icon(
+                    isInFamily ? Icons.family_restroom : Icons.group_add_outlined,
+                    color: isInFamily ? AppTheme.primary : Colors.grey,
+                  ),
+                  title: Text(isInFamily ? '가족 공유 중' : '가족 공유 설정'),
+                  subtitle: Text(
+                    isInFamily
+                        ? '${memberCount}명이 함께 기록하고 있어요'
+                        : '엄마, 아빠가 함께 기록을 공유해요',
+                    style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                  ),
+                  trailing: const Icon(Icons.chevron_right_rounded),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const FamilyScreen()),
+                    );
+                  },
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 28),
+
           Text(
             '수유 알림',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -87,23 +129,6 @@ class SettingsScreen extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: 28),
-          Text(
-            '홈 화면 위젯',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: AppTheme.primary,
-                  fontWeight: FontWeight.w700,
-                ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            '홈 화면에 위젯을 추가하면 오늘 요약과 마지막 수유 시각을 바로 볼 수 있어요. 기록을 바꾸면 위젯도 함께 갱신됩니다.',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppTheme.onSurfaceVariant,
-                ),
-          ),
-          const SizedBox(height: 12),
-          if (Platform.isAndroid) const _HomeWidgetPinCard(),
           const SizedBox(height: 28),
 
           // ── 서비스 개선 참여 (NLP 분석 데이터 수집) ──
@@ -335,77 +360,3 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
-class _HomeWidgetPinCard extends StatefulWidget {
-  const _HomeWidgetPinCard();
-
-  @override
-  State<_HomeWidgetPinCard> createState() => _HomeWidgetPinCardState();
-}
-
-class _HomeWidgetPinCardState extends State<_HomeWidgetPinCard> {
-  bool? _pinSupported;
-  bool _busy = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _load();
-  }
-
-  Future<void> _load() async {
-    final ok = await BabyTimeHomeWidget.isPinSupported();
-    if (mounted) setState(() => _pinSupported = ok);
-  }
-
-  Future<void> _onPin() async {
-    setState(() => _busy = true);
-    try {
-      await BabyTimeHomeWidget.requestPin();
-    } finally {
-      if (mounted) setState(() => _busy = false);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: AppTheme.surfaceContainer,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              '위젯을 아직 안 쓰신다면',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              '홈 화면 빈 곳을 길게 누른 뒤 「위젯」에서 아기톡톡을 찾아 추가할 수 있어요.',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppTheme.onSurfaceVariant,
-                  ),
-            ),
-            if (_pinSupported == true) ...[
-              const SizedBox(height: 12),
-              FilledButton.icon(
-                onPressed: _busy ? null : _onPin,
-                icon: _busy
-                    ? const SizedBox(
-                        width: 18,
-                        height: 18,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Icon(Icons.push_pin_outlined),
-                label: Text(_busy ? '요청 중…' : '바로 홈에 고정하기'),
-              ),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
-}

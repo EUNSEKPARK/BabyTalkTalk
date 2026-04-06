@@ -30,6 +30,12 @@ class CategoryDisambiguationChips extends StatelessWidget {
         return '🌡️';
       case RecordCategory.milestone:
         return '⭐';
+      case RecordCategory.bath:
+        return '🛁';
+      case RecordCategory.pumping:
+        return '🍶';
+      case RecordCategory.tummytime:
+        return '👶';
       case RecordCategory.other:
         return '📝';
     }
@@ -51,6 +57,12 @@ class CategoryDisambiguationChips extends StatelessWidget {
         return '건강';
       case RecordCategory.milestone:
         return '성장';
+      case RecordCategory.bath:
+        return '목욕';
+      case RecordCategory.pumping:
+        return '유축';
+      case RecordCategory.tummytime:
+        return '터미타임';
       case RecordCategory.other:
         return '기타';
     }

@@ -63,7 +63,7 @@ class _MainScreenState extends State<MainScreen> {
                 _buildNavItem(index: 0, icon: Icons.edit_calendar_rounded, label: '기록'),
                 _buildNavItem(index: 1, icon: Icons.timeline_rounded, label: '패턴'),
                 _buildNavItem(index: 2, icon: Icons.bar_chart_rounded, label: '통계'),
-                _buildNavItem(index: 3, icon: Icons.person_rounded, label: '프로필'),
+                _buildNavItem(index: 3, icon: Icons.settings_rounded, label: '설정'),
               ],
             ),
           ),
