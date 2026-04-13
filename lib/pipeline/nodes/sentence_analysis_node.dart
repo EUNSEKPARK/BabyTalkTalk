@@ -160,44 +160,49 @@ class SentenceAnalysisNode {
   }
 
   /// 다중 문장 분할
+  ///
+  /// 분할 조건: 시간 마커가 2개 이상 존재하거나, 연결 동사 + 시간 마커가
+  /// 동반될 때만 분할. "분유 먹고 잤어"처럼 시간 마커 없이 연결 동사만
+  /// 있는 경우는 단일 문장으로 처리.
   static List<String> _splitMultipleSentences(String text) {
-    // 먼저 구분자로 분할 시도
-    List<String> segments = [text];
+    // 시간 마커가 2개 이상 있는지 확인 (다중 이벤트의 강한 신호)
+    final timeMatches = timeMarkerRegex.allMatches(text).toList();
+    final hasMultipleTimeMarkers = timeMatches.length >= 2;
 
-    for (final splitter in multiSentenceSplitters) {
-      final newSegments = <String>[];
-      for (final segment in segments) {
-        final parts = segment.split(splitter);
-        newSegments.addAll(parts.map((p) => p.trim()).where((p) => p.isNotEmpty));
-      }
-      if (newSegments.length > segments.length) {
-        segments = newSegments;
+    // 시간 마커가 2개 미만이면 분할하지 않음
+    // "분유 먹고 잤어" → 분할 안 함 (단일 연속 이벤트)
+    if (!hasMultipleTimeMarkers) {
+      return [text];
+    }
+
+    // 시간 마커 기반 분할 (2개 이상의 시간 마커가 있을 때)
+    // 예: "5시에 분유 먹고 6시에 잤어" → ["5시에 분유 먹고", "6시에 잤어"]
+    final segments = <String>[];
+    final timePositions = <int>[];
+
+    for (final match in timeMatches) {
+      timePositions.add(match.start);
+    }
+
+    for (int i = 0; i < timePositions.length; i++) {
+      final start = timePositions[i];
+      final end = i + 1 < timePositions.length
+          ? timePositions[i + 1]
+          : text.length;
+      final segment = text.substring(start, end).trim();
+
+      // 연결 동사로 끝나는 경우 제거 (먹고, 하고, 그리고 등)
+      final cleaned = segment.replaceAll(
+        RegExp(r'\s*(하고|그리고|먹고|먹었고|자고|잤고|갈아|갈았고)\s*$'),
+        '',
+      ).trim();
+
+      if (cleaned.isNotEmpty) {
+        segments.add(cleaned);
       }
     }
 
-    // 시간 마커로 추가 분할
-    final finalSegments = <String>[];
-    for (final segment in segments) {
-      final matches = timeMarkerRegex.allMatches(segment);
-      if (matches.isNotEmpty) {
-        var lastEnd = 0;
-        for (final match in matches) {
-          final before = segment.substring(lastEnd, match.start).trim();
-          if (before.isNotEmpty) {
-            finalSegments.add(before);
-          }
-          lastEnd = match.start;
-        }
-        final remaining = segment.substring(lastEnd).trim();
-        if (remaining.isNotEmpty) {
-          finalSegments.add(remaining);
-        }
-      } else {
-        finalSegments.add(segment);
-      }
-    }
-
-    return finalSegments.isEmpty ? [text] : finalSegments;
+    return segments.isEmpty ? [text] : segments;
   }
 
   /// 문장 완성도 분석

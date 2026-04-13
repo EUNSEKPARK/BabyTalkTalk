@@ -169,10 +169,29 @@ class StageKeywords {
   Map<RecordCategory, Map<String, double>> _getToddlerStageKeywords() {
     return {
       RecordCategory.feeding: {
-        '분유': 1.5, // 가중치 감소
-        '모유': 1.5, // 가중치 감소
+        // 분유/모유 (가중치 감소하되 유지)
+        '분유': 1.5,
+        '모유': 1.5,
         '수유': 1.5,
         '젖병': 1.5,
+        // 유아식 메뉴 키워드 (통합)
+        '밥': 3.0,
+        '메뉴': 2.5,
+        '반찬': 2.5,
+        '국': 2.0,
+        '카레': 2.5,
+        '국수': 2.5,
+        '우동': 2.5,
+        '파스타': 2.5,
+        '볶음밥': 2.5,
+        '김밥': 2.5,
+        '스파게티': 2.5,
+        '먹었': 1.0,
+        '먹임': 1.0,
+        '먹였': 1.0,
+        '먹음': 1.0,
+        '먹어': 1.0,
+        '마셨': 1.0,
       },
       RecordCategory.snack: {
         '간식': 3.0,
@@ -190,21 +209,6 @@ class StageKeywords {
         // 유아식기에서는 MEAL로 분류되므로 babyfood는 최소화
         '이유식': 1.0,
         '죽': 1.0,
-      },
-      // 새로운 MEAL 카테고리 (babyfood 사용하되, 메뉴 명시)
-      RecordCategory.feeding: {
-        // 밥(3.0), 메뉴(2.5) 등은 로직으로 처리
-        '밥': 3.0,
-        '메뉴': 2.5,
-        '반찬': 2.5,
-        '국': 2.0,
-        '카레': 2.5,
-        '국수': 2.5,
-        '우동': 2.5,
-        '파스타': 2.5,
-        '볶음밥': 2.5,
-        '김밥': 2.5,
-        '스파게티': 2.5,
       },
       RecordCategory.sleep: {
         '잠들': 3.0,
@@ -235,17 +239,22 @@ class StageKeywords {
   }
 
   /// 공통 정규표현식 패턴 (모든 단계)
+  ///
+  /// 주의: 동일 패턴이 여러 카테고리에 존재하면 양쪽에 점수가 가산되어
+  /// 불필요한 disambiguation을 유발하므로, 카테고리별로 차별화된 패턴 사용
   static final Map<RecordCategory, List<RegexPattern>> commonRegexPatterns = {
     RecordCategory.feeding: [
-      RegexPattern(pattern: r'\d+\s*(ml|cc|cc)', weight: 3.0),
+      RegexPattern(pattern: r'\d+\s*(ml|cc)', weight: 3.0),
       RegexPattern(pattern: r'젖\s*(먹|물)', weight: 2.5),
-      RegexPattern(pattern: r'\d+분', weight: 2.0),
+      // "N분 수유", "N분 먹" 등 수유 컨텍스트의 시간만 매치
+      RegexPattern(pattern: r'\d+분\s*(수유|먹|동안\s*먹)', weight: 2.0),
     ],
     RecordCategory.sleep: [
       RegexPattern(pattern: r'깨\s*(어|었|서|고|남)', weight: 2.5),
       RegexPattern(pattern: r'잠\s*(들|잤|잘)', weight: 3.0),
-      RegexPattern(pattern: r'\d+시간', weight: 2.5),
-      RegexPattern(pattern: r'\d+분', weight: 2.0),
+      RegexPattern(pattern: r'\d+시간\s*(잤|잠|자)', weight: 2.5),
+      // "N분 잤", "N분 잠" 등 수면 컨텍스트의 시간만 매치
+      RegexPattern(pattern: r'\d+분\s*(잤|잠|자|깼)', weight: 2.0),
     ],
     RecordCategory.diaper: [
       RegexPattern(pattern: r'똥\s*(쌌|싸|나)', weight: 3.0),
@@ -259,7 +268,7 @@ class StageKeywords {
       RegexPattern(pattern: r'\d+\s*(ml|cc|스푼|숟가락)', weight: 2.5),
     ],
     RecordCategory.snack: [
-      RegexPattern(pattern: r'\d+\s*(개|개)', weight: 2.0),
+      RegexPattern(pattern: r'\d+\s*개', weight: 2.0),
     ],
   };
 

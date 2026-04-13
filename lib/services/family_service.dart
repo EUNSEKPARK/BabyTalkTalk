@@ -79,7 +79,14 @@ class FamilyService extends ChangeNotifier {
 
   /// 새 가족 그룹 생성. [nickname]은 "엄마", "아빠" 등.
   Future<String?> createFamily(String nickname) async {
-    if (_user == null) return '로그인이 필요합니다.';
+    if (_user == null) {
+      // 익명 인증 재시도
+      try {
+        await _auth.signInAnonymously();
+        _user = _auth.currentUser;
+      } catch (_) {}
+      if (_user == null) return '인터넷 연결을 확인해주세요. (서버 연결 실패)';
+    }
     _syncing = true;
     _error = null;
     notifyListeners();
@@ -105,6 +112,12 @@ class FamilyService extends ChangeNotifier {
 
       final docRef = await _db.collection('families').add(group.toFirestore());
 
+      // invites 컬렉션에 초대 코드 → familyId 매핑 저장
+      await _db.collection('invites').doc(code).set({
+        'familyId': docRef.id,
+        'createdAt': now.millisecondsSinceEpoch,
+      });
+
       // 로컬 저장
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(_prefFamilyId, docRef.id);
@@ -127,28 +140,42 @@ class FamilyService extends ChangeNotifier {
   // ===== 초대 코드로 참여 =====
 
   Future<String?> joinFamily(String code, String nickname) async {
-    if (_user == null) return '로그인이 필요합니다.';
+    if (_user == null) {
+      try {
+        await _auth.signInAnonymously();
+        _user = _auth.currentUser;
+      } catch (_) {}
+      if (_user == null) return '인터넷 연결을 확인해주세요. (서버 연결 실패)';
+    }
     _syncing = true;
     _error = null;
     notifyListeners();
 
     try {
-      // 코드로 가족 찾기
-      final query = await _db
-          .collection('families')
-          .where('inviteCode', isEqualTo: code.toUpperCase())
-          .limit(1)
+      // invites 컬렉션에서 초대 코드로 familyId 조회
+      final inviteDoc = await _db
+          .collection('invites')
+          .doc(code.toUpperCase())
           .get();
 
-      if (query.docs.isEmpty) {
+      if (!inviteDoc.exists) {
         _syncing = false;
         _error = '초대 코드를 찾을 수 없습니다.';
         notifyListeners();
         return _error;
       }
 
-      final doc = query.docs.first;
-      final data = doc.data();
+      final familyId = inviteDoc.data()!['familyId'] as String;
+      final doc = await _db.collection('families').doc(familyId).get();
+
+      if (!doc.exists) {
+        _syncing = false;
+        _error = '가족 그룹을 찾을 수 없습니다.';
+        notifyListeners();
+        return _error;
+      }
+
+      final data = doc.data()!;
       final members = (data['members'] as List<dynamic>? ?? [])
           .map((m) => Map<String, dynamic>.from(m))
           .toList();
@@ -183,6 +210,7 @@ class FamilyService extends ChangeNotifier {
 
       await doc.reference.update({
         'members': FieldValue.arrayUnion([newMember.toMap()]),
+        'memberUids': FieldValue.arrayUnion([_user!.uid]),
       });
 
       final prefs = await SharedPreferences.getInstance();
@@ -221,6 +249,10 @@ class FamilyService extends ChangeNotifier {
         for (final r in records.docs) {
           await r.reference.delete();
         }
+        // invites 컬렉션에서도 삭제
+        try {
+          await _db.collection('invites').doc(_familyGroup!.inviteCode).delete();
+        } catch (_) {}
         await docRef.delete();
       } else {
         // 본인만 제거
@@ -231,6 +263,7 @@ class FamilyService extends ChangeNotifier {
         if (myData.isNotEmpty) {
           await docRef.update({
             'members': FieldValue.arrayRemove(myData),
+            'memberUids': FieldValue.arrayRemove([_user!.uid]),
           });
         }
       }
@@ -347,12 +380,9 @@ class FamilyService extends ChangeNotifier {
     final rng = Random.secure();
     for (int attempt = 0; attempt < 10; attempt++) {
       final code = List.generate(6, (_) => chars[rng.nextInt(chars.length)]).join();
-      final existing = await _db
-          .collection('families')
-          .where('inviteCode', isEqualTo: code)
-          .limit(1)
-          .get();
-      if (existing.docs.isEmpty) return code;
+      // invites 컬렉션에서 중복 확인 (보안 규칙 통과 가능)
+      final existing = await _db.collection('invites').doc(code).get();
+      if (!existing.exists) return code;
     }
     // 충돌 시 타임스탬프 기반 폴백
     return DateTime.now().millisecondsSinceEpoch.toRadixString(36).toUpperCase().substring(0, 6);

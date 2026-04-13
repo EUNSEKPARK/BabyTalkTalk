@@ -24,6 +24,9 @@ class TypeClassificationNode {
     '갈아야',
   ];
 
+  /// 최소 신뢰도 기준 점수 (이 이상이면 의미있는 분류로 간주)
+  static const double _minMeaningfulScore = 2.0;
+
   /// 분류 결과
   static NodeResult<ClassificationResult> run({
     required String normalizedText,
@@ -151,8 +154,11 @@ class TypeClassificationNode {
       }
     }
 
-    // 자기참조 페널티 적용 (타인이 먹인 경우 신뢰도 감소)
-    if (detectedSubject != null && detectedSubject != 'baby' && detectedSubject != 'self') {
+    // 자기참조 페널티 적용
+    // "나 배고파", "내가 먹었어" 등 주체가 부모 자신인 경우
+    // 아기 기록이 아닐 가능성이 높으므로 점수 감소
+    if (detectedSubject != null &&
+        (detectedSubject == '자신(self)')) {
       score *= selfReferencePenalty;
     }
 
@@ -160,18 +166,43 @@ class TypeClassificationNode {
   }
 
   /// 신뢰도 계산 (0.0 ~ 1.0)
+  ///
+  /// 절대 점수와 상대적 분리도를 결합하여 계산:
+  /// - 절대 점수: 최소 기준(2.0) 대비 상대적 위치
+  /// - 분리도: 1위와 2위 점수의 차이 비율
   static double _calculateConfidence(
     double topScore,
     Map<RecordCategory, double> allScores,
   ) {
-    // 점수가 높을수록 신뢰도 증가
-    // 점수 범위: 0 ~ 15 (대략)
-    // 신뢰도 범위: 0.0 ~ 1.0
-
     if (topScore == 0.0) return 0.0;
 
-    // 0-3: 0.3-0.4, 3-6: 0.4-0.6, 6-9: 0.6-0.8, 9+: 0.8-1.0
-    final confidence = (topScore / 12.0).clamp(0.0, 1.0);
+    // 1. 절대 신뢰도: 전체 점수 합 대비 1위 비율 (softmax-like)
+    final totalScore = allScores.values
+        .where((s) => s > 0)
+        .fold(0.0, (sum, s) => sum + s);
+    final absoluteConfidence = totalScore > 0
+        ? (topScore / totalScore)
+        : 0.0;
+
+    // 2. 분리도: 1위와 2위의 점수 차이
+    final sortedScores = allScores.values.toList()
+      ..sort((a, b) => b.compareTo(a));
+    final secondScore = sortedScores.length > 1 ? sortedScores[1] : 0.0;
+    final separation = topScore > 0
+        ? ((topScore - secondScore) / topScore)
+        : 0.0;
+
+    // 3. 최소 기준 보정: 낮은 절대 점수는 신뢰도 감소
+    final scoreFactor = topScore >= _minMeaningfulScore
+        ? 1.0
+        : topScore / _minMeaningfulScore;
+
+    // 결합: 절대 신뢰도(40%) + 분리도(40%) + 점수 보정(20%)
+    final confidence = (absoluteConfidence * 0.4 +
+            separation * 0.4 +
+            scoreFactor * 0.2)
+        .clamp(0.0, 1.0);
+
     return confidence;
   }
 }

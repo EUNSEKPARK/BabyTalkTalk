@@ -18,6 +18,9 @@ class IntentDetectionNode {
     try {
       final result = IntentDetectionResult(category: category);
 
+      // 공통: 시간 표현 추출 (모든 카테고리에 적용)
+      _detectTimeExpression(normalizedText, result);
+
       switch (category) {
         case RecordCategory.feeding:
           _detectFeedingIntent(normalizedText, result);
@@ -114,12 +117,15 @@ class IntentDetectionNode {
   static void _detectDiaperIntent(String text, IntentDetectionResult result) {
     final hasPee = text.contains('소변') ||
         text.contains('오줌') ||
-        text.contains('쌔') ||
-        text.contains('누');
+        text.contains('쉬했') ||
+        text.contains('쉬 했') ||
+        // "누" 단독 대신 "쉬 누", "소변 누" 등 구체적 패턴 사용
+        RegExp(r'쉬\s*누|소변\s*누|오줌\s*누').hasMatch(text);
     final hasPoop = text.contains('대변') ||
         text.contains('응가') ||
         text.contains('똥') ||
-        text.contains('쌌');
+        text.contains('쌌') ||
+        text.contains('똥쌌');
 
     if (hasPee && hasPoop) {
       result.diaperType = DiaperType.both;
@@ -194,6 +200,34 @@ class IntentDetectionNode {
     }
   }
 
+  /// 시간 표현 추출 (모든 카테고리 공통)
+  ///
+  /// "오후 2시에", "3시 반에", "30분 전에", "방금", "아까" 등을 감지
+  static void _detectTimeExpression(String text, IntentDetectionResult result) {
+    // 1. 절대 시간: "오전/오후 N시", "N시 반", "N시 N분"
+    final absoluteMatch = RegExp(
+      r'(오전|오후)?\s*(\d{1,2})\s*시\s*(반|(\d{1,2})\s*분)?',
+    ).firstMatch(text);
+    if (absoluteMatch != null) {
+      result.timeExpression = absoluteMatch.group(0)?.trim();
+      return;
+    }
+
+    // 2. 상대 시간: "N분 전", "N시간 전"
+    final relativeMatch = RegExp(r'(\d+)\s*(분|시간)\s*전').firstMatch(text);
+    if (relativeMatch != null) {
+      result.timeExpression = relativeMatch.group(0)?.trim();
+      return;
+    }
+
+    // 3. 구어체 시간
+    if (text.contains('방금')) {
+      result.timeExpression = '방금';
+    } else if (text.contains('아까')) {
+      result.timeExpression = '아까';
+    }
+  }
+
   /// 간식 의도 감지
   static void _detectSnackIntent(String text, IntentDetectionResult result) {
     // 수량 추출
@@ -253,6 +287,9 @@ class IntentDetectionResult {
   /// 메모/추가 정보
   String? memo;
 
+  /// 시간 표현 (원본 텍스트에서 추출)
+  String? timeExpression;
+
   IntentDetectionResult({required this.category});
 
   /// 필드 추출 여부 확인
@@ -264,7 +301,8 @@ class IntentDetectionResult {
         diaperType != null ||
         temperature != null ||
         medicine != null ||
-        memo != null;
+        memo != null ||
+        timeExpression != null;
   }
 
   /// 디버그 정보로 변환
@@ -279,6 +317,7 @@ class IntentDetectionResult {
       'temperature': temperature,
       'medicine': medicine,
       'memo': memo,
+      'timeExpression': timeExpression,
     };
   }
 

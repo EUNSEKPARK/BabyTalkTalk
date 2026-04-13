@@ -27,23 +27,32 @@ class InputNormalizationNode {
     '프로로': '', // 잡음 제거
   };
 
-  /// 한글 숫자 매핑
-  static final Map<String, String> koreanNumeralMap = {
-    '영': '0',
-    '일': '1',
-    '이': '2',
-    '삼': '3',
-    '사': '4',
-    '오': '5',
-    '육': '6',
-    '일곱': '7',
-    '팔': '8',
-    '구': '9',
-    '십': '10',
-    '백': '100',
-    '천': '1000',
-    '만': '10000',
+  /// 한글 숫자 매핑 (단위 컨텍스트에서만 사용)
+  /// 주의: 단독 사용 시 "이유식"→"2유식" 등의 오변환 발생하므로
+  /// _convertKoreanNumerals()에서 단위와 결합된 경우만 변환
+  static final Map<String, int> koreanDigitMap = {
+    '일': 1,
+    '이': 2,
+    '삼': 3,
+    '사': 4,
+    '오': 5,
+    '육': 6,
+    '칠': 7,
+    '팔': 8,
+    '구': 9,
   };
+
+  /// 한글 자릿수 매핑
+  static final Map<String, int> koreanPlaceMap = {
+    '십': 10,
+    '백': 100,
+    '천': 1000,
+  };
+
+  /// 안전한 한글 숫자 단위 (이 단위 앞에서만 한글 숫자 변환 적용)
+  static const List<String> safeUnits = [
+    'ml', 'cc', '도', '°', '℃', '분', '시간', '개', '숟가락', '스푼', '번',
+  ];
 
   /// 입력 정규화 실행
   static NodeResult<NormalizedInput> run(String rawInput) {
@@ -125,35 +134,76 @@ class InputNormalizationNode {
     return result;
   }
 
-  /// 한글 숫자 변환
+  /// 한글 숫자 변환 (단위 컨텍스트에서만 안전하게 변환)
+  ///
+  /// "백오십ml" → "150ml", "삼십분" → "30분" 처리
+  /// "이유식", "오줌" 같은 일반 단어는 변환하지 않음
   static String _convertKoreanNumerals(String text) {
     var result = text;
 
-    // 복합 한글 숫자 (백이십 → 120)
-    result = _convertComplexKoreanNumerals(result);
+    // 단위 앞의 한글 숫자 조합을 찾아서 변환
+    final unitPattern = safeUnits.map(RegExp.escape).join('|');
 
-    // 단순 한글 숫자
-    koreanNumeralMap.forEach((korean, numeral) {
-      result = result.replaceAll(korean, numeral);
+    // 패턴: 한글숫자조합 + 단위
+    // 예: "백오십ml", "이백cc", "삼십분", "오도"
+    final koreanDigits = koreanDigitMap.keys.join('|');
+    final koreanPlaces = koreanPlaceMap.keys.join('|');
+    final koreanNumChars = '(?:$koreanDigits|$koreanPlaces)';
+
+    final regex = RegExp('($koreanNumChars+)\\s*($unitPattern)');
+
+    result = result.replaceAllMapped(regex, (match) {
+      final koreanNum = match.group(1)!;
+      final unit = match.group(2)!;
+      final parsed = _parseKoreanNumber(koreanNum);
+      if (parsed != null && parsed > 0) {
+        return '$parsed$unit';
+      }
+      return match.group(0)!; // 파싱 실패 시 원본 유지
     });
 
     return result;
   }
 
-  /// 복합 한글 숫자 변환 (예: 백이십 → 120)
-  static String _convertComplexKoreanNumerals(String text) {
-    // 백이십 → 120
-    text = text.replaceAll(RegExp(r'백이십'), '120');
-    // 백오십 → 150
-    text = text.replaceAll(RegExp(r'백오십'), '150');
-    // 이백 → 200
-    text = text.replaceAll(RegExp(r'이백'), '200');
-    // 삼백 → 300
-    text = text.replaceAll(RegExp(r'삼백'), '300');
-    // 오백 → 500
-    text = text.replaceAll(RegExp(r'오백'), '500');
+  /// 한글 숫자열을 정수로 파싱
+  ///
+  /// "백오십" → 150, "이백삼십" → 230, "삼십" → 30, "오" → 5
+  static int? _parseKoreanNumber(String koreanNum) {
+    if (koreanNum.isEmpty) return null;
 
-    return text;
+    int total = 0;
+    int current = 0;
+
+    for (int i = 0; i < koreanNum.length;) {
+      bool matched = false;
+
+      // 2글자 매칭 먼저 시도 (없음 - 현재는 모두 1글자)
+      // 1글자 매칭
+      final char = koreanNum[i];
+
+      if (koreanDigitMap.containsKey(char)) {
+        current = koreanDigitMap[char]!;
+        matched = true;
+        i += 1;
+      } else if (koreanPlaceMap.containsKey(char)) {
+        final place = koreanPlaceMap[char]!;
+        if (current == 0) {
+          // "백" = 1 * 100, "십" = 1 * 10
+          current = 1;
+        }
+        total += current * place;
+        current = 0;
+        matched = true;
+        i += 1;
+      }
+
+      if (!matched) {
+        return null; // 파싱할 수 없는 문자
+      }
+    }
+
+    total += current; // 남은 1의 자리 수 추가
+    return total > 0 ? total : null;
   }
 
   /// 반복 문자 정리 (아~~~ → 아, 으~~~ → 으)

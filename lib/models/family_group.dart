@@ -29,12 +29,16 @@ class FamilyGroup {
     );
   }
 
+  /// memberUids: 보안 규칙에서 빠르게 확인할 수 있는 UID 배열
+  List<String> get memberUids => members.map((m) => m.uid).toList();
+
   Map<String, dynamic> toFirestore() {
     return {
       'inviteCode': inviteCode,
       'ownerId': ownerId,
       'createdAt': createdAt.millisecondsSinceEpoch,
       'members': members.map((m) => m.toMap()).toList(),
+      'memberUids': memberUids,
     };
   }
 
