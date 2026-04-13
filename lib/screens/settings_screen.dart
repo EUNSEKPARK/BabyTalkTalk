@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:chat_baby_time/services/notification_service.dart';
 import 'package:chat_baby_time/services/record_service.dart';
@@ -171,6 +172,39 @@ class SettingsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 28),
 
+          // ── 앱 정보 ──
+          Text(
+            '앱 정보',
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: AppTheme.primary,
+                  fontWeight: FontWeight.w700,
+                ),
+          ),
+          const SizedBox(height: 8),
+          Card(
+            color: AppTheme.surfaceContainer,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.privacy_tip_outlined, color: AppTheme.primary),
+                  title: const Text('개인정보처리방침'),
+                  trailing: const Icon(Icons.chevron_right_rounded),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  onTap: () => _showPrivacyPolicy(context),
+                ),
+                const Divider(height: 1, indent: 16, endIndent: 16),
+                ListTile(
+                  leading: const Icon(Icons.info_outline, color: AppTheme.primary),
+                  title: const Text('앱 버전'),
+                  subtitle: const Text('1.0.0'),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 28),
+
           Text(
             '데이터 백업',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -205,6 +239,61 @@ class SettingsScreen extends StatelessWidget {
                 ],
               );
             },
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showPrivacyPolicy(BuildContext context) {
+    // TODO: 웹 호스팅 URL 확보 후 launchUrl로 변경
+    // 현재는 앱 내 다이얼로그로 표시
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('개인정보처리방침'),
+        content: SizedBox(
+          width: double.maxFinite,
+          height: 400,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  '아기톡톡 (ChatBabyTime)\n시행일: 2026년 4월 1일\n개발자: PARK EUN (pes1228@gmail.com)\n',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '1. 수집하는 개인정보 항목\n\n'
+                  '1-1. 기기 내 저장 (로컬 전용)\n'
+                  '아기 이름, 생년월일, 성별, 출생 체중/신장, 육아 기록, 성장 일기, 앱 설정 등은 '
+                  '사용자의 기기에만 저장되며 외부 서버로 전송되지 않습니다.\n\n'
+                  '1-2. 선택적 수집 (사용자 동의 시)\n'
+                  '익명화된 텍스트 입력·인식 결과·수정 내역을 자연어 인식 정확도 개선 목적으로 '
+                  'Firebase Firestore에 저장합니다. 앱 최초 실행 시 동의 팝업을 통해 동의한 경우에만 '
+                  '수집되며, 설정에서 언제든 중단할 수 있습니다.\n\n'
+                  '2. 접근 권한\n'
+                  '• 마이크: 음성 입력 (선택)\n'
+                  '• 인터넷: Firebase 동기화 (필수)\n'
+                  '• 알림: 수유 리마인더 (선택)\n'
+                  '• 사진: 일기 표지 이미지 (선택)\n\n'
+                  '3. 개인정보의 보관 및 파기\n'
+                  '로컬 데이터는 앱 삭제 시 완전 삭제됩니다. 수집 동의 데이터는 익명화 상태로 저장되며, '
+                  '목적 달성 후 파기합니다. 설정에서 데이터 초기화가 가능합니다.\n\n'
+                  '4. 제3자 제공\n'
+                  '개인정보를 제3자에게 제공하지 않습니다.\n\n'
+                  '5. 아동 개인정보 보호\n'
+                  '아기톡톡은 부모(보호자)용 도구이며, 아동이 직접 사용하도록 설계되지 않았습니다.\n\n'
+                  '문의: pes1228@gmail.com',
+                ),
+              ],
+            ),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('닫기'),
           ),
         ],
       ),

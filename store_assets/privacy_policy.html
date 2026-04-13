@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>개인정보처리방침 — 아기톡톡 (BabyTalkTalk)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif;
+      line-height: 1.7;
+      color: #333;
+      background: #fafafa;
+      padding: 20px;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 40px 32px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    h1 {
+      font-size: 1.6em;
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+    .meta {
+      color: #888;
+      font-size: 0.9em;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #eee;
+    }
+    h2 {
+      font-size: 1.2em;
+      color: #2c3e50;
+      margin-top: 28px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e8f4f8;
+    }
+    h3 {
+      font-size: 1.05em;
+      color: #444;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+    p { margin-bottom: 12px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 0.92em;
+    }
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      border: 1px solid #e0e0e0;
+    }
+    th {
+      background: #f0f7fa;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    ul { margin: 8px 0 12px 20px; }
+    li { margin-bottom: 4px; }
+    .lang-switch {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .lang-switch a {
+      display: inline-block;
+      padding: 8px 20px;
+      margin: 0 4px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.9em;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .lang-switch a.active {
+      background: #3498db;
+      color: #fff;
+    }
+    .lang-switch a:not(.active) {
+      background: #eee;
+      color: #666;
+    }
+    .lang-section { display: none; }
+    .lang-section.active { display: block; }
+    .contact { margin-top: 24px; padding: 16px; background: #f8f9fa; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="lang-switch">
+      <a href="#" class="active" onclick="switchLang('ko', event)">한국어</a>
+      <a href="#" onclick="switchLang('en', event)">English</a>
+    </div>
+
+    <!-- 한국어 -->
+    <div id="lang-ko" class="lang-section active">
+      <h1>개인정보처리방침</h1>
+      <p class="meta">아기톡톡 (ChatBabyTime) · 시행일: 2026년 4월 1일 · 개발자: PARK EUN</p>
+
+      <h2>1. 수집하는 개인정보 항목</h2>
+
+      <h3>1-1. 기기 내 저장 (로컬 전용)</h3>
+      <table>
+        <tr><th>항목</th><th>목적</th><th>저장 위치</th></tr>
+        <tr><td>아기 이름, 생년월일, 성별, 출생 체중/신장</td><td>프로필 표시 및 성장 단계 계산</td><td>Hive (기기 내 DB)</td></tr>
+        <tr><td>육아 기록 (수유, 수면, 기저귀, 이유식 등)</td><td>기록 관리 및 통계</td><td>Hive (기기 내 DB)</td></tr>
+        <tr><td>성장 일기 내용 및 표지 이미지</td><td>성장 일기 기능</td><td>Hive (기기 내 DB)</td></tr>
+        <tr><td>앱 설정 (알림, 테마 등)</td><td>사용자 환경설정</td><td>SharedPreferences</td></tr>
+      </table>
+      <p>위 데이터는 <strong>사용자의 기기에만 저장</strong>되며, 외부 서버로 전송되지 않습니다.</p>
+
+      <h3>1-2. 선택적 수집 (사용자 동의 시)</h3>
+      <table>
+        <tr><th>항목</th><th>목적</th><th>저장 위치</th></tr>
+        <tr><td>텍스트 입력 내용 (익명화)</td><td>자연어 인식 정확도 개선</td><td>Firebase Firestore</td></tr>
+        <tr><td>인식 결과 (익명화)</td><td>파싱 알고리즘 개선</td><td>Firebase Firestore</td></tr>
+        <tr><td>수정 내역 (익명화)</td><td>오인식 패턴 분석</td><td>Firebase Firestore</td></tr>
+      </table>
+      <ul>
+        <li>앱 최초 실행 시 <strong>동의 팝업</strong>을 통해 명시적으로 동의한 경우에만 수집됩니다.</li>
+        <li><strong>개인 식별이 불가능한 익명 데이터</strong>만 수집하며, 아기 이름·생년월일 등은 포함되지 않습니다.</li>
+        <li>설정 화면에서 <strong>언제든지 수집을 중단</strong>할 수 있습니다.</li>
+      </ul>
+
+      <h2>2. 개인정보의 이용 목적</h2>
+      <ul>
+        <li>육아 기록 입력, 조회, 통계 제공</li>
+        <li>음성 인식을 통한 편리한 기록 입력</li>
+        <li>알림 및 위젯을 통한 기록 리마인더</li>
+        <li>(선택 동의 시) 자연어 인식 정확도 개선</li>
+      </ul>
+
+      <h2>3. 접근 권한</h2>
+      <table>
+        <tr><th>권한</th><th>용도</th><th>필수 여부</th></tr>
+        <tr><td>마이크 (RECORD_AUDIO)</td><td>음성으로 육아 기록 입력</td><td>선택</td></tr>
+        <tr><td>인터넷 (INTERNET)</td><td>Firebase 동기화</td><td>필수</td></tr>
+        <tr><td>알림 (POST_NOTIFICATIONS)</td><td>수유·수면 리마인더</td><td>선택</td></tr>
+        <tr><td>사진 접근 (READ_MEDIA_IMAGES)</td><td>성장 일기 표지 이미지 선택</td><td>선택</td></tr>
+        <tr><td>정확한 알람 (SCHEDULE_EXACT_ALARM)</td><td>정확한 수유 알림 스케줄링</td><td>자동</td></tr>
+      </table>
+      <p>모든 선택 권한은 해당 기능 사용 시에만 요청되며, 거부해도 핵심 기능은 정상 작동합니다.</p>
+
+      <h2>4. 개인정보의 보관 및 파기</h2>
+      <ul>
+        <li><strong>로컬 데이터:</strong> 앱 삭제 시 기기에서 완전히 삭제됩니다.</li>
+        <li><strong>수집 동의 데이터:</strong> 익명화된 상태로 저장되며, 수집 목적 달성 후 파기합니다.</li>
+        <li>설정 화면에서 <strong>데이터 초기화</strong> 기능을 통해 직접 삭제할 수 있습니다.</li>
+      </ul>
+
+      <h2>5. 개인정보의 제3자 제공</h2>
+      <p>아기톡톡은 사용자의 개인정보를 <strong>제3자에게 제공하지 않습니다.</strong></p>
+      <p>아래 서비스를 기술적으로 이용합니다:</p>
+      <ul>
+        <li><strong>Google Firebase (Firestore):</strong> 익명 데이터 저장 (동의 시에만)</li>
+        <li><strong>Google Speech-to-Text:</strong> 음성 인식 처리 (기기 내장 엔진 사용)</li>
+      </ul>
+
+      <h2>6. 아동 개인정보 보호</h2>
+      <p>아기톡톡은 <strong>부모(보호자)가 사용하는 육아 도구</strong>이며, 아동이 직접 사용하도록 설계되지 않았습니다. 아기 정보는 기기에만 로컬 저장되며 외부로 전송되지 않습니다.</p>
+
+      <h2>7. 개인정보처리방침 변경</h2>
+      <p>본 방침이 변경되는 경우 앱 내 공지를 통해 안내합니다.</p>
+
+      <div class="contact">
+        <h2>8. 문의처</h2>
+        <p>개인정보 관련 문의: <strong>pes1228@gmail.com</strong></p>
+      </div>
+    </div>
+
+    <!-- English -->
+    <div id="lang-en" class="lang-section">
+      <h1>Privacy Policy</h1>
+      <p class="meta">ChatBabyTime · Effective Date: April 1, 2026 · Developer: PARK EUN</p>
+
+      <h2>1. Information We Collect</h2>
+
+      <h3>1-1. Stored Locally on Device Only</h3>
+      <table>
+        <tr><th>Data</th><th>Purpose</th><th>Storage</th></tr>
+        <tr><td>Baby name, birthdate, gender, birth weight/height</td><td>Profile display &amp; growth stage calculation</td><td>Hive (on-device DB)</td></tr>
+        <tr><td>Parenting records (feeding, sleep, diaper, etc.)</td><td>Record management &amp; statistics</td><td>Hive (on-device DB)</td></tr>
+        <tr><td>Growth diary entries &amp; cover images</td><td>Growth diary feature</td><td>Hive (on-device DB)</td></tr>
+        <tr><td>App settings (notifications, theme, etc.)</td><td>User preferences</td><td>SharedPreferences</td></tr>
+      </table>
+      <p>This data is stored <strong>exclusively on your device</strong> and is never transmitted to external servers.</p>
+
+      <h3>1-2. Optional Collection (With User Consent)</h3>
+      <table>
+        <tr><th>Data</th><th>Purpose</th><th>Storage</th></tr>
+        <tr><td>Text input (anonymized)</td><td>Improve natural language recognition accuracy</td><td>Firebase Firestore</td></tr>
+        <tr><td>Recognition results (anonymized)</td><td>Improve parsing algorithms</td><td>Firebase Firestore</td></tr>
+        <tr><td>Correction history (anonymized)</td><td>Analyze misrecognition patterns</td><td>Firebase Firestore</td></tr>
+      </table>
+      <ul>
+        <li>Collected <strong>only with explicit user consent</strong> via an opt-in dialog on first launch.</li>
+        <li>Only <strong>anonymous, non-identifiable data</strong> is collected — no personal information included.</li>
+        <li>You can <strong>opt out at any time</strong> from the Settings screen.</li>
+      </ul>
+
+      <h2>2. How We Use Information</h2>
+      <ul>
+        <li>Provide parenting record input, viewing, and statistics</li>
+        <li>Enable voice-based convenient record entry</li>
+        <li>Send reminders via notifications and widgets</li>
+        <li>(With consent) Improve natural language recognition accuracy</li>
+      </ul>
+
+      <h2>3. Permissions</h2>
+      <table>
+        <tr><th>Permission</th><th>Purpose</th><th>Required</th></tr>
+        <tr><td>Microphone (RECORD_AUDIO)</td><td>Voice input for parenting records</td><td>Optional</td></tr>
+        <tr><td>Internet (INTERNET)</td><td>Firebase sync</td><td>Required</td></tr>
+        <tr><td>Notifications (POST_NOTIFICATIONS)</td><td>Feeding/sleep reminders</td><td>Optional</td></tr>
+        <tr><td>Photos (READ_MEDIA_IMAGES)</td><td>Select cover images for growth diary</td><td>Optional</td></tr>
+        <tr><td>Exact Alarm (SCHEDULE_EXACT_ALARM)</td><td>Precise feeding reminder scheduling</td><td>Automatic</td></tr>
+      </table>
+      <p>All optional permissions are requested only when the corresponding feature is used. Denying them does not affect core functionality.</p>
+
+      <h2>4. Data Retention and Deletion</h2>
+      <ul>
+        <li><strong>Local data:</strong> Completely deleted when the app is uninstalled.</li>
+        <li><strong>Consented data:</strong> Stored in anonymized form and deleted after collection purpose is fulfilled.</li>
+        <li>Users can delete all data through the <strong>Data Reset</strong> function in Settings.</li>
+      </ul>
+
+      <h2>5. Third-Party Sharing</h2>
+      <p>ChatBabyTime does <strong>not share personal information with third parties.</strong></p>
+      <p>The following services are used for technical purposes only:</p>
+      <ul>
+        <li><strong>Google Firebase (Firestore):</strong> Anonymous data storage (only with consent)</li>
+        <li><strong>Google Speech-to-Text:</strong> Voice recognition (uses on-device engine)</li>
+      </ul>
+
+      <h2>6. Children's Privacy</h2>
+      <p>ChatBabyTime is a <strong>parenting tool designed for parents/guardians</strong>, not for direct use by children. Baby information is stored locally only and never transmitted externally.</p>
+
+      <h2>7. Changes to This Policy</h2>
+      <p>Any changes will be communicated through in-app notifications.</p>
+
+      <div class="contact">
+        <h2>8. Contact Us</h2>
+        <p>For privacy-related inquiries: <strong>pes1228@gmail.com</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchLang(lang, e) {
+      e.preventDefault();
+      document.querySelectorAll('.lang-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.lang-switch a').forEach(a => a.classList.remove('active'));
+      document.getElementById('lang-' + lang).classList.add('active');
+      e.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
